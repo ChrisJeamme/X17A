@@ -1,11 +1,8 @@
 CC=gcc
 CFLAGS=-Wall -lglut -lGLU -lGL -lm
 
-boulemagique: src/main.o src/fonctions.o src/volume.o src/affichage.o src/karbre.o src/point.h src/matrice.h src/karbre.h src/volume.h
+boulemagique: src/main.o src/volume.o src/affichage.o src/karbre.o src/point.h src/matrice.h src/karbre.h src/volume.h
 	$(CC) -o $@ $^ $(CFLAGS)
-
-src/fonctions.o: src/fonctions.c
-	$(CC) -o $@ -c $^ $(CFLAGS)
 
 src/affichage.o: src/affichage.c
 	$(CC) -o $@ -c $^ $(CFLAGS)

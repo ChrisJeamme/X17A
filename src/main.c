@@ -1,10 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "fonctions.h"
 #include "affichage.h"
 #include "karbre.h"
+#include "matrice.h"
 #include "volume.h"
-#include <string.h>
 
 #define HAUTEUR_FENETRE 800 
 #define LARGEUR_FENETRE 800
@@ -23,9 +22,9 @@ int sens_rotation = SENS_MONTRE;
 //Pour changer d'exemple dans affichage
 int exemple = 0;
 
-void afficherText(float x, float y, int r, int g, int b, const char *string);
 void transformer_polyone_actuel(Matrice m);
 void animer();
+void Affichage();
 void gererClavier(unsigned char touche, int x, int y);
 
 int main(int argc, char** argv)
@@ -53,31 +52,15 @@ void Affichage()
     gluLookAt(px, py, pz, -px, -py, -pz, 0, 1, 0);
     glRotatef(angle, 0,1,0);
 
-    //Afficher X et Y sur le repère
-    afficherText(10,0,0,1,1,"X");
-    afficherText(0,10,0,1,1,"Y");
-    afficherText(-10,0,0,1,1,"X");
-    afficherText(0,-10,0,1,1,"Y");
     
-    //Création des 2 boules et de leur intersection
-    Pointf centre = creer_pointf(0,0,0);
-    Pointf centre2 = creer_pointf(5,0,0);
-    Pointf p1 = creer_pointf(-50,-50,-50);
-    Pointf p2 = creer_pointf(50,50,50);
-    karbre test1 = boule2arbre(centre, 4, p1, p2);
-    karbre test2 = boule2arbre(centre2, 5, p1, p2);
-    karbre test3 = intersection(test1,test2);
-
-    //Texte en haut à droite de la fenêtre
-    afficherText(0,17,1,1,1,"Appuyez sur C pour continuer");
-    afficherText(0,16,1,1,1,"Appuyez sur A pour changer de sens");
 
     //Selection de l'exemple (Touche C: voir gererClavier() )
     if(exemple==0)
     {
-        afficherText(0,12,1,1,1,"Maison");
+        afficherText(0,12,1,1,1,"Test Boule");
         // dessiner_maison();
         dessiner_plan1();
+        dessiner_boule(5,5,5,5);
     }
     if(exemple>=2)
     {
@@ -104,33 +87,6 @@ void gererClavier(unsigned char touche, int x, int y)
         sens_rotation*=-1; //On inverse le sens
     if(touche=='c')
         exemple++;
-}
-
-void transformer_polyone_actuel(Matrice m)
-{
-    int i;
-
-    for(i=0; i<nombre_sommets; i++)
-    {
-        sommet[i]=produit_point(m,sommet[i]);        
-    }
-    init_lct();
-    remplissage();
-    balayage();
-    glFlush();
-    getchar();
-    glClear(GL_COLOR_BUFFER_BIT);
-}
-
-void afficherText(float x, float y, int r, int g, int b, const char *texte) 
-{
-	int i, j = strlen(texte);
-	glColor3f(r,g,b);
-	glRasterPos2f(x,y);
-	for(i=0; i<j; i++)
-    {
-		glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, texte[i] );
-	}
 }
 
 // glColor3f(1.0,0.5,0.0); //Orange
