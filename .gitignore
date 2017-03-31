@@ -32,3 +32,6 @@ boulemagique
 # Debug files
 *.dSYM/
 *.su
+
+#VSCode
+*.json
