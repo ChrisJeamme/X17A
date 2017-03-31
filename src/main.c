@@ -13,14 +13,23 @@
 
 //Angle de rotation de l'observateur
 float angle = .0;
-//Coordonnées de base de l'observateur
-int px = 50;
-int py = 50;
-int pz = 50;
+
 //Sert pour changer le sens de rotation de l'observateur
 int sens_rotation = SENS_MONTRE;
 //Pour changer d'exemple dans affichage
 int exemple = 0;
+
+//Rayon de la boule
+int brayon = 2;
+//Coordonnées du centre de la boule
+float bx = 0;
+float by = 2;
+float bz = 0;
+//Vecteur de direction de la boule
+float dx = 0;
+float dy = 0;
+float dz = 0;
+
 
 void transformer_polyone_actuel(Matrice m);
 void animer();
@@ -46,26 +55,21 @@ int main(int argc, char** argv)
 void Affichage()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_PROJECTION);
+    //glPushMatrix() ;
     glLoadIdentity();
+    
     glFrustum(-1,1,-1,1,1,100);
-    gluLookAt(px, py, pz, -px, -py, -pz, 0, 1, 0);
-    glRotatef(angle, 0,1,0);
+    bx+=dx;
+    bz+=dz;
+
+    gluLookAt(bx-dx*400, by+brayon*4, bz-dz*400, bx, by+brayon, bz+1, 0, 1, 0);
+	//glRotatef(angle,0,0,1);
 
     
-
-    //Selection de l'exemple (Touche C: voir gererClavier() )
-    if(exemple==0)
-    {
-        afficherText(0,12,1,1,1,"Test Boule");
-        // dessiner_maison();
-        dessiner_plan(0,0,0,30,10,45);
-        //dessiner_boule(5,5,5,5);
-    }
-    if(exemple>=2)
-    {
-        exit(-1);
-    }
+    afficherText(0,12,1,1,1,"Test Boule");
+    // dessiner_maison();
+    dessiner_plan(-30,0,-30,30,0,30);
+    dessiner_boule(brayon,bx,by,bz);
 
     trace_grille(5);
     glutSwapBuffers();
@@ -73,7 +77,7 @@ void Affichage()
 
 void animer()
 {
-    angle += .1 * sens_rotation;
+    angle += .0 * sens_rotation;
     if(angle > 360)
         angle = 0;
     glutPostRedisplay();
@@ -81,10 +85,16 @@ void animer()
 
 void gererClavier(unsigned char touche, int x, int y)
 {
-    //printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
+    printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
 
-    if(touche=='a')
-        sens_rotation*=-1; //On inverse le sens
+    if(touche=='z') //En haut
+        dz += 0.01;  
+    if(touche=='q') //A gauche
+        dx -= 0.01;
+    if(touche=='s') //En bas
+        dz -= 0.01;  
+    if(touche=='d') //A droite
+        dx += 0.01;
 
     if (touche ==27) //Touche Echap => ferme le programme
 		exit(0);

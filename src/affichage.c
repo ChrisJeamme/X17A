@@ -10,7 +10,7 @@ void dessiner_plan(int x1, int y1, int z1, int x2, int y2, int z2)
     glColor3f(0,0,1); //Bleu
     glVertex3f(x1, y1, z1);    
     glVertex3f(x2, y1, z1);
-    glColor3f(0,0.4,1); //Bleu plus clair    
+    glColor3f(0,0.6,0.7); //Bleu plus clair    
     glVertex3f(x2, y2, z2);
     glVertex3f(x1, y2, z2);
 

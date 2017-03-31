@@ -14,6 +14,6 @@
 #define INTERSECTION 1
 #define INTERIEUR 2
 
-void dessiner_boule(int rayon, int x, int y, int z);
+void dessiner_boule(float rayon, float x, float y, float z);
 void dessiner_maison();
 void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2);
