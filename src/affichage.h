@@ -13,4 +13,4 @@ void trace_grille(int n);
 
 void afficherText(float x, float y, int r, int g, int b, const char *texte);
 
-void dessiner_plan1();
+void dessiner_plan(int x1, int y1, int z1, int x2, int y2, int z2);

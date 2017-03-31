@@ -14,9 +14,9 @@
 //Angle de rotation de l'observateur
 float angle = .0;
 //Coordonnées de base de l'observateur
-int px = 20;
-int py = 10;
-int pz = 10;
+int px = 50;
+int py = 50;
+int pz = 50;
 //Sert pour changer le sens de rotation de l'observateur
 int sens_rotation = SENS_MONTRE;
 //Pour changer d'exemple dans affichage
@@ -33,7 +33,7 @@ int main(int argc, char** argv)
     glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE | GLUT_DEPTH);
     glutInitWindowSize(LARGEUR_FENETRE, HAUTEUR_FENETRE);
     glutInitWindowPosition(50,50);
-    glutCreateWindow("Projet X17A");
+    glutCreateWindow("La boule magique");
     glEnable(GL_DEPTH_TEST);
     glutDisplayFunc(Affichage);
     glutIdleFunc(animer);
@@ -59,8 +59,8 @@ void Affichage()
     {
         afficherText(0,12,1,1,1,"Test Boule");
         // dessiner_maison();
-        dessiner_plan1();
-        dessiner_boule(5,5,5,5);
+        dessiner_plan(0,0,0,30,10,45);
+        //dessiner_boule(5,5,5,5);
     }
     if(exemple>=2)
     {
@@ -73,7 +73,7 @@ void Affichage()
 
 void animer()
 {
-    angle += .5 * sens_rotation;
+    angle += .1 * sens_rotation;
     if(angle > 360)
         angle = 0;
     glutPostRedisplay();
@@ -81,12 +81,13 @@ void animer()
 
 void gererClavier(unsigned char touche, int x, int y)
 {
-    printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
+    //printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
 
     if(touche=='a')
         sens_rotation*=-1; //On inverse le sens
-    if(touche=='c')
-        exemple++;
+
+    if (touche ==27) //Touche Echap => ferme le programme
+		exit(0);
 }
 
 // glColor3f(1.0,0.5,0.0); //Orange
