@@ -53,6 +53,23 @@ int main(int argc, char** argv)
     return 0;
 }
 
+void maj_vecteur_vitesse()
+{
+    vx = vx + ax;
+    vy = vy + ay + gy;
+    vz = vz + az;
+}
+
+void maj_position_boule()
+{
+    bx+=vx;
+    if (by > 0+brayon)
+        by+= vy;
+    else    //Boule au sol
+        vy = 0;
+    bz+=vz;
+}
+
 void Affichage()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -66,26 +83,20 @@ void Affichage()
     // sprintf(vx_string, "%f", vx);
     // afficherText(10,0,0,1,1,vx_string);
     
-    vx = vx + ax;
-    vy = vy + ay + gy;
-    vz = vz + az;
+    maj_vecteur_vitesse();
+    maj_position_boule();
     
-    bx+=vx;
-    if (by > 0+brayon)
-    {
-        by+= vy;
-    }
-    else 
-        vy = 0;
-    bz+=vz;
-
     ax=0; ay=0; az=0;
 
+    //Mise a jour de la caméra
     gluLookAt(bx-vx*400, by+brayon*4, bz-vz*400, bx, by+brayon, bz+1, 0, 1, 0);
     
-    dessiner_plan(-30,0,-30,30,0,30);
+    //Affichage Boule
     dessiner_boule(brayon,bx,by,bz);
 
+    //Affichage Plan 1
+    dessiner_plan(-30,0,-30,30,0,30);
+    
     trace_grille(5);
     glutSwapBuffers();
 }
@@ -208,7 +219,6 @@ void gererClavier(unsigned char touche, int x, int y)
     if (touche ==27) //Touche Echap => ferme le programme
 		exit(0);
 }
-
 
 void afficher_vecteurs()
 {
