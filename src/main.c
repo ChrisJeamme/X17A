@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include "affichage.h"
 #include "karbre.h"
 #include "matrice.h"
@@ -14,9 +15,9 @@
 //Rayon de la boule
 int brayon = 2;
 //Coordonnées du centre de la boule
-float bx = 0;
+float bx = 1;
 float by = 50;
-float bz = 0;
+float bz = 1;
 //Vecteur de vitesse de la boule
 float vx = 0;
 float vy = 0;
@@ -60,6 +61,11 @@ void Affichage()
     afficher_vecteurs();
 
     glFrustum(-1,1,-1,1,1,100);
+
+    // char vx_string[50];
+    // sprintf(vx_string, "%f", vx);
+    // afficherText(10,0,0,1,1,vx_string);
+    
     vx = vx + ax;
     vy = vy + ay + gy;
     vz = vz + az;
@@ -93,17 +99,111 @@ void gererClavier(unsigned char touche, int x, int y)
 {
     printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
 
-    if(touche=='z') //On veut accélerer
-        az += 0.01;  
-    if(touche=='s') //En veut décelérer
-        if (vz >0) //Si vitesse positive
-            az -= 0.01;  //On décrémente l'accélération donc la vitesse va diminuer
+    printf("AVANT: ax=%f az=%f\n, (bx=%f & bz=%f & bx/bz=%f & bz/bx=%f)",ax,az,bx,bz,bx/bz,bz/bx);
 
+    double angle = acos(0.01*bz / (sqrt(bz*bz+bx*bx)*sqrt(0.01*0.01)));
+    printf("angle=%f\n",angle);
+
+    if(touche=='z') //On veut accélerer
+    {
+        if(bx==0)
+        {
+            az = 0.01;
+            ax = 0;
+        }
+        else
+        {
+            if(bz==0)
+            {
+                az = 0;
+                ax = 0.01;
+            }
+            else
+            {
+                az = 0*sin(angle)+0.01*cos(angle);
+                ax = 0*cos(angle)-0.01*sin(angle);
+            }
+        }
+    }
+        
+    if(touche=='s') //En veut décelérer
+    {
+        if(bx==0)
+        {
+            az = 0.01;
+            ax = 0;
+        }
+        else
+        {
+            if(bz==0)
+            {
+                az = 0;
+                ax = 0.01;
+            }
+            else
+            {
+                az = -(0*sin(angle)+0.01*cos(angle));
+                ax = -(0*cos(angle)-0.01*sin(angle));
+            }
+        }
+    }
 
     if(touche=='q') //A gauche
-        ax -= 0.01;
+    {
+         if(bx==0)
+        {
+            az = 0.01;
+            ax = 0;
+        }
+        else
+        {
+            if(bz==0)
+            {
+                az = 0;
+                ax = 0.01;
+            }
+            else
+            {
+                az = -(0*cos(angle)-0.01*sin(angle));
+                ax = -(0*sin(angle)+0.01*cos(angle));
+            }
+        }
+    }
+    
     if(touche=='d') //A droite
-        ax += 0.01;
+    {
+        if(bx==0)
+        {
+            az = 0.01;
+            ax = 0;
+        }
+        else
+        {
+            if(bz==0)
+            {
+                az = 0;
+                ax = 0.01;
+            }
+            else
+            {
+                az = 0*cos(angle)-0.01*sin(angle);
+                ax = -(0*sin(angle)+0.01*cos(angle));
+            }
+        }
+    }
+    
+    //Intteruption
+    if(touche=='g')
+        getchar();
+
+    //Reset de la boule
+    if(touche=='r')
+    {
+        vx=0;        vy=0;        vz=0;
+        bx=1;        by=50;        bz=1;
+    }
+
+    printf("APRES: ax=%f az=%f\n",ax,az);
 
     if (touche ==27) //Touche Echap => ferme le programme
 		exit(0);
