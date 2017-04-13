@@ -97,9 +97,16 @@ void Affichage()
     
     ax=0; ay=0; az=0;
 
+    //maj caméra
+    float positionCameraX = bx-vx-7;//((bx-vx*400)>7)?bx-vx-7:((bx-vx*400)<-7)?bx-vx+7:bx-vx*400;
+    float positionCameraY = by+brayon*4;
+    float positionCameraZ = bz-vz-7;//((bz-vz*400)>7)?bz-vz-7:((bz-vz*400)<-7)?bz-vz+7:bz-vz*400;
+
     //Mise a jour de la caméra
-    gluLookAt(bx-vx*400, by+brayon*4, bz-vz*400, bx, by+brayon, bz+1, 0, 1, 0);
-    
+    gluLookAt(positionCameraX,positionCameraY,positionCameraZ, bx, by+brayon, bz+1, 0, 1, 0);
+    printf("Vecteur caméra: %f %f %f\n", positionCameraX, positionCameraY, positionCameraZ);
+
+
     //Affichage Boule
     dessiner_boule(brayon,bx,by,bz);
 
@@ -121,8 +128,7 @@ void gererClavier(unsigned char touche, int x, int y)
 
     printf("AVANT: ax=%f az=%f\n, (bx=%f & bz=%f & bx/bz=%f & bz/bx=%f)",ax,az,bx,bz,bx/bz,bz/bx);
 
-    double angle = acos(0.01*bz / (sqrt(bz*bz+bx*bx)*sqrt(0.01*0.01)));
-    printf("angle=%f\n",angle);
+    double angle;
 
     if(touche=='z') //On veut accélerer
     {
@@ -140,6 +146,7 @@ void gererClavier(unsigned char touche, int x, int y)
             }
             else
             {
+                angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
                 az = 0*sin(angle)+0.01*cos(angle);
                 ax = 0*cos(angle)-0.01*sin(angle);
             }
@@ -162,6 +169,7 @@ void gererClavier(unsigned char touche, int x, int y)
             }
             else
             {
+                angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
                 az = -(0*sin(angle)+0.01*cos(angle));
                 ax = -(0*cos(angle)-0.01*sin(angle));
             }
@@ -184,6 +192,7 @@ void gererClavier(unsigned char touche, int x, int y)
             }
             else
             {
+                angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
                 az = -(0*cos(angle)-0.01*sin(angle));
                 ax = -(0*sin(angle)+0.01*cos(angle));
             }
@@ -206,6 +215,7 @@ void gererClavier(unsigned char touche, int x, int y)
             }
             else
             {
+                angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
                 az = 0*cos(angle)-0.01*sin(angle);
                 ax = (0*sin(angle)+0.01*cos(angle));
             }
