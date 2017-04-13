@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include "affichage.h"
 #include "karbre.h"
 #include "matrice.h"
@@ -10,7 +11,6 @@
 #define TAILLE 50 
 #define SENS_MONTRE 1
 #define SENS_INVERSE -1
-
 
 
 void transformer_polyone_actuel(Matrice m);
@@ -57,6 +57,24 @@ int main(int argc, char** argv)
     return 0;
 }
 
+void maj_vecteur_vitesse()
+{
+    vx = vx + ax;
+    vy = vy + ay + gy;
+    vz = vz + az;
+}
+
+void maj_position_boule()
+{
+    bx+=vx;
+    if (!intersection_plan_boule(-30,0,-30,30,0,30))
+    {
+        by+= vy;
+    else    //Boule au sol
+        vy = 0;
+    bz+=vz;
+}
+
 void Affichage()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -65,26 +83,25 @@ void Affichage()
     afficher_vecteurs();
 
     glFrustum(-1,1,-1,1,1,100);
-    vx = vx + ax;
-    vy = vy + ay + gy;
-    vz = vz + az;
-    
-    bx+=vx;
-    if (!intersection_plan_boule(-30,0,-30,30,0,30))
-    {
-        by+= vy;
-    }
-    else 
-        vy = 0;
-    bz+=vz;
 
+    // char vx_string[50];
+    // sprintf(vx_string, "%f", vx);
+    // afficherText(10,0,0,1,1,vx_string);
+    
+    maj_vecteur_vitesse();
+    maj_position_boule();
+    
     ax=0; ay=0; az=0;
 
+    //Mise a jour de la caméra
     gluLookAt(bx-vx*400, by+brayon*4, bz-vz*400, bx, by+brayon, bz+1, 0, 1, 0);
     
-    dessiner_plan(-30,0,-30,30,0,30);
+    //Affichage Boule
     dessiner_boule(brayon,bx,by,bz);
 
+    //Affichage Plan 1
+    dessiner_plan(-30,0,-30,30,0,30);
+    
     trace_grille(5);
     glutSwapBuffers();
 }
@@ -98,22 +115,115 @@ void gererClavier(unsigned char touche, int x, int y)
 {
     printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
 
-    if(touche=='z') //On veut accélerer
-        az += 0.01;  
-    if(touche=='s') //En veut décelérer
-        if (vz >0) //Si vitesse positive
-            az -= 0.01;  //On décrémente l'accélération donc la vitesse va diminuer
+    printf("AVANT: ax=%f az=%f\n, (bx=%f & bz=%f & bx/bz=%f & bz/bx=%f)",ax,az,bx,bz,bx/bz,bz/bx);
 
+    double angle = acos(0.01*bz / (sqrt(bz*bz+bx*bx)*sqrt(0.01*0.01)));
+    printf("angle=%f\n",angle);
+
+    if(touche=='z') //On veut accélerer
+    {
+        if(bx==0)
+        {
+            az = 0.01;
+            ax = 0;
+        }
+        else
+        {
+            if(bz==0)
+            {
+                az = 0;
+                ax = 0.01;
+            }
+            else
+            {
+                az = 0*sin(angle)+0.01*cos(angle);
+                ax = 0*cos(angle)-0.01*sin(angle);
+            }
+        }
+    }
+        
+    if(touche=='s') //En veut décelérer
+    {
+        if(bx==0)
+        {
+            az = 0.01;
+            ax = 0;
+        }
+        else
+        {
+            if(bz==0)
+            {
+                az = 0;
+                ax = 0.01;
+            }
+            else
+            {
+                az = -(0*sin(angle)+0.01*cos(angle));
+                ax = -(0*cos(angle)-0.01*sin(angle));
+            }
+        }
+    }
 
     if(touche=='q') //A gauche
-        ax -= 0.01;
+    {
+         if(bx==0)
+        {
+            az = 0.01;
+            ax = 0;
+        }
+        else
+        {
+            if(bz==0)
+            {
+                az = 0;
+                ax = 0.01;
+            }
+            else
+            {
+                az = -(0*cos(angle)-0.01*sin(angle));
+                ax = -(0*sin(angle)+0.01*cos(angle));
+            }
+        }
+    }
+    
     if(touche=='d') //A droite
-        ax += 0.01;
+    {
+        if(bx==0)
+        {
+            az = 0.01;
+            ax = 0;
+        }
+        else
+        {
+            if(bz==0)
+            {
+                az = 0;
+                ax = 0.01;
+            }
+            else
+            {
+                az = 0*cos(angle)-0.01*sin(angle);
+                ax = -(0*sin(angle)+0.01*cos(angle));
+            }
+        }
+    }
+    
+    //Intteruption
+    if(touche=='g')
+        getchar();
+
+    //Reset de la boule
+    if(touche=='r')
+    {
+        vx=0;        vy=0;        vz=0;
+        bx=1;        by=50;        bz=1;
+    }
+
+    printf("APRES: ax=%f az=%f\n",ax,az);
 
     if (touche ==27) //Touche Echap => ferme le programme
 		exit(0);
 }
-
 
 void afficher_vecteurs()
 {
