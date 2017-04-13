@@ -31,6 +31,8 @@ float az;
 float gx;
 float gy;
 float gz;
+//Angle de direction 
+float angle;
 
 void dessiner_boule(float rayon, float x, float y, float z);
 void dessiner_maison();

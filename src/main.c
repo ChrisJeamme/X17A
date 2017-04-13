@@ -28,6 +28,7 @@ int main(int argc, char** argv)
     glutCreateWindow("La boule magique");
     glEnable(GL_DEPTH_TEST);
 
+
     //Rayon de la boule
     brayon = 2;
     //Coordonnées du centre de la boule
@@ -46,6 +47,8 @@ int main(int argc, char** argv)
     gx = 0;
     gy = -0.001;
     gz = 0;
+    //Angle de direction 
+    angle = 0;
 
 
 
@@ -70,6 +73,7 @@ void maj_position_boule()
     if (!intersection_plan_boule(-30,0,-30,30,0,30))
     {
         by+= vy;
+    }
     else    //Boule au sol
         vy = 0;
     bz+=vz;
@@ -122,14 +126,14 @@ void gererClavier(unsigned char touche, int x, int y)
 
     if(touche=='z') //On veut accélerer
     {
-        if(bx==0)
+        if(vx==0)
         {
             az = 0.01;
             ax = 0;
         }
         else
         {
-            if(bz==0)
+            if(vz==0)
             {
                 az = 0;
                 ax = 0.01;
@@ -144,17 +148,17 @@ void gererClavier(unsigned char touche, int x, int y)
         
     if(touche=='s') //En veut décelérer
     {
-        if(bx==0)
+        if(vx==0)
         {
-            az = 0.01;
+            az = -0.01;
             ax = 0;
         }
         else
         {
-            if(bz==0)
+            if(vz==0)
             {
                 az = 0;
-                ax = 0.01;
+                ax = -0.01;
             }
             else
             {
@@ -166,17 +170,17 @@ void gererClavier(unsigned char touche, int x, int y)
 
     if(touche=='q') //A gauche
     {
-         if(bx==0)
+        if(vx==0)
         {
-            az = 0.01;
-            ax = 0;
+            az = 0;
+            ax = 0.01;
         }
         else
         {
-            if(bz==0)
+            if(vz==0)
             {
-                az = 0;
-                ax = 0.01;
+                az = 0.01;
+                ax = 0;
             }
             else
             {
@@ -188,22 +192,22 @@ void gererClavier(unsigned char touche, int x, int y)
     
     if(touche=='d') //A droite
     {
-        if(bx==0)
+        if(vx==0)
         {
-            az = 0.01;
-            ax = 0;
+            az = 0;
+            ax = -0.01;
         }
         else
         {
-            if(bz==0)
+            if(vz==0)
             {
-                az = 0;
-                ax = 0.01;
+                az = -0.01;
+                ax = 0;
             }
             else
             {
                 az = 0*cos(angle)-0.01*sin(angle);
-                ax = -(0*sin(angle)+0.01*cos(angle));
+                ax = (0*sin(angle)+0.01*cos(angle));
             }
         }
     }
