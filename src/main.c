@@ -11,24 +11,7 @@
 #define SENS_MONTRE 1
 #define SENS_INVERSE -1
 
-//Rayon de la boule
-int brayon = 2;
-//Coordonnées du centre de la boule
-float bx = 0;
-float by = 50;
-float bz = 0;
-//Vecteur de vitesse de la boule
-float vx = 0;
-float vy = 0;
-float vz = 0;
-//Vecteur d'accélération de la boule
-float ax = 0;
-float ay = 0;
-float az = 0;
-//Vecteur de gravité de la boule
-float gx = 0;
-float gy = -0.001;
-float gz = 0;
+
 
 void transformer_polyone_actuel(Matrice m);
 void animer();
@@ -44,6 +27,28 @@ int main(int argc, char** argv)
     glutInitWindowPosition(50,50);
     glutCreateWindow("La boule magique");
     glEnable(GL_DEPTH_TEST);
+
+    //Rayon de la boule
+    brayon = 2;
+    //Coordonnées du centre de la boule
+    bx = 0;
+    by = 50;
+    bz = 0;
+    //Vecteur de vitesse de la boule
+    vx = 0;
+    vy = 0;
+    vz = 0;
+    //Vecteur d'accélération de la boule
+    ax = 0;
+    ay = 0;
+    az = 0;
+    //Vecteur de gravité de la boule
+    gx = 0;
+    gy = -0.001;
+    gz = 0;
+
+
+
     glutDisplayFunc(Affichage);
     glutIdleFunc(animer);
     glutKeyboardFunc(gererClavier);
@@ -65,7 +70,7 @@ void Affichage()
     vz = vz + az;
     
     bx+=vx;
-    if (by > 0+brayon)
+    if (!intersection_plan_boule(-30,0,-30,30,0,30))
     {
         by+= vy;
     }
