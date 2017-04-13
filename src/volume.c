@@ -50,6 +50,44 @@ void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2)
 }
 
 
+int intersection_plan_boule(int x1, int y1, int z1, int x2, int y2, int z2)
+{
+    int x3 = x2;
+    int y3 = y1;
+    int z3 = z3;
+
+    float ABx = x2 - x1;
+    float ABy = y2 - y1;
+    float ABz = z2 - z1;
+
+    float ACx = x3 - x1;
+    float ACy = y3 - y1;
+    float ACz = z3 - z1;
+
+    //Produit vectoriel pour avoir vecteur normal au plan (ABC): 
+    float a = ABy*ACz - ABz*ACy;
+    float b = ABz*ACx - ABx*ACz;
+    float c = ABx*ACy - ABy*ACx;
+    //float d = -(a*x1 + b*x2 + c*x3); //car (x1,x2,x3) appartient au plan
+
+    float Abx = bx - x1; 
+    float Aby = by - y1; 
+    float Abz = bz - z1;
+
+    float distance = abs((Abx*a + Aby*b + Abz*c)/sqrt(a*a + b*b + c*c));
+
+    printf("Distance centre-plan : %f\n\n", distance);
+
+    if (distance > brayon)
+        return 0;
+    if ((bx < x1 && bx < x2 )||( bx > x1 && bx > x2 )||( bz < z1 && bz < z2 )||( bz > z1 && bz > z2))
+        return 0;
+    else return 1;
+
+
+}
+
+
 
 void dessiner_boule(float rayon, float x, float y, float z)
 {
@@ -59,21 +97,3 @@ void dessiner_boule(float rayon, float x, float y, float z)
     glTranslatef(-x, -y, -z);
     glColor3f(1,1,1);   //Blanc
 }
-
-//   glClearColor(0.0F,0.0F,0.0F,0.0F) ;
-//   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT) ;
-//   glPushMatrix() ;
-//   glRotatef(anglex,1.0F,0.0F,0.0F) ;
-//   glRotatef(angley,0.0F,1.0F,0.0F) ;
-//   glRotatef(anglez,0.0F,0.0F,1.0F) ;
-//   glTranslatef(0.5F,0.0F,0.0F) ;
-//   GLfloat rouge[] = { 1.0,0.0,0.0,0.0 };
-//   glMaterialfv(GL_FRONT,GL_DIFFUSE,rouge);
-//   glutSolidCube(0.6) ;
-//   glTranslatef(-1.0F,0.0F,0.0F) ;
-//   GLfloat vert[] = { 0.0,1.0,0.0,0.0 };
-//   glMaterialfv(GL_FRONT,GL_DIFFUSE,vert);
-//   glutSolidSphere(0.4,50,50) ;
-//   glPopMatrix() ;
-//   glFlush() ;
-//   glutSwapBuffers() ;
