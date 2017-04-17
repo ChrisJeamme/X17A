@@ -76,7 +76,6 @@ int intersection_plan_boule(int x1, int y1, int z1, int x2, int y2, int z2)
 
     float distance = abs((Abx*a + Aby*b + Abz*c)/sqrt(a*a + b*b + c*c));
 
-    printf("Distance centre-plan : %f\n\n", distance);
 
     if (distance > brayon)
         return 0;

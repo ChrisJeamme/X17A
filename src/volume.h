@@ -30,7 +30,11 @@ float az;
 //Vecteur de gravité de la boule
 float gx;
 float gy;
-float gz;
+float gz;    
+//Position de l'observateur
+float ox;
+float oy;
+float oz;
 //Angle de direction 
 float angle;
 

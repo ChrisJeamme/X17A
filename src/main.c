@@ -47,6 +47,10 @@ int main(int argc, char** argv)
     gx = 0;
     gy = -0.001;
     gz = 0;
+    //Position de l'observateur
+    ox = bx;
+    oy = by + brayon*5;
+    oz = bz;
     //Angle de direction 
     angle = 0;
 
@@ -63,8 +67,13 @@ int main(int argc, char** argv)
 void maj_vecteur_vitesse()
 {
     vx = vx + ax;
+    if (vx > 0.05 || vx < -0.05)
+        vx -= ax;
     vy = vy + ay + gy;
     vz = vz + az;
+    if (vz > 0.05 || vz < -0.05)
+        vz -= az;
+    //printf("\n\n VITESSE X : %f \n VITESSE Z : %f\n\n",vx, vz);
 }
 
 void maj_position_boule()
@@ -79,12 +88,20 @@ void maj_position_boule()
     bz+=vz;
 }
 
+void maj_observateur()
+{
+
+    ox = bx - vx*400;
+    oz = bz - vz*400;
+    oy = by + brayon * 5;
+}
+
 void Affichage()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //glPushMatrix() ;
     glLoadIdentity();
-    afficher_vecteurs();
+    //afficher_vecteurs();
 
     glFrustum(-1,1,-1,1,1,100);
 
@@ -98,13 +115,14 @@ void Affichage()
     ax=0; ay=0; az=0;
 
     //maj caméra
-    float positionCameraX = bx-vx-7;//((bx-vx*400)>7)?bx-vx-7:((bx-vx*400)<-7)?bx-vx+7:bx-vx*400;
-    float positionCameraY = by+brayon*4;
-    float positionCameraZ = bz-vz-7;//((bz-vz*400)>7)?bz-vz-7:((bz-vz*400)<-7)?bz-vz+7:bz-vz*400;
+    // float positionCameraX = bx-vx*400;//((bx-vx*400)>7)?bx-vx-7:((bx-vx*400)<-7)?bx-vx+7:bx-vx*400;
+    // float positionCameraY = by+brayon*4;
+    // float positionCameraZ = bz-vz*400;//((bz-vz*400)>7)?bz-vz-7:((bz-vz*400)<-7)?bz-vz+7:bz-vz*400;
 
     //Mise a jour de la caméra
-    gluLookAt(positionCameraX,positionCameraY,positionCameraZ, bx, by+brayon, bz+1, 0, 1, 0);
-    printf("Vecteur caméra: %f %f %f\n", positionCameraX, positionCameraY, positionCameraZ);
+    maj_observateur();
+    gluLookAt(ox, oy, oz, bx, by+brayon, bz+1, 0, 1, 0);
+    //printf("Vecteur caméra: %f %f %f\n", ox, oy, oz);
 
 
     //Affichage Boule
@@ -124,102 +142,53 @@ void animer()
 
 void gererClavier(unsigned char touche, int x, int y)
 {
-    printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
+    //printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
 
-    printf("AVANT: ax=%f az=%f\n, (bx=%f & bz=%f & bx/bz=%f & bz/bx=%f)",ax,az,bx,bz,bx/bz,bz/bx);
+    //printf("AVANT: ax=%f az=%f\n, (bx=%f & bz=%f & bx/bz=%f & bz/bx=%f)",ax,az,bx,bz,bx/bz,bz/bx);
 
-    double angle;
-
+    float normeVitesse = sqrt(vx*vx+vz*vz);
     if(touche=='z') //On veut accélerer
     {
-        if(vx==0)
-        {
-            az = 0.01;
-            ax = 0;
+        if (normeVitesse < 0.01) //La boule est à l'arrêt, il faut choisir une direction au hasard
+        {     
+            vx = 0.01;
+            vz = 0.01;
         }
-        else
+        else //On augmente le vecteur vitesse dans la même direction
         {
-            if(vz==0)
-            {
-                az = 0;
-                ax = 0.01;
-            }
-            else
-            {
-                angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
-                az = 0*sin(angle)+0.01*cos(angle);
-                ax = 0*cos(angle)-0.01*sin(angle);
-            }
+            ax = vx*0.1;
+            az = vz*0.1;
         }
     }
         
     if(touche=='s') //En veut décelérer
     {
-        if(vx==0)
+        if (normeVitesse > 0.01)
         {
-            az = -0.01;
-            ax = 0;
+            ax -= vx*0.1;
+            az -= vz*0.1;
         }
-        else
+        else 
         {
-            if(vz==0)
-            {
-                az = 0;
-                ax = -0.01;
-            }
-            else
-            {
-                angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
-                az = -(0*sin(angle)+0.01*cos(angle));
-                ax = -(0*cos(angle)-0.01*sin(angle));
-            }
+            vx=0;
+            vz=0;
         }
     }
 
     if(touche=='q') //A gauche
     {
-        if(vx==0)
-        {
-            az = 0;
-            ax = 0.01;
-        }
-        else
-        {
-            if(vz==0)
-            {
-                az = 0.01;
-                ax = 0;
-            }
-            else
-            {
-                angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
-                az = -(0*cos(angle)-0.01*sin(angle));
-                ax = -(0*sin(angle)+0.01*cos(angle));
-            }
-        }
+        float changementDirectionX = vz;
+        float changementDirectionZ = -vx;
+        ax = changementDirectionX*0.5;
+        az = changementDirectionZ*0.5;
     }
     
     if(touche=='d') //A droite
     {
-        if(vx==0)
-        {
-            az = 0;
-            ax = -0.01;
-        }
-        else
-        {
-            if(vz==0)
-            {
-                az = -0.01;
-                ax = 0;
-            }
-            else
-            {
-                angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
-                az = 0*cos(angle)-0.01*sin(angle);
-                ax = (0*sin(angle)+0.01*cos(angle));
-            }
-        }
+        float changementDirectionX = -vz;
+        float changementDirectionZ = vx;
+        ax = changementDirectionX*0.1;
+        az = changementDirectionZ*0.1;
     }
     
     //Intteruption
@@ -233,11 +202,127 @@ void gererClavier(unsigned char touche, int x, int y)
         bx=1;        by=50;        bz=1;
     }
 
-    printf("APRES: ax=%f az=%f\n",ax,az);
 
     if (touche ==27) //Touche Echap => ferme le programme
 		exit(0);
 }
+
+// void gererClavier(unsigned char touche, int x, int y)
+// {
+//     printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
+
+//     printf("AVANT: ax=%f az=%f\n, (bx=%f & bz=%f & bx/bz=%f & bz/bx=%f)",ax,az,bx,bz,bx/bz,bz/bx);
+
+//     double angle;
+
+//     if(touche=='z') //On veut accélerer
+//     {
+//         if(vx==0)
+//         {
+//             az = 0.01;
+//             ax = 0;
+//         }
+//         else
+//         {
+//             if(vz==0)
+//             {
+//                 az = 0;
+//                 ax = 0.01;
+//             }
+//             else
+//             {
+//                 angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
+//                 az = 0*sin(angle)+0.01*cos(angle);
+//                 ax = 0*cos(angle)-0.01*sin(angle);
+//             }
+//         }
+//     }
+        
+//     if(touche=='s') //En veut décelérer
+//     {
+//         if(vx==0)
+//         {
+//             az = -0.01;
+//             ax = 0;
+//         }
+//         else
+//         {
+//             if(vz==0)
+//             {
+//                 az = 0;
+//                 ax = -0.01;
+//             }
+//             else
+//             {
+//                 angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
+//                 az = -(0*sin(angle)+0.01*cos(angle));
+//                 ax = -(0*cos(angle)-0.01*sin(angle));
+//             }
+//         }
+//     }
+
+//     if(touche=='q') //A gauche
+//     {
+//         if(vx==0)
+//         {
+//             az = 0;
+//             ax = 0.01;
+//         }
+//         else
+//         {
+//             if(vz==0)
+//             {
+//                 az = 0.01;
+//                 ax = 0;
+//             }
+//             else
+//             {
+//                 angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
+//                 az = -(0*cos(angle)-0.01*sin(angle));
+//                 ax = -(0*sin(angle)+0.01*cos(angle));
+//             }
+//         }
+//     }
+    
+//     if(touche=='d') //A droite
+//     {
+//         if(vx==0)
+//         {
+//             az = 0;
+//             ax = -0.01;
+//         }
+//         else
+//         {
+//             if(vz==0)
+//             {
+//                 az = -0.01;
+//                 ax = 0;
+//             }
+//             else
+//             {
+//                 angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
+//                 az = 0*cos(angle)-0.01*sin(angle);
+//                 ax = (0*sin(angle)+0.01*cos(angle));
+//             }
+//         }
+//     }
+    
+//     //Intteruption
+//     if(touche=='g')
+//         getchar();
+
+//     //Reset de la boule
+//     if(touche=='r')
+//     {
+//         vx=0;        vy=0;        vz=0;
+//         bx=1;        by=50;        bz=1;
+//     }
+
+//     printf("APRES: ax=%f az=%f\n",ax,az);
+
+//     if (touche ==27) //Touche Echap => ferme le programme
+// 		exit(0);
+// }
 
 void afficher_vecteurs()
 {
