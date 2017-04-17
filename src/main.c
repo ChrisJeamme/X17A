@@ -179,8 +179,8 @@ void gererClavier(unsigned char touche, int x, int y)
     {
         float changementDirectionX = vz;
         float changementDirectionZ = -vx;
-        ax = changementDirectionX*0.5;
-        az = changementDirectionZ*0.5;
+        ax = changementDirectionX*0.1;
+        az = changementDirectionZ*0.1;
     }
     
     if(touche=='d') //A droite
