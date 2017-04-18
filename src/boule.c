@@ -1,10 +1,5 @@
 #include "boule.h"
 
-#define EXTERIEUR 0
-#define INTERSECTION 1
-#define INTERIEUR 2
-
-
 int collision_boule_plateforme()
 {
     int i;

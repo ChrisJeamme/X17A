@@ -11,9 +11,10 @@
 #define SENS_MONTRE 1
 #define SENS_INVERSE -1
 
-void animer();
+void Animer();
 void Affichage();
-void gererClavier(unsigned char touche, int x, int y);
+void GererClavier(unsigned char touche, int x, int y);
+void GestionSpecial(int key, int x, int y);
 
 int main(int argc, char** argv)
 {
@@ -23,6 +24,7 @@ int main(int argc, char** argv)
     glutInitWindowPosition(50,50);
     glutCreateWindow("La boule magique");
     glEnable(GL_DEPTH_TEST);
+    
 
     //Rayon de la boule
     brayon = 2;
@@ -54,8 +56,9 @@ int main(int argc, char** argv)
     ajouter_plateforme(90,-20,90,30,-15,150);
 
     glutDisplayFunc(Affichage);
-    glutIdleFunc(animer);
-    glutKeyboardFunc(gererClavier);
+    glutIdleFunc(Animer);
+    glutKeyboardFunc(GererClavier);
+    glutSpecialFunc(GestionSpecial);
 
     glutMainLoop();
     return 0;
@@ -100,12 +103,60 @@ void Affichage()
     glutSwapBuffers();
 }
 
-void animer()
+void Animer()
 {
     glutPostRedisplay();
 }
 
-void gererClavier(unsigned char touche, int x, int y)
+void GestionSpecial(int key, int x, int y)
+{ 	
+    float normeVitesse = sqrt(vx*vx+vz*vz);
+    if (key == GLUT_KEY_LEFT) //A gauche
+    {
+        float changementDirectionX = vz;
+        float changementDirectionZ = -vx;
+        ax = changementDirectionX*0.1;
+        az = changementDirectionZ*0.1;
+    }
+
+    if (key == GLUT_KEY_UP) // On accelère
+    {
+        if (normeVitesse < 0.01) //La boule est à l'arrêt, il faut choisir une direction au hasard
+        {     
+            vx = 0.01;
+            vz = 0.01;
+        }
+        else //On augmente le vecteur vitesse dans la même direction
+        {
+            ax = vx*0.1;
+            az = vz*0.1;
+        }
+    } 
+
+    if (key == GLUT_KEY_RIGHT)  //A droite
+    {
+        float changementDirectionX = -vz;
+        float changementDirectionZ = vx;
+        ax = changementDirectionX*0.1;
+        az = changementDirectionZ*0.1;
+    }
+
+    if (key == GLUT_KEY_DOWN) //On veut ralentir
+    {
+        if (normeVitesse > 0.01)
+        {
+            ax -= vx*0.1;
+            az -= vz*0.1;
+        }
+        else 
+        {
+            vx=0;
+            vz=0;
+        }
+    }
+} 
+
+void GererClavier(unsigned char touche, int x, int y)
 {
     //printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
 
@@ -172,7 +223,7 @@ void gererClavier(unsigned char touche, int x, int y)
 		exit(0);
 }
 
-// void gererClavier(unsigned char touche, int x, int y)
+// void GererClavier(unsigned char touche, int x, int y)
 // {
 //     printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
 
