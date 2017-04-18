@@ -1,6 +1,14 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include "affichage.h"
+#include "decor.h"
+
+void dessiner_boule(float rayon, float x, float y, float z)
+{
+    glColor3f(1,0,0);   //Rouge 
+    glTranslatef(x, y, z);
+    glutSolidSphere(rayon, 20, 20 );
+    glTranslatef(-x, -y, -z);
+    glColor3f(1,1,1);   //Blanc
+}
+
 
 void dessiner_plan(int x1, int y1, int z1, int x2, int y2, int z2)
 {
@@ -98,4 +106,45 @@ void afficherText(float x, float y, int r, int g, int b, const char *texte)
     {
 		glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, texte[i] );
 	}
+}
+
+void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2)
+{
+    glBegin(GL_QUADS);
+        //Face dessous
+        glVertex3f(x1, y1, z1);    
+        glVertex3f(x2, y1, z1);
+        glVertex3f(x2, y1, z2);
+        glVertex3f(x1, y1, z2);
+
+        //Face dessus
+        glVertex3f(x1, y2, z1);    
+        glVertex3f(x2, y2, z1);
+        glVertex3f(x2, y2, z2);
+        glVertex3f(x1, y2, z2);
+
+        //Face devant
+        glVertex3f(x1, y1, z1);    
+        glVertex3f(x2, y1, z1);  
+        glVertex3f(x2, y2, z1);
+        glVertex3f(x1, y2, z1);
+
+        //Face derrière
+        glVertex3f(x1, y1, z2);    
+        glVertex3f(x2, y1, z2);  
+        glVertex3f(x2, y2, z2);
+        glVertex3f(x1, y2, z2);
+
+        //Face gauche
+        glVertex3f(x1, y1, z1);    
+        glVertex3f(x1, y2, z1);  
+        glVertex3f(x1, y2, z2);
+        glVertex3f(x1, y1, z2);    
+
+        //Face droite
+        glVertex3f(x2, y1, z1);    
+        glVertex3f(x2, y2, z1);  
+        glVertex3f(x2, y2, z2);
+        glVertex3f(x2, y1, z2);  
+    glEnd();
 }

@@ -1,10 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include "affichage.h"
+#include "decor.h"
 #include "karbre.h"
-#include "matrice.h"
-#include "volume.h"
+#include "boule.h"
 
 #define HAUTEUR_FENETRE 800 
 #define LARGEUR_FENETRE 800
@@ -12,8 +11,6 @@
 #define SENS_MONTRE 1
 #define SENS_INVERSE -1
 
-
-void transformer_polyone_actuel(Matrice m);
 void animer();
 void Affichage();
 void gererClavier(unsigned char touche, int x, int y);
@@ -27,7 +24,6 @@ int main(int argc, char** argv)
     glutInitWindowPosition(50,50);
     glutCreateWindow("La boule magique");
     glEnable(GL_DEPTH_TEST);
-
 
     //Rayon de la boule
     brayon = 2;
@@ -51,10 +47,6 @@ int main(int argc, char** argv)
     ox = bx;
     oy = by + brayon*5;
     oz = bz;
-    //Angle de direction 
-    angle = 0;
-
-
 
     glutDisplayFunc(Affichage);
     glutIdleFunc(animer);
@@ -64,37 +56,6 @@ int main(int argc, char** argv)
     return 0;
 }
 
-void maj_vecteur_vitesse()
-{
-    vx = vx + ax;
-    if (vx > 0.05 || vx < -0.05)
-        vx -= ax;
-    vy = vy + ay + gy;
-    vz = vz + az;
-    if (vz > 0.05 || vz < -0.05)
-        vz -= az;
-    //printf("\n\n VITESSE X : %f \n VITESSE Z : %f\n\n",vx, vz);
-}
-
-void maj_position_boule()
-{
-    bx+=vx;
-    if (!intersection_plan_boule(-30,0,-30,30,0,30))
-    {
-        by+= vy;
-    }
-    else    //Boule au sol
-        vy = 0;
-    bz+=vz;
-}
-
-void maj_observateur()
-{
-
-    ox = bx - vx*400;
-    oz = bz - vz*400;
-    oy = by + brayon * 5;
-}
 
 void Affichage()
 {
@@ -108,7 +69,7 @@ void Affichage()
     // char vx_string[50];
     // sprintf(vx_string, "%f", vx);
     // afficherText(10,0,0,1,1,vx_string);
-    
+
     maj_vecteur_vitesse();
     maj_position_boule();
     
@@ -324,12 +285,7 @@ void gererClavier(unsigned char touche, int x, int y)
 // 		exit(0);
 // }
 
-void afficher_vecteurs()
-{
-    printf("Position : \n   %3f, %3f, %3f\n", bx, by, bz);
-    printf("Vitesse : \n   %3f, %3f, %3f\n", vx, vy, vz);
-    printf("Acceleration : \n   %3f, %3f, %3f\n", ax, ay, az);
-}
+
 
 // glColor3f(1.0,0.5,0.0); //Orange
 // glColor3f(0.0,0.0,1.0); //Bleu

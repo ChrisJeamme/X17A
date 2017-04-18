@@ -27,7 +27,6 @@
     element kRacine(karbre A);
     int kEstVide(karbre A);
     void kAfficher(karbre A);
-    karbre kCopie(karbre A);
     void kAfficher_bis(karbre A, int prof);
     void kAfficher(karbre A);
     void afficher_racine(int racine);

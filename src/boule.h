@@ -35,10 +35,13 @@ float gz;
 float ox;
 float oy;
 float oz;
-//Angle de direction 
-float angle;
 
-void dessiner_boule(float rayon, float x, float y, float z);
-void dessiner_maison();
-void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2);
 int intersection_plan_boule(int x1, int y1, int z1, int x2, int y2, int z2);
+
+void maj_vecteur_vitesse();
+
+void maj_observateur();
+
+void maj_position_boule();
+
+void afficher_vecteurs();

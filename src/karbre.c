@@ -44,26 +44,6 @@ int kEstVide(karbre A)
     return A==NULL;
 }
 
-karbre kCopie(karbre A)
-{
-    // if(kArbreVide(A))
-    //     return NULL;
-
-    // karbre B = (struct noeud*) malloc(sizeof(struct noeud));
-    // int i;
-    // for(i=0; i<K; i++)
-    // {
-    //     if(!kArbreVide(A->fils[i]))
-    //         B->fils[i] = kCopie(A->fils[i]);
-    //     else
-    //         B->fils[i] = kArbreVide();
-    // }
-
-    // B->racine = A->racine; 
-
-    // return B;
-    return NULL;
-}
 
 void kAfficher(karbre A)
 {
