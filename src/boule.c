@@ -4,41 +4,8 @@
 #define INTERSECTION 1
 #define INTERIEUR 2
 
-int intersection_plan_boule(int x1, int y1, int z1, int x2, int y2, int z2)
-{
-    int x3 = x2;
-    int y3 = y1;
-    int z3 = z3;
 
-    float ABx = x2 - x1;
-    float ABy = y2 - y1;
-    float ABz = z2 - z1;
-
-    float ACx = x3 - x1;
-    float ACy = y3 - y1;
-    float ACz = z3 - z1;
-
-    //Produit vectoriel pour avoir vecteur normal au plan (ABC): 
-    float a = ABy*ACz - ABz*ACy;
-    float b = ABz*ACx - ABx*ACz;
-    float c = ABx*ACy - ABy*ACx;
-    //float d = -(a*x1 + b*x2 + c*x3); //car (x1,x2,x3) appartient au plan
-
-    float Abx = bx - x1; 
-    float Aby = by - y1; 
-    float Abz = bz - z1;
-
-    float distance = abs((Abx*a + Aby*b + Abz*c)/sqrt(a*a + b*b + c*c));
-
-
-    if (distance > brayon)
-        return 0;
-    if ((bx < x1 && bx < x2 )||( bx > x1 && bx > x2 )||( bz < z1 && bz < z2 )||( bz > z1 && bz > z2))
-        return 0;
-    else return 1;
-}
-
-int intersection_boule_plateforme()
+int collision_boule_plateforme()
 {
     int i;
     for (i=0; i<nb_plateformes; i++)
@@ -69,7 +36,7 @@ int intersection_boule_plateforme()
         float a = ABy*ACz - ABz*ACy;
         float b = ABz*ACx - ABx*ACz;
         float c = ABx*ACy - ABy*ACx;
-        //float d = -(a*x1 + b*x2 + c*x3); //car (x1,x2,x3) appartient au plan
+        float d = -(a*x1 + b*x2 + c*x3); //car (x1,x2,x3) appartient au plan
 
         float Abx = bx - x1; 
         float Aby = by - y1; 
@@ -79,7 +46,12 @@ int intersection_boule_plateforme()
 
         if (distance > brayon)
             continue;
-        else return 1;
+        else 
+        {
+            printf("%f x + %f y + %f z + %f = 0\n",a,b,c,d);
+            printf("%f \n\n", fabs((-a*bx-c*bz-d)/b));
+            return fabs((-a*bx-c*bz-d)/b);
+        }
     }
     return 0;
 }
@@ -99,18 +71,20 @@ void maj_vecteur_vitesse()
 void maj_position_boule()
 {
     bx+=vx;
-    if (!intersection_boule_plateforme())
+    if (!collision_boule_plateforme()) //La boule n'est pas en collision avec une plateforme
     {
         by+= vy;
     }
-    else    //Boule au sol
+    else
+    {
         vy = 0;
+        by = collision_boule_plateforme();
+    }
     bz+=vz;
 }
 
 void maj_observateur()
 {
-
     ox = bx - vx*400;
     oz = bz - vz*400;
     oy = by + brayon * 5;

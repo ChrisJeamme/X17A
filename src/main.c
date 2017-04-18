@@ -50,8 +50,8 @@ int main(int argc, char** argv)
     nb_plateformes = 0;
 
     ajouter_plateforme(-30,0,-30,30,0,30);
-    ajouter_plateforme(30,-20,30,90,-20,90);
-    ajouter_plateforme(-30,-20,-30,-90,-20,-90);
+    ajouter_plateforme(30,-10,30,90,-20,90);
+    ajouter_plateforme(90,-20,90,30,-15,150);
 
     glutDisplayFunc(Affichage);
     glutIdleFunc(animer);

@@ -1,6 +1,6 @@
-#define VIDE 0
-#define PLEIN 1
-#define RIEN 2
+#ifndef _BOULE_H_
+#define _BOULE_H_
+
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -9,10 +9,6 @@
 #include "GL/glut.h"
 #include "karbre.h"
 #include "decor.h"
-
-#define EXTERIEUR 0
-#define INTERSECTION 1
-#define INTERIEUR 2
 
 //Rayon de la boule
 int brayon;
@@ -37,9 +33,8 @@ float ox;
 float oy;
 float oz;
 
-int intersection_plan_boule(int x1, int y1, int z1, int x2, int y2, int z2);
 
-int intersection_boule_plateforme();
+int collison_boule_plateforme();
 
 void maj_vecteur_vitesse();
 
@@ -48,3 +43,5 @@ void maj_observateur();
 void maj_position_boule();
 
 void afficher_vecteurs();
+
+#endif
