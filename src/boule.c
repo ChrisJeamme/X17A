@@ -36,21 +36,19 @@ int collision_boule_plateforme()
         float a = ABy*ACz - ABz*ACy;
         float b = ABz*ACx - ABx*ACz;
         float c = ABx*ACy - ABy*ACx;
-        float d = -(a*x1 + b*x2 + c*x3); //car (x1,x2,x3) appartient au plan
+        float d = -(a*x1 + b*y1 + c*z1); //car (x1,y1,z1) appartient au plan
 
         float Abx = bx - x1; 
         float Aby = by - y1; 
         float Abz = bz - z1;
 
-        float distance = abs((Abx*a + Aby*b + Abz*c)/sqrt(a*a + b*b + c*c));
+        float distance = fabs((Abx*a + Aby*b + Abz*c)/sqrt(a*a + b*b + c*c));
 
         if (distance > brayon)
             continue;
         else 
         {
-            printf("%f x + %f y + %f z + %f = 0\n",a,b,c,d);
-            printf("%f \n\n", fabs((-a*bx-c*bz-d)/b));
-            return fabs((-a*bx-c*bz-d)/b);
+            return ((-a*bx-c*bz-d)/b)+brayon;
         }
     }
     return 0;
@@ -87,7 +85,7 @@ void maj_observateur()
 {
     ox = bx - vx*400;
     oz = bz - vz*400;
-    oy = by + brayon * 5;
+    oy = by + brayon*5;
 }
 
 void afficher_vecteurs()
