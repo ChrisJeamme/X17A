@@ -8,10 +8,27 @@
 #define LARGEUR_FENETRE 800
 #define TAILLE 50
 
+typedef struct struct_plateforme
+{
+    int x1;
+    int y1;
+    int z1;
+    int x2;
+    int y2;
+    int z2;
+} plateforme;
+
+plateforme tab_plateformes[100];
+int nb_plateformes;
+
 //Prototypes
 void dessiner_boule(float rayon, float x, float y, float z);
 
 void dessiner_plan(int x1, int y1, int z1, int x2, int y2, int z2);
+
+void dessiner_plateformes();
+
+void afficher_plateforme(int x1, int y1, int z1, int x2, int y2, int z2);
 
 void trace_grille(int n);
 

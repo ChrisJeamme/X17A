@@ -8,6 +8,7 @@
 #include "GL/gl.h"
 #include "GL/glut.h"
 #include "karbre.h"
+#include "decor.h"
 
 #define EXTERIEUR 0
 #define INTERSECTION 1
@@ -37,6 +38,8 @@ float oy;
 float oz;
 
 int intersection_plan_boule(int x1, int y1, int z1, int x2, int y2, int z2);
+
+int intersection_boule_plateforme();
 
 void maj_vecteur_vitesse();
 

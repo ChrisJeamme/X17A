@@ -9,7 +9,6 @@ void dessiner_boule(float rayon, float x, float y, float z)
     glColor3f(1,1,1);   //Blanc
 }
 
-
 void dessiner_plan(int x1, int y1, int z1, int x2, int y2, int z2)
 {
     glBegin(GL_QUADS);
@@ -47,12 +46,90 @@ void dessiner_plan(int x1, int y1, int z1, int x2, int y2, int z2)
     glVertex3f(x2, y2-2, z2);
     glVertex3f(x2, y1-2, z1);
 
-    //La face du dessous ne sert à rien car jamais visible
+    //Face du dessous
+    glColor3f(0,0,1); //Bleu
+    glVertex3f(x1, y1-2, z1);    
+    glVertex3f(x2, y1-2, z1);
+    glVertex3f(x2, y2-2, z2);
+    glVertex3f(x1, y2-2, z2);
+    
+    glColor3f(1,1,1); //Blanc   
 
     glEnd();
 }
 
+void afficher_plateformes()
+{
+    int i;
+    for (i=0; i<nb_plateformes; i++)
+    {
+        int x1 = tab_plateformes[i].x1;
+        int y1 = tab_plateformes[i].y1;
+        int z1 = tab_plateformes[i].z1;
+        int x2 = tab_plateformes[i].x2;
+        int y2 = tab_plateformes[i].y2;
+        int z2 = tab_plateformes[i].z2;
 
+        glBegin(GL_QUADS);
+    
+        //Face dessus
+        glColor3f(0,0,1); //Bleu
+        glVertex3f(x1, y1, z1);    
+        glVertex3f(x2, y1, z1);
+        glColor3f(0,0.6,0.7); //Bleu plus clair    
+        glVertex3f(x2, y2, z2);
+        glVertex3f(x1, y2, z2);
+
+        //Bord 1
+        glColor3f(1,1,1); //Blanc   
+        glVertex3f(x1, y1, z1);    
+        glVertex3f(x2, y1, z1);
+        glVertex3f(x2, y1-2, z1);
+        glVertex3f(x1, y1-2, z1);
+
+        //Bord 2
+        glVertex3f(x1, y1, z1);    
+        glVertex3f(x1, y2, z2);
+        glVertex3f(x1, y2-2, z2);
+        glVertex3f(x1, y1-2, z1);
+
+        //Bord 3
+        glVertex3f(x1, y2, z2);    
+        glVertex3f(x2, y2, z2);
+        glVertex3f(x2, y2-2, z2);
+        glVertex3f(x1, y2-2, z2);
+
+        //Bord 4
+        glVertex3f(x2, y1, z1);    
+        glVertex3f(x2, y2, z2);
+        glVertex3f(x2, y2-2, z2);
+        glVertex3f(x2, y1-2, z1);
+
+        //Face du dessous
+        glColor3f(0,0,1); //Bleu
+        glVertex3f(x1, y1-2, z1);    
+        glVertex3f(x2, y1-2, z1);
+        glVertex3f(x2, y2-2, z2);
+        glVertex3f(x1, y2-2, z2);
+        
+        glColor3f(1,1,1); //Blanc   
+
+        glEnd();
+    }
+}
+
+void ajouter_plateforme(int x1, int y1, int z1, int x2, int y2, int z2)
+{
+    plateforme p;
+    p.x1 = x1;
+    p.y1 = y1;
+    p.z1 = z1;
+    p.x2 = x2;
+    p.y2 = y2;
+    p.z2 = z2;
+    tab_plateformes[nb_plateformes] = p;
+    nb_plateformes++;
+}
 
 //Tracage de la grille des points
 void trace_grille(int n)

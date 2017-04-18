@@ -14,7 +14,6 @@
 void animer();
 void Affichage();
 void gererClavier(unsigned char touche, int x, int y);
-void afficher_vecteurs();
 
 int main(int argc, char** argv)
 {
@@ -47,6 +46,12 @@ int main(int argc, char** argv)
     ox = bx;
     oy = by + brayon*5;
     oz = bz;
+
+    nb_plateformes = 0;
+
+    ajouter_plateforme(-30,0,-30,30,0,30);
+    ajouter_plateforme(30,-20,30,90,-20,90);
+    ajouter_plateforme(-30,-20,-30,-90,-20,-90);
 
     glutDisplayFunc(Affichage);
     glutIdleFunc(animer);
@@ -89,8 +94,7 @@ void Affichage()
     //Affichage Boule
     dessiner_boule(brayon,bx,by,bz);
 
-    //Affichage Plan 1
-    dessiner_plan(-30,0,-30,30,0,30);
+    afficher_plateformes();
     
     trace_grille(5);
     glutSwapBuffers();
