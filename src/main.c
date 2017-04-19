@@ -34,8 +34,8 @@ int main(int argc, char** argv)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
-    chargementTexture(&tex_sol[0], "test3.png");
-    chargementTexture(&tex_sol[1], "test2.png");
+    //chargementTexture(&tex_sol[0], "test2.png");
+    //chargementTexture(&tex_sol[1], "test2.png");
 
     //Rayon de la boule
     brayon = 2;
@@ -66,8 +66,7 @@ int main(int argc, char** argv)
     ajouter_plateforme(30,-10,30,90,-20,90);
     ajouter_plateforme(90,-20,90,30,-15,150);
     ajouter_plateforme(-30, -5,30, -60, 5,60);
-    ajouter_plateforme(-30, -5,60, -60, 5,30);
-    ajouter_plateforme(-60, 5,60, -60, -5,30);
+
 
     glutDisplayFunc(Affichage);
     glutIdleFunc(Animer);
