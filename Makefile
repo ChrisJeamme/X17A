@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -lglut -lGLU -lGL -lm
+CFLAGS=-Wall -lglut -lGLU -lGL -lm -lSOIL
 
 boulemagique: src/main.o src/boule.o src/decor.o src/karbre.o src/karbre.h src/boule.h
 	$(CC) -o $@ $^ $(CFLAGS)

@@ -3,6 +3,7 @@
 
 #include "GL/gl.h"
 #include "GL/glut.h"
+#include "../lib/SOIL.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -23,6 +24,9 @@ typedef struct struct_plateforme
 
 plateforme tab_plateformes[100];
 int nb_plateformes;
+
+//Texture plateformes
+GLuint tex_sol;
 
 //Prototypes
 void dessiner_boule(float rayon, float x, float y, float z);

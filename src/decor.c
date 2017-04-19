@@ -1,11 +1,12 @@
 #include "decor.h"
-#include "../lib/src/SOIL.h"
 
 void dessiner_boule(float rayon, float x, float y, float z)
 {
     glColor3f(1,0,0);   //Rouge 
     glTranslatef(x, y, z);
     glutSolidSphere(rayon, 20, 20 );
+    glBindTexture(GL_TEXTURE_2D, tex_sol);
+    glPopMatrix();
     glTranslatef(-x, -y, -z);
     glColor3f(1,1,1);   //Blanc
 }
@@ -70,43 +71,8 @@ void chargementTexture(GLuint* texture, char* chemin)
         fprintf(stderr,"Erreur de chargement de texture: \"%s\"\n", chemin);
 }
 
-void drawTexturedRect(int x, int y, int w, int h, GLuint texture)
+void afficher_plateformes()
 {
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glDepthMask(GL_FALSE);
-    glDisable(GL_DEPTH_TEST);
-    glBegin(GL_QUADS);
-        glColor3f(255,255,255);
-        glTexCoord2f(0,0);
-            glVertex2f(x,y);
-        glTexCoord2f(1,0);
-            glVertex2f(x+w,y);
-        glTexCoord2f(0,1);
-            glVertex2f(x,y+h);
-        glTexCoord2f(1,1);
-            glVertex2f(x+w,y+h);
-        glTexCoord2f(0,1);
-            glVertex2f(x,y+h);
-    glEnd();
-    glEnable(GL_DEPTH_TEST);
-    glDepthMask(GL_TRUE);
-    glDisable(GL_BLEND);
-}
-
-void afficher_plateformes(GLuint tex_sol)
-{
-    drawTexturedRect(25,25,256,256,tex_sol);
-
-    glGenTextures(1,&tex_sol);
-    glBindTexture(GL_TEXTURE_2D, tex_sol);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-
-    printf(" %d", tex_sol);
-
     int i;
     for (i=0; i<nb_plateformes; i++)
     {
@@ -118,48 +84,51 @@ void afficher_plateformes(GLuint tex_sol)
         int z2 = tab_plateformes[i].z2;
 
         glBegin(GL_QUADS);
-    
+        
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
+
         //Face dessus
-         glColor3f(0,0,1); //Bleu
+          glColor3f(1,1,1); //Blanc  
          glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
-         glTexCoord2i(1,0); glVertex3f(x2, y1, z1);
-         glColor3f(0,0.6,0.7); //Bleu plus clair    
+         glTexCoord2i(0,1); glVertex3f(x2, y1, z1);    
          glTexCoord2i(1,1); glVertex3f(x2, y2, z2);
          glTexCoord2i(1,0); glVertex3f(x1, y2, z2);
 
          //Bord 1
-         //glColor3f(1,1,1); //Blanc   
-         glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
-         glTexCoord2i(1,0); glVertex3f(x2, y1, z1);
-         glTexCoord2i(1,1); glVertex3f(x2, y1-2, z1);
-         glTexCoord2i(0,1); glVertex3f(x1, y1-2, z1);
+          glColor3f(0.9,0.9,0.9);  //Gris
+         glVertex3f(x1, y1, z1);    
+         glVertex3f(x2, y1, z1);
+         glVertex3f(x2, y1-2, z1);
+         glVertex3f(x1, y1-2, z1);
 
         //Bord 2
-         glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
-         glTexCoord2i(1,0); glVertex3f(x1, y2, z2);
-         glTexCoord2i(1,1); glVertex3f(x1, y2-2, z2);
-         glTexCoord2i(0,1); glVertex3f(x1, y1-2, z1);
+         glVertex3f(x1, y1, z1);    
+         glVertex3f(x1, y2, z2);
+         glVertex3f(x1, y2-2, z2);
+         glVertex3f(x1, y1-2, z1);
 
         //Bord 3
-         glTexCoord2i(0,0); glVertex3f(x1, y2, z2);    
-         glTexCoord2i(1,0); glVertex3f(x2, y2, z2);
-         glTexCoord2i(1,1); glVertex3f(x2, y2-2, z2);
-         glTexCoord2i(0,1); glVertex3f(x1, y2-2, z2);
+         glVertex3f(x1, y2, z2);    
+         glVertex3f(x2, y2, z2);
+         glVertex3f(x2, y2-2, z2);
+         glVertex3f(x1, y2-2, z2);
 
         //Bord 4
-         glTexCoord2i(0,0); glVertex3f(x2, y1, z1);    
-         glTexCoord2i(1,0); glVertex3f(x2, y2, z2);
-         glTexCoord2i(1,1); glVertex3f(x2, y2-2, z2);
-         glTexCoord2i(0,1); glVertex3f(x2, y1-2, z1);
+         glVertex3f(x2, y1, z1);    
+         glVertex3f(x2, y2, z2);
+         glVertex3f(x2, y2-2, z2);
+         glVertex3f(x2, y1-2, z1);
 
-        //Face du dessous
-         //glColor3f(0,0,1); //Bleu
-         glTexCoord2i(0,0); glVertex3f(x1, y1-2, z1);    
-         glTexCoord2i(1,0); glVertex3f(x2, y1-2, z1);
-         glTexCoord2i(1,1); glVertex3f(x2, y2-2, z2);
-         glTexCoord2i(0,1); glVertex3f(x1, y2-2, z2);
+        //Face du dessous 
+         glVertex3f(x1, y1-2, z1);    
+         glVertex3f(x2, y1-2, z1);
+         glVertex3f(x2, y2-2, z2);
+         glVertex3f(x1, y2-2, z2);
         
-        //glColor3f(1,1,1); //Blanc   
+        glColor3f(1,1,1); //Blanc   
 
         glEnd();
     }

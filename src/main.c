@@ -4,15 +4,12 @@
 #include "decor.h"
 #include "karbre.h"
 #include "boule.h"
-#include "../lib/src/SOIL.h"
 
 #define HAUTEUR_FENETRE 800 
 #define LARGEUR_FENETRE 800
 #define TAILLE 50 
 #define SENS_MONTRE 1
 #define SENS_INVERSE -1
-
-GLuint tex_sol;
 
 void animer();
 void Affichage();
@@ -64,8 +61,14 @@ int main(int argc, char** argv)
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
 
-    chargementTexture(&tex_sol, "test.jpg");
-    //genererTexture();
+    glGenTextures(1,&tex_sol);
+    glBindTexture(GL_TEXTURE_2D, tex_sol);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
+    chargementTexture(&tex_sol, "test3.png");
 
     //Rayon de la boule
     brayon = 2;
@@ -104,7 +107,6 @@ int main(int argc, char** argv)
     return 0;
 }
 
-
 void Affichage()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -137,7 +139,7 @@ void Affichage()
     //Affichage Boule
     dessiner_boule(brayon,bx,by,bz);
 
-    afficher_plateformes(tex_sol);
+    afficher_plateformes();
     
     trace_grille(5);
     glutSwapBuffers();
