@@ -15,6 +15,44 @@ void animer();
 void Affichage();
 void gererClavier(unsigned char touche, int x, int y);
 
+
+
+void genererTexture()
+{
+
+    //Texture 1
+
+    GLuint tex =0;
+    GLubyte texture[16] =
+    {
+    0,0,0,0, 0xFF,0xFF,0xFF,0xFF,
+    0xFF,0xFF,0xFF,0xFF, 0,0,0,0
+    };
+
+    // int width, height;
+    // unsigned char* image = SOIL_load_image("test.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+
+    
+    glGenTextures(1,&tex); 	//Génère un n° de texture
+    glBindTexture(GL_TEXTURE_2D,tex); 	//Sélectionne ce n°
+
+    
+
+    glTexImage2D (
+        GL_TEXTURE_2D, 	//Type : texture 2D
+        0, 	//Mipmap : aucun
+        4, 	//Couleurs : 4
+        2, 	//Largeur : 2
+        2, 	//Hauteur : 2
+        0, 	//Largeur du bord : 0
+        GL_RGBA, 	//Format : RGBA
+        GL_UNSIGNED_BYTE, 	//Type des couleurs
+        texture 	//Addresse de l'image
+    ); 	
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+}
+
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -23,6 +61,9 @@ int main(int argc, char** argv)
     glutInitWindowPosition(50,50);
     glutCreateWindow("La boule magique");
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_TEXTURE_2D);
+
+    genererTexture();
 
     //Rayon de la boule
     brayon = 2;
