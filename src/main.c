@@ -54,7 +54,9 @@ int main(int argc, char** argv)
     ajouter_plateforme(-30,0,-30,30,0,30);
     ajouter_plateforme(30,-10,30,90,-20,90);
     ajouter_plateforme(90,-20,90,30,-15,150);
-    ajouter_plateforme(40,-30,95,150,-10,150);
+    ajouter_plateforme(-30, -5,30, -60, 5,60);
+    ajouter_plateforme(-30, -5,60, -60, 5,30);
+    ajouter_plateforme(-60, 5,60, -60, -5,30);
 
     glutDisplayFunc(Affichage);
     glutIdleFunc(Animer);
@@ -73,7 +75,7 @@ void Affichage()
     glLoadIdentity();
     //afficher_vecteurs();
 
-    glFrustum(-1,1,-1,1,1,100);
+    glFrustum(-1,1,-1,1,1,200);
 
     // char vx_string[50];
     // sprintf(vx_string, "%f", vx);
