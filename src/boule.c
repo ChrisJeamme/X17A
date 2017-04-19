@@ -43,11 +43,26 @@ int collision_boule_plateforme()
             continue;
         else 
         {
+            if (y1 != y2)
+                ajouter_pente(a,b,c);
             by = ((-a*bx-c*bz-d)/b)+brayon;
             return 1;
         }
     }
     return 0;
+}
+
+void ajouter_pente(int a, int b, int c) //on cherche le vecteur directeur normé de la pente
+{   
+    float Px = a*b;
+    float Py = a*a + c*c;
+    float Pz = c*b;
+    float norme = sqrt(Px*Px + Py*Py + Pz*Pz);
+    Px /= norme;
+    Py /= norme;
+    Pz /= norme;
+    vx += Px*0.0001;
+    vz += Pz*0.0001;
 }
 
 void maj_vecteur_vitesse()
@@ -64,6 +79,7 @@ void maj_vecteur_vitesse()
 
 void maj_position_boule()
 {
+    maj_vecteur_vitesse();
     bx+=vx;
     if (!collision_boule_plateforme()) //La boule n'est pas en collision avec une plateforme
     {
@@ -80,7 +96,7 @@ void maj_observateur()
 {
     ox = bx - vx*400;
     oz = bz - vz*400;
-    oy = by /*+ brayon*5*/;
+    oy = by + brayon*5;
 }
 
 void afficher_vecteurs()

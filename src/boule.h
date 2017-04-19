@@ -44,4 +44,7 @@ void maj_position_boule();
 
 void afficher_vecteurs();
 
+void ajouter_pente(int a, int b, int c);
+
+
 #endif

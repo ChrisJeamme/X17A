@@ -54,6 +54,7 @@ int main(int argc, char** argv)
     ajouter_plateforme(-30,0,-30,30,0,30);
     ajouter_plateforme(30,-10,30,90,-20,90);
     ajouter_plateforme(90,-20,90,30,-15,150);
+    ajouter_plateforme(40,-30,95,150,-10,150);
 
     glutDisplayFunc(Affichage);
     glutIdleFunc(Animer);
@@ -78,7 +79,6 @@ void Affichage()
     // sprintf(vx_string, "%f", vx);
     // afficherText(10,0,0,1,1,vx_string);
 
-    maj_vecteur_vitesse();
     maj_position_boule();
     
     ax=0; ay=0; az=0;
