@@ -43,7 +43,8 @@ int collision_boule_plateforme()
             continue;
         else 
         {
-            return ((-a*bx-c*bz-d)/b)+brayon;
+            by = ((-a*bx-c*bz-d)/b)+brayon;
+            return 1;
         }
     }
     return 0;
@@ -71,7 +72,6 @@ void maj_position_boule()
     else
     {
         vy = 0;
-        by = collision_boule_plateforme();
     }
     bz+=vz;
 }
