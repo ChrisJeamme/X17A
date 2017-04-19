@@ -26,7 +26,7 @@ plateforme tab_plateformes[100];
 int nb_plateformes;
 
 //Texture plateformes
-GLuint tex_sol;
+GLuint tex_sol[2];
 
 //Prototypes
 void dessiner_boule(float rayon, float x, float y, float z);

@@ -61,15 +61,15 @@ int main(int argc, char** argv)
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
 
-    glGenTextures(1,&tex_sol);
-    glBindTexture(GL_TEXTURE_2D, tex_sol);
+    glGenTextures(2,&tex_sol);
+    glBindTexture(GL_TEXTURE_2D, tex_sol[0]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
-    chargementTexture(&tex_sol, "test3.png");
-
+    chargementTexture(&tex_sol[0], "test3.png");
+    chargementTexture(&tex_sol[1], "test2.png");
     //Rayon de la boule
     brayon = 2;
     //Coordonnées du centre de la boule

@@ -2,13 +2,13 @@
 
 void dessiner_boule(float rayon, float x, float y, float z)
 {
+    glBindTexture(GL_TEXTURE_2D, tex_sol[1]);
     glColor3f(1,0,0);   //Rouge 
     glTranslatef(x, y, z);
-    glutSolidSphere(rayon, 20, 20 );
-    glBindTexture(GL_TEXTURE_2D, tex_sol);
-    glPopMatrix();
+    glutSolidSphere(rayon, 20, 20);
     glTranslatef(-x, -y, -z);
     glColor3f(1,1,1);   //Blanc
+    glBindTexture(GL_TEXTURE_2D, tex_sol[0]);
 }
 
 void dessiner_plan(int x1, int y1, int z1, int x2, int y2, int z2)
