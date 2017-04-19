@@ -27,7 +27,7 @@ int main(int argc, char** argv)
 
     glEnable(GL_TEXTURE_2D);
 
-    glGenTextures(2,&tex_sol);
+    glGenTextures(2,tex_sol);
     glBindTexture(GL_TEXTURE_2D, tex_sol[0]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
