@@ -17,7 +17,7 @@ int collision_boule_plateforme()
         
         int x3 = x2;
         int y3 = y1;
-        int z3 = z3;
+        int z3 = z1;
 
         float ABx = x2 - x1;
         float ABy = y2 - y1;
@@ -80,7 +80,7 @@ void maj_observateur()
 {
     ox = bx - vx*400;
     oz = bz - vz*400;
-    oy = by + brayon*5;
+    oy = by /*+ brayon*5*/;
 }
 
 void afficher_vecteurs()
