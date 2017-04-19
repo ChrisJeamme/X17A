@@ -4,6 +4,7 @@
 #include "decor.h"
 #include "karbre.h"
 #include "boule.h"
+#include "../lib/src/SOIL.h"
 
 #define HAUTEUR_FENETRE 800 
 #define LARGEUR_FENETRE 800
@@ -11,26 +12,26 @@
 #define SENS_MONTRE 1
 #define SENS_INVERSE -1
 
+GLuint tex_sol;
+
 void animer();
 void Affichage();
 void gererClavier(unsigned char touche, int x, int y);
-
-
 
 void genererTexture()
 {
 
     //Texture 1
 
-    GLuint tex =0;
+    GLuint tex = 0;
     GLubyte texture[16] =
     {
     0,0,0,0, 0xFF,0xFF,0xFF,0xFF,
     0xFF,0xFF,0xFF,0xFF, 0,0,0,0
     };
 
-    // int width, height;
-    // unsigned char* image = SOIL_load_image("test.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+    int width, height;
+    unsigned char* image = SOIL_load_image("test.jpg", &width, &height, 0, SOIL_LOAD_RGB);
 
     
     glGenTextures(1,&tex); 	//Génère un n° de texture
@@ -47,7 +48,7 @@ void genererTexture()
         0, 	//Largeur du bord : 0
         GL_RGBA, 	//Format : RGBA
         GL_UNSIGNED_BYTE, 	//Type des couleurs
-        texture 	//Addresse de l'image
+        image 	//Addresse de l'image
     ); 	
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -63,7 +64,8 @@ int main(int argc, char** argv)
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
 
-    genererTexture();
+    chargementTexture(&tex_sol, "test.jpg");
+    //genererTexture();
 
     //Rayon de la boule
     brayon = 2;
@@ -135,7 +137,7 @@ void Affichage()
     //Affichage Boule
     dessiner_boule(brayon,bx,by,bz);
 
-    afficher_plateformes();
+    afficher_plateformes(tex_sol);
     
     trace_grille(5);
     glutSwapBuffers();
