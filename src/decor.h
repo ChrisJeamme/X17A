@@ -12,6 +12,7 @@
 #define LARGEUR_FENETRE 800
 #define TAILLE 50
 
+
 typedef struct struct_plateforme
 {
     int x1; 
@@ -27,6 +28,11 @@ int nb_plateformes;
 
 //Texture plateformes
 GLuint tex_sol[2];
+
+//Gestion menus
+
+int nSousmenu1, nSousmenu2, nMenuprincipal; // Numéros (identifiants) des menus
+int nTue=0;
 
 //Prototypes
 void dessiner_boule(float rayon, float x, float y, float z);

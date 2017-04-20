@@ -10,15 +10,64 @@
 #define TAILLE 50 
 #define SENS_MONTRE 1
 #define SENS_INVERSE -1
+#define MENU_RESET 1
+#define MENU_QUITTER 2
 
+void initGL();
+void majVecteurs();
 void Animer();
 void Affichage();
 void GererClavier(unsigned char touche, int x, int y);
 void GestionSpecial(int key, int x, int y);
 
-int main(int argc, char** argv)
+void majObservateur()
 {
-    glutInit(&argc, argv);
+    if(!appartientPlateforme(bx, by + brayon*5, bz))
+    {
+        ox = bx;
+        oy = by + brayon*5;
+        oz = bz;
+    }
+}
+
+int appartientPlateforme(x,y,z)
+{
+    return 0;
+    // int i;
+    // for (i=0; i<nb_plateformes; i++)
+    // {
+    //     int x1 = tab_plateformes[i].x1;
+    //     int y1 = tab_plateformes[i].y1;
+    //     int z1 = tab_plateformes[i].z1;
+    //     int x2 = tab_plateformes[i].x2;
+    //     int y2 = tab_plateformes[i].y2;
+    //     int z2 = tab_plateformes[i].z2;
+    
+       
+    // }
+}
+
+
+void vRappelSousMenu1(int i)
+{
+	printf("rappel de l'element %d\n", i);
+}
+
+void vRappelMenuPrincipal(int i)
+{
+	printf("rappel de l'element %d\n", i);
+    if(i==MENU_QUITTER)
+        exit(0);
+    if(i==MENU_RESET)
+    {
+        vx=0;        vy=0;        vz=0;
+        bx=1;        by=50;        bz=1;
+    }
+
+}
+
+void initGL()
+{
     glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE | GLUT_DEPTH);
     glutInitWindowSize(LARGEUR_FENETRE, HAUTEUR_FENETRE);
     glutInitWindowPosition(50,50);
@@ -32,11 +81,12 @@ int main(int argc, char** argv)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
     //chargementTexture(&tex_sol[0], "test2.png");
     //chargementTexture(&tex_sol[1], "test2.png");
+}
 
+void majVecteurs()
+{
     //Rayon de la boule
     brayon = 2;
     //Coordonnées du centre de la boule
@@ -56,9 +106,32 @@ int main(int argc, char** argv)
     gy = -0.001;
     gz = 0;
     //Position de l'observateur
-    ox = bx;
-    oy = by + brayon*5;
-    oz = bz;
+    majObservateur();
+}
+
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+    initGL();
+
+    majVecteurs();
+
+    // nSousmenu1 = glutCreateMenu(vRappelSousMenu1);
+	// glutAddMenuEntry("Elément 1 du sous-menu 1", 11);
+	
+	nMenuprincipal = glutCreateMenu(vRappelMenuPrincipal);
+
+	// glutAddSubMenu("Sous-menu 1", nSousmenu1);
+
+    glutAddMenuEntry("Reset", MENU_RESET);
+	glutAddMenuEntry("Quitter", MENU_QUITTER);
+
+	// glutAddMenuEntry("Elément 2", 2);
+
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
+
+
+
 
     nb_plateformes = 0;
 
@@ -168,7 +241,6 @@ void GestionSpecial(int key, int x, int y)
 
 } 
 
-
 void GererClavier(unsigned char touche, int x, int y)
 {
     //printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
@@ -235,125 +307,6 @@ void GererClavier(unsigned char touche, int x, int y)
     if (touche ==27) //Touche Echap => ferme le programme
 		exit(0);
 }
-
-// void GererClavier(unsigned char touche, int x, int y)
-// {
-//     printf(" Touche: %c    Souris : %d %d \n",touche,x,y);
-
-//     printf("AVANT: ax=%f az=%f\n, (bx=%f & bz=%f & bx/bz=%f & bz/bx=%f)",ax,az,bx,bz,bx/bz,bz/bx);
-
-//     double angle;
-
-//     if(touche=='z') //On veut accélerer
-//     {
-//         if(vx==0)
-//         {
-//             az = 0.01;
-//             ax = 0;
-//         }
-//         else
-//         {
-//             if(vz==0)
-//             {
-//                 az = 0;
-//                 ax = 0.01;
-//             }
-//             else
-//             {
-//                 angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
-//                 az = 0*sin(angle)+0.01*cos(angle);
-//                 ax = 0*cos(angle)-0.01*sin(angle);
-//             }
-//         }
-//     }
-        
-//     if(touche=='s') //En veut décelérer
-//     {
-//         if(vx==0)
-//         {
-//             az = -0.01;
-//             ax = 0;
-//         }
-//         else
-//         {
-//             if(vz==0)
-//             {
-//                 az = 0;
-//                 ax = -0.01;
-//             }
-//             else
-//             {
-//                 angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
-//                 az = -(0*sin(angle)+0.01*cos(angle));
-//                 ax = -(0*cos(angle)-0.01*sin(angle));
-//             }
-//         }
-//     }
-
-//     if(touche=='q') //A gauche
-//     {
-//         if(vx==0)
-//         {
-//             az = 0;
-//             ax = 0.01;
-//         }
-//         else
-//         {
-//             if(vz==0)
-//             {
-//                 az = 0.01;
-//                 ax = 0;
-//             }
-//             else
-//             {
-//                 angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
-//                 az = -(0*cos(angle)-0.01*sin(angle));
-//                 ax = -(0*sin(angle)+0.01*cos(angle));
-//             }
-//         }
-//     }
-    
-//     if(touche=='d') //A droite
-//     {
-//         if(vx==0)
-//         {
-//             az = 0;
-//             ax = -0.01;
-//         }
-//         else
-//         {
-//             if(vz==0)
-//             {
-//                 az = -0.01;
-//                 ax = 0;
-//             }
-//             else
-//             {
-//                 angle = acos(0.01*vz / (sqrt(vz*vz+vx*vx)*sqrt(0.01*0.01)));
-//                 az = 0*cos(angle)-0.01*sin(angle);
-//                 ax = (0*sin(angle)+0.01*cos(angle));
-//             }
-//         }
-//     }
-    
-//     //Intteruption
-//     if(touche=='g')
-//         getchar();
-
-//     //Reset de la boule
-//     if(touche=='r')
-//     {
-//         vx=0;        vy=0;        vz=0;
-//         bx=1;        by=50;        bz=1;
-//     }
-
-//     printf("APRES: ax=%f az=%f\n",ax,az);
-
-//     if (touche ==27) //Touche Echap => ferme le programme
-// 		exit(0);
-// }
-
-
 
 // glColor3f(1.0,0.5,0.0); //Orange
 // glColor3f(0.0,0.0,1.0); //Bleu
