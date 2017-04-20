@@ -19,10 +19,24 @@ void Animer();
 void Affichage();
 void GererClavier(unsigned char touche, int x, int y);
 void GestionSpecial(int key, int x, int y);
-void majObservateur();
 int appartientPlateforme(float x, float y, float z);
 void vRappelSousMenu1(int i);
 void vRappelMenuPrincipal(int i);
+void gestionMenu();
+void AffichageMenu();
+void GererClavierMenu(unsigned char touche, int x, int y);
+void lancement();
+void lancementJeu();
+
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+    initGL();
+
+    lancement();
+
+    return 0;
+}
 
 void initGL()
 {
@@ -64,32 +78,28 @@ void majVecteurs()
     gy = -0.001;
     gz = 0;
     //Position de l'observateur
-    majObservateur();
+    if(!appartientPlateforme(bx, by + brayon*5, bz))
+    {
+        ox = bx;
+        oy = by + brayon*5;
+        oz = bz;
+    }
 }
 
-int main(int argc, char** argv)
+
+void lancement()
 {
-    glutInit(&argc, argv);
-    initGL();
+    //Menu
+    glutDisplayFunc(AffichageMenu);
+    glutIdleFunc(Animer);
+    glutKeyboardFunc(GererClavierMenu); //<= Lancera lancementJeu
+    glutMainLoop();
+}
 
+void lancementJeu()
+{
     majVecteurs();
-
-    // nSousmenu1 = glutCreateMenu(vRappelSousMenu1);
-	// glutAddMenuEntry("Elément 1 du sous-menu 1", 11);
-	
-	nMenuprincipal = glutCreateMenu(vRappelMenuPrincipal);
-
-	// glutAddSubMenu("Sous-menu 1", nSousmenu1);
-
-    glutAddMenuEntry("Reset", MENU_RESET);
-	glutAddMenuEntry("Quitter", MENU_QUITTER);
-
-	// glutAddMenuEntry("Elément 2", 2);
-
-	glutAttachMenu(GLUT_RIGHT_BUTTON);
-
-
-
+    gestionMenu();
 
     nb_plateformes = 0;
 
@@ -105,8 +115,9 @@ int main(int argc, char** argv)
     glutSpecialFunc(GestionSpecial);
 
     glutMainLoop();
-    return 0;
 }
+
+//Fonction Affichage pour flutDisplayFunc
 
 void Affichage()
 {
@@ -145,10 +156,22 @@ void Affichage()
     glutSwapBuffers();
 }
 
+void AffichageMenu()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+    glFrustum(-1,1,-1,1,1,200);
+    gluLookAt(ox, oy, oz, 1, 1, 1, 0, 1, 0);
+    afficherText(0,0,1,1,1,"Salut");
+    glutSwapBuffers();
+}
+
 void Animer()
 {
     glutPostRedisplay();
 }
+
+//Gestion clavier
 
 void GestionSpecial(int key, int x, int y)
 { 	
@@ -198,6 +221,14 @@ void GestionSpecial(int key, int x, int y)
     }
 
 } 
+
+void GererClavierMenu(unsigned char touche, int x, int y)
+{
+    if(touche=='l')
+    {
+        lancementJeu();
+    }
+}
 
 void GererClavier(unsigned char touche, int x, int y)
 {
@@ -266,6 +297,7 @@ void GererClavier(unsigned char touche, int x, int y)
 		exit(0);
 }
 
+//
 
 int appartientPlateforme(float x, float y, float z)
 {
@@ -284,14 +316,18 @@ int appartientPlateforme(float x, float y, float z)
     // }
 }
 
-void majObservateur()
+//Menu ingame
+
+void gestionMenu()
 {
-    if(!appartientPlateforme(bx, by + brayon*5, bz))
-    {
-        ox = bx;
-        oy = by + brayon*5;
-        oz = bz;
-    }
+    // nSousmenu1 = glutCreateMenu(vRappelSousMenu1);
+	// glutAddMenuEntry("Elément 1 du sous-menu 1", 11);
+	nMenuprincipal = glutCreateMenu(vRappelMenuPrincipal);
+	// glutAddSubMenu("Sous-menu 1", nSousmenu1);
+    glutAddMenuEntry("Reset", MENU_RESET);
+	glutAddMenuEntry("Quitter", MENU_QUITTER);
+	// glutAddMenuEntry("Elément 2", 2);
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
 void vRappelSousMenu1(int i)
