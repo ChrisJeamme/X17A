@@ -19,52 +19,10 @@ void Animer();
 void Affichage();
 void GererClavier(unsigned char touche, int x, int y);
 void GestionSpecial(int key, int x, int y);
-
-void majObservateur()
-{
-    if(!appartientPlateforme(bx, by + brayon*5, bz))
-    {
-        ox = bx;
-        oy = by + brayon*5;
-        oz = bz;
-    }
-}
-
-int appartientPlateforme(x,y,z)
-{
-    return 0;
-    // int i;
-    // for (i=0; i<nb_plateformes; i++)
-    // {
-    //     int x1 = tab_plateformes[i].x1;
-    //     int y1 = tab_plateformes[i].y1;
-    //     int z1 = tab_plateformes[i].z1;
-    //     int x2 = tab_plateformes[i].x2;
-    //     int y2 = tab_plateformes[i].y2;
-    //     int z2 = tab_plateformes[i].z2;
-    
-       
-    // }
-}
-
-
-void vRappelSousMenu1(int i)
-{
-	printf("rappel de l'element %d\n", i);
-}
-
-void vRappelMenuPrincipal(int i)
-{
-	printf("rappel de l'element %d\n", i);
-    if(i==MENU_QUITTER)
-        exit(0);
-    if(i==MENU_RESET)
-    {
-        vx=0;        vy=0;        vz=0;
-        bx=1;        by=50;        bz=1;
-    }
-
-}
+void majObservateur();
+int appartientPlateforme(float x, float y, float z);
+void vRappelSousMenu1(int i);
+void vRappelMenuPrincipal(int i);
 
 void initGL()
 {
@@ -306,6 +264,51 @@ void GererClavier(unsigned char touche, int x, int y)
 
     if (touche ==27) //Touche Echap => ferme le programme
 		exit(0);
+}
+
+
+int appartientPlateforme(float x, float y, float z)
+{
+    return 0;
+    // int i;
+    // for (i=0; i<nb_plateformes; i++)
+    // {
+    //     int x1 = tab_plateformes[i].x1;
+    //     int y1 = tab_plateformes[i].y1;
+    //     int z1 = tab_plateformes[i].z1;
+    //     int x2 = tab_plateformes[i].x2;
+    //     int y2 = tab_plateformes[i].y2;
+    //     int z2 = tab_plateformes[i].z2;
+    
+       
+    // }
+}
+
+void majObservateur()
+{
+    if(!appartientPlateforme(bx, by + brayon*5, bz))
+    {
+        ox = bx;
+        oy = by + brayon*5;
+        oz = bz;
+    }
+}
+
+void vRappelSousMenu1(int i)
+{
+	printf("rappel de l'element %d\n", i);
+}
+
+void vRappelMenuPrincipal(int i)
+{
+    if(i==MENU_QUITTER)
+        exit(0);
+    if(i==MENU_RESET)
+    {
+        vx=0;        vy=0;        vz=0;
+        bx=1;        by=50;        bz=1;
+    }
+
 }
 
 // glColor3f(1.0,0.5,0.0); //Orange

@@ -13,7 +13,7 @@ src/karbre.o: src/karbre.c
 src/boule.o: src/boule.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
-src/main.o: src/main.c
+src/main.o: src/main.c 
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
 clean:

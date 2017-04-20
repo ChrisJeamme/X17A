@@ -31,8 +31,7 @@ GLuint tex_sol[2];
 
 //Gestion menus
 
-int nSousmenu1, nSousmenu2, nMenuprincipal; // Numéros (identifiants) des menus
-int nTue=0;
+int nSousmenu1, nMenuprincipal; // Numéros (identifiants) des menus
 
 //Prototypes
 void dessiner_boule(float rayon, float x, float y, float z);
