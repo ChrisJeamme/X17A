@@ -44,7 +44,7 @@ int collision_boule_plateforme()
             continue;
         else 
         {
-            if (y1 != y2)
+            if (y1 != y2 || y1 != y3)
                 ajouter_pente(a,b,c);
             by = ((-a*bx-c*bz-d)/b)+brayon;
             return 1;
@@ -85,6 +85,7 @@ void ajouter_pente(int a, int b, int c) //on cherche le vecteur directeur normé
     Px /= norme;
     Py /= norme;
     Pz /= norme;
+    printf("%f %f %f \n", Px, Py, Pz);
     vx += Px*0.0001;
     vz += Pz*0.0001;
 }
