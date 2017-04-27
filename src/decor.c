@@ -132,12 +132,12 @@ void afficher_decor()
     {
         glBegin(GL_QUADS);
     
-        int x1 = tab_decor[i].x1;
-        int y1 = tab_decor[i].y1;
-        int z1 = tab_decor[i].z1;
-        int x2 = tab_decor[i].x2;
-        int y2 = tab_decor[i].y2;
-        int z2 = tab_decor[i].z2;
+        int x1 = tab_decor[i].p1.x;
+        int y1 = tab_decor[i].p1.y;
+        int z1 = tab_decor[i].p1.z;
+        int x2 = tab_decor[i].p2.x;
+        int y2 = tab_decor[i].p2.y;
+        int z2 = tab_decor[i].p2.z;
         // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         // glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
