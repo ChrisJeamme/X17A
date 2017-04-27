@@ -41,18 +41,21 @@ GLuint tex_sol[2];
 int nSousmenu1, nSousmenu2, nMenuprincipal; // Numéros (identifiants) des menus
 
 //Prototypes
+
+/*Permet de dessiner la boule avec un rayon donné et les coordonnées du centre*/
 void dessiner_boule(float rayon, float x, float y, float z);
 
+/*Ajoute une plate-forme grace a 4 points*/
 void ajouter_plateforme(point p1, point p2, point p3, point p4);
 
-void dessiner_plateformes();
-
+/*Permet d'afficher toutes les plateformes*/
 void afficher_plateformes();
 
 void afficher_decor();
 
 void definir_decor();
 
+/*Permet de charger une texture*/
 void chargementTexture(GLuint* texture, char* chemin);
 
 void trace_grille(int n);
@@ -63,6 +66,7 @@ void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2);
 
 void chargementTexture(GLuint* texture, char* chemin);
 
+/*Permet de creer un point avec 3 coordonnées*/
 point nouveau_point(int x, int y, int z);
 
 #endif

@@ -1,5 +1,6 @@
 #include "decor.h"
 
+/*Permet de dessiner la boule avec un rayon donné et les coordonnées du centre*/
 void dessiner_boule(float rayon, float x, float y, float z)
 {
     glBindTexture(GL_TEXTURE_2D, tex_sol[1]);
@@ -11,7 +12,7 @@ void dessiner_boule(float rayon, float x, float y, float z)
     glBindTexture(GL_TEXTURE_2D, tex_sol[0]);
 }
 
-
+/*Permet de cherger une texture*/
 void chargementTexture(GLuint* texture, char* chemin)
 {
     *texture = SOIL_load_OGL_texture(chemin,
@@ -23,11 +24,13 @@ void chargementTexture(GLuint* texture, char* chemin)
         fprintf(stderr,"Erreur de chargement de texture: \"%s\"\n", chemin);
 }
 
+/*Permet d'afficher toutes les plateformes*/
 void afficher_plateformes()
 {
     int i;
-    for (i=0; i<nb_plateformes; i++)
+    for (i=0; i<nb_plateformes; i++) //Parcourt toutes les plateformes 
     {
+        //On récupère les coordonnées des 4 points qui définissent la plateforme
         int x1 = tab_plateformes[i].p1.x;
         int y1 = tab_plateformes[i].p1.y;
         int z1 = tab_plateformes[i].p1.z;
@@ -44,55 +47,55 @@ void afficher_plateformes()
         int y4 = tab_plateformes[i].p4.y;
         int z4 = tab_plateformes[i].p4.z;
 
+
         glBegin(GL_QUADS);
-        
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
 
         //Face dessus
-          //glColor3f(0,0,1); //Bleu
-         glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
-         glTexCoord2i(0,1); glVertex3f(x2, y2, z2);    
-          glColor3f(0,0.5,0.5); //Vert      
-         glTexCoord2i(1,1); glVertex3f(x3, y3, z3);
-         glTexCoord2i(1,0); glVertex3f(x4, y4, z4);
+        //glColor3f(0,0,1); //Bleu
+        glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
+        glTexCoord2i(0,1); glVertex3f(x2, y2, z2);    
+        glColor3f(0,0.5,0.5); //Vert      
+        glTexCoord2i(1,1); glVertex3f(x3, y3, z3);
+        glTexCoord2i(1,0); glVertex3f(x4, y4, z4);
 
 
-         //Bord 1
-          glColor3f(1,1,1);  //Blanc
-         glVertex3f(x1, y1, z1);    
-         glVertex3f(x2, y2, z2);
-         glVertex3f(x2, y2-2, z2);
-         glVertex3f(x1, y1-2, z1);
+        //Bord 1
+        glColor3f(1,1,1);  //Blanc
+        glVertex3f(x1, y1, z1);    
+        glVertex3f(x2, y2, z2);
+        glVertex3f(x2, y2-2, z2);
+        glVertex3f(x1, y1-2, z1);
 
-         //Bord 2
-          glColor3f(1,1,1);  //Blanc
-         glVertex3f(x2, y2, z2);    
-         glVertex3f(x3, y3, z3);
-         glVertex3f(x3, y3-2, z3);
-         glVertex3f(x2, y2-2, z2);
+        //Bord 2
+        glVertex3f(x2, y2, z2);    
+        glVertex3f(x3, y3, z3);
+        glVertex3f(x3, y3-2, z3);
+        glVertex3f(x2, y2-2, z2);
 
         //Bord 3
-         glVertex3f(x3, y3, z3);    
-         glVertex3f(x4, y4, z4);
-         glVertex3f(x4, y4-2, z4);
-         glVertex3f(x3, y3-2, z3);
+        glVertex3f(x3, y3, z3);    
+        glVertex3f(x4, y4, z4);
+        glVertex3f(x4, y4-2, z4);
+        glVertex3f(x3, y3-2, z3);
 
         //Bord 4
-         glVertex3f(x4, y4, z4);    
-         glVertex3f(x1, y1, z1);
-         glVertex3f(x1, y1-2, z1);
-         glVertex3f(x4, y4-2, z4);
+        glVertex3f(x4, y4, z4);    
+        glVertex3f(x1, y1, z1);
+        glVertex3f(x1, y1-2, z1);
+        glVertex3f(x4, y4-2, z4);
 
         //Face du dessous 
-            glColor3f(0,0,1); //Bleu        
+        glColor3f(0,0,1); //Bleu        
         glVertex3f(x1, y1-2, z1);    
         glVertex3f(x2, y2-2, z2);
         glVertex3f(x3, y3-2, z3);
         glVertex3f(x4, y4-2, z4);
-        
+
         glColor3f(1,1,1); //Blanc   
 
         glEnd();
@@ -166,6 +169,7 @@ void definir_decor(int nombre)
     // ajouter_element_decor(p1,p2);
 }
 
+/*Permet de creer un point avec 3 coordonnées*/
 point nouveau_point(int x, int y, int z)
 {
     point p;
@@ -175,6 +179,7 @@ point nouveau_point(int x, int y, int z)
     return p;
 }
 
+/*Ajoute une plate-forme grace a 4 points*/
 void ajouter_plateforme(point p1, point p2, point p3, point p4)
 {
     plateforme p;
@@ -195,7 +200,7 @@ void ajouter_element_decor(point p1, point p2, point p3, point p4)
     tab_decor[nb_element_decor++] = p;
 }
 
-//Tracage de la grille des points
+/*Tracage de la grille des points*/
 void trace_grille(int n)
 {
     glColor3f(1.0,1.0,1.0); //Blanc
