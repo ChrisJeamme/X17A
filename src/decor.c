@@ -107,10 +107,10 @@ void trace_grille(int n)
     glColor3f(1.0,1.0,1.0); //Blanc
     
     //Afficher X et Y sur le repère
-    afficherText(10,0,0,1,1,"X");
-    afficherText(0,10,0,1,1,"Y");
-    afficherText(-10,0,0,1,1,"X");
-    afficherText(0,-10,0,1,1,"Y");
+    // afficherText(10,0,0,1,1,"X");
+    // afficherText(0,10,0,1,1,"Y");
+    // afficherText(-10,0,0,1,1,"X");
+    // afficherText(0,-10,0,1,1,"Y");
     // glBegin(GL_LINES);
     // for(int i=-TAILLE; i<=TAILLE; i+=n)
     // {

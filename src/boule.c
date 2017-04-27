@@ -68,11 +68,11 @@ void ajouter_pente(int a, int b, int c) //on cherche le vecteur directeur normé
 void maj_vecteur_vitesse()
 {
     vx = vx + ax;
-    if (vx > 0.05 || vx < -0.05)
+    if (vx > 0.1 || vx < -0.1)
         vx -= ax;
     vy = vy + ay + gy;
     vz = vz + az;
-    if (vz > 0.05 || vz < -0.05)
+    if (vz > 0.1 || vz < -0.1)
         vz -= az;
     //printf("\n\n VITESSE X : %f \n VITESSE Z : %f\n\n",vx, vz);
 }

@@ -53,8 +53,8 @@ void initGL()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    //chargementTexture(&tex_sol[0], "test2.png");
-    //chargementTexture(&tex_sol[1], "test2.png");
+    chargementTexture(&tex_sol[0], "test2.png");
+    chargementTexture(&tex_sol[1], "test2.png");
 }
 
 void majVecteurs()
@@ -193,8 +193,8 @@ void GestionSpecial(int key, int x, int y)
         }
         else //On augmente le vecteur vitesse dans la même direction
         {
-            ax = vx*0.1;
-            az = vz*0.1;
+            ax = vx*0.2;
+            az = vz*0.2;
         }
     } 
 

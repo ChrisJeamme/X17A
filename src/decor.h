@@ -48,4 +48,6 @@ void afficherText(float x, float y, int r, int g, int b, const char *texte);
 
 void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2);
 
+void chargementTexture(GLuint* texture, char* chemin);
+
 #endif
