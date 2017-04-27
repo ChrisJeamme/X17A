@@ -26,6 +26,20 @@ typedef struct struct_plateforme
 plateforme tab_plateformes[100];
 int nb_plateformes;
 
+typedef struct element_decor
+{
+    int x1; 
+    int y1;
+    int z1;
+    int x2;
+    int y2;
+    int z2;
+    int hauteur;
+} element_decor;
+
+element_decor tab_decor[100];
+int nb_element_decor;
+
 //Texture plateformes
 GLuint tex_sol[2];
 
@@ -41,6 +55,8 @@ void ajouter_plateforme(int x1, int y1, int z1, int x2, int y2, int z2);
 void dessiner_plateformes();
 
 void afficher_plateformes();
+
+void afficher_decor();
 
 void chargementTexture(GLuint* texture, char* chemin);
 

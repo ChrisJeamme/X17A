@@ -54,7 +54,7 @@ void initGL()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     chargementTexture(&tex_sol[0], "test.png");
-    chargementTexture(&tex_sol[1], "test.png");
+    //chargementTexture(&tex_sol[1], "test.png");
 }
 
 void majVecteurs()
@@ -151,7 +151,8 @@ void Affichage()
     dessiner_boule(brayon,bx,by,bz);
 
     afficher_plateformes();
-    
+    afficher_decor();
+
     trace_grille(5);
     glutSwapBuffers();
 }

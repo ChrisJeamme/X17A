@@ -88,6 +88,66 @@ void afficher_plateformes()
     }
 }
 
+
+void afficher_decor()
+{
+    int x1 = -500;
+    int y1 = -100;
+    int z1 = -500;
+    int x2 = 500;
+    int y2 = -100;
+    int z2 = 500;
+
+    glBegin(GL_QUADS);
+    
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    // glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
+
+    //Face dessus
+        glColor3f(0,0,1); //Bleu
+        /*glTexCoord2i(0,0);*/ glVertex3f(x1, y1, z1);    
+        /*glTexCoord2i(0,1);*/ glVertex3f(x2, y1, z1);    
+        glColor3f(0,0.5,0.5); //Bleu clair    
+        /*glTexCoord2i(1,1);*/ glVertex3f(x2, y2, z2);
+        /*glTexCoord2i(1,0);*/ glVertex3f(x1, y2, z2);
+
+    glColor3f(1,1,1); //Blanc   
+
+    glEnd();
+
+    int i;
+    for(i=0; i<nb_element_decor; i++)
+    {
+        glBegin(GL_QUADS);
+    
+        int x1 = tab_decor[i].x1;
+        int y1 = tab_decor[i].y1;
+        int z1 = tab_decor[i].z1;
+        int x2 = tab_decor[i].x2;
+        int y2 = tab_decor[i].y2;
+        int z2 = tab_decor[i].z2;
+        // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        // glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        // glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
+
+        //Face dessus
+            glColor3f(1,0,1); //Bleu
+            /*glTexCoord2i(0,0);*/ glVertex3f(x1, y1, z1);    
+            /*glTexCoord2i(0,1);*/ glVertex3f(x2, y1, z1);    
+            glColor3f(0,1,0); //Bleu clair    
+            /*glTexCoord2i(1,1);*/ glVertex3f(x2, y2, z2);
+            /*glTexCoord2i(1,0);*/ glVertex3f(x1, y2, z2);
+
+        glColor3f(1,1,1); //Blanc   
+
+        glEnd();
+    }
+
+}
+
 void ajouter_plateforme(int x1, int y1, int z1, int x2, int y2, int z2)
 {
     plateforme p;
