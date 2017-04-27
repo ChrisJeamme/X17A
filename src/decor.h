@@ -51,6 +51,8 @@ void afficher_plateformes();
 
 void afficher_decor();
 
+void definir_decor();
+
 void chargementTexture(GLuint* texture, char* chemin);
 
 void trace_grille(int n);

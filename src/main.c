@@ -127,6 +127,7 @@ void lancementJeu()
     ajouter_plateforme(p41, p42, p43, p44);
 
 
+    definir_decor(1);
 
     glutDisplayFunc(Affichage);
     glutIdleFunc(Animer);
