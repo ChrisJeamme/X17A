@@ -43,10 +43,10 @@ void afficher_plateformes()
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
 
         //Face dessus
-          glColor3f(0,0,1); //Bleu
+          //glColor3f(0,0,1); //Bleu
          glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
          glTexCoord2i(0,1); glVertex3f(x2, y1, z1);    
-          glColor3f(0,0.5,0.5); //Vert      
+          //glColor3f(0,0.5,0.5); //Vert      
          glTexCoord2i(1,1); glVertex3f(x2, y2, z2);
          glTexCoord2i(1,0); glVertex3f(x1, y2, z2);
 
@@ -76,7 +76,7 @@ void afficher_plateformes()
          glVertex3f(x2, y1-2, z1);
 
         //Face du dessous 
-          glColor3f(0,0,1); //Bleu        
+          //glColor3f(0,0,1); //Bleu        
          glVertex3f(x1, y1-2, z1);    
          glVertex3f(x2, y1-2, z1);
          glVertex3f(x2, y2-2, z2);
@@ -107,10 +107,10 @@ void trace_grille(int n)
     glColor3f(1.0,1.0,1.0); //Blanc
     
     //Afficher X et Y sur le repère
-    afficherText(10,0,0,1,1,"X");
-    afficherText(0,10,0,1,1,"Y");
-    afficherText(-10,0,0,1,1,"X");
-    afficherText(0,-10,0,1,1,"Y");
+        // afficherText(10,0,0,1,1,"X");
+        // afficherText(0,10,0,1,1,"Y");
+        // afficherText(-10,0,0,1,1,"X");
+        // afficherText(0,-10,0,1,1,"Y");
     // glBegin(GL_LINES);
     // for(int i=-TAILLE; i<=TAILLE; i+=n)
     // {
