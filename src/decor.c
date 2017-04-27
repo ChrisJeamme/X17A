@@ -28,12 +28,21 @@ void afficher_plateformes()
     int i;
     for (i=0; i<nb_plateformes; i++)
     {
-        int x1 = tab_plateformes[i].x1;
-        int y1 = tab_plateformes[i].y1;
-        int z1 = tab_plateformes[i].z1;
-        int x2 = tab_plateformes[i].x2;
-        int y2 = tab_plateformes[i].y2;
-        int z2 = tab_plateformes[i].z2;
+        int x1 = tab_plateformes[i].p1.x;
+        int y1 = tab_plateformes[i].p1.y;
+        int z1 = tab_plateformes[i].p1.z;
+
+        int x2 = tab_plateformes[i].p2.x;
+        int y2 = tab_plateformes[i].p2.y;
+        int z2 = tab_plateformes[i].p2.z;
+
+        int x3 = tab_plateformes[i].p3.x;
+        int y3 = tab_plateformes[i].p3.y;
+        int z3 = tab_plateformes[i].p3.z;
+
+        int x4 = tab_plateformes[i].p4.x;
+        int y4 = tab_plateformes[i].p4.y;
+        int z4 = tab_plateformes[i].p4.z;
 
         glBegin(GL_QUADS);
         
@@ -45,42 +54,43 @@ void afficher_plateformes()
         //Face dessus
           glColor3f(0,0,1); //Bleu
          glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
-         glTexCoord2i(0,1); glVertex3f(x2, y1, z1);    
+         glTexCoord2i(0,1); glVertex3f(x2, y2, z2);    
           glColor3f(0,0.5,0.5); //Vert      
-         glTexCoord2i(1,1); glVertex3f(x2, y2, z2);
-         glTexCoord2i(1,0); glVertex3f(x1, y2, z2);
+         glTexCoord2i(1,1); glVertex3f(x3, y3, z3);
+         glTexCoord2i(1,0); glVertex3f(x4, y4, z4);
 
          //Bord 1
-          glColor3f(1,1,1);  //Gris
+          glColor3f(1,1,1);  //Blanc
          glVertex3f(x1, y1, z1);    
-         glVertex3f(x2, y1, z1);
-         glVertex3f(x2, y1-2, z1);
+         glVertex3f(x2, y2, z2);
+         glVertex3f(x2, y2-2, z2);
          glVertex3f(x1, y1-2, z1);
 
-        //Bord 2
-         glVertex3f(x1, y1, z1);    
-         glVertex3f(x1, y2, z2);
-         glVertex3f(x1, y2-2, z2);
-         glVertex3f(x1, y1-2, z1);
+         //Bord 2
+          glColor3f(1,1,1);  //Blanc
+         glVertex3f(x2, y2, z2);    
+         glVertex3f(x3, y3, z3);
+         glVertex3f(x3, y3-2, z3);
+         glVertex3f(x2, y2-2, z2);
 
         //Bord 3
-         glVertex3f(x1, y2, z2);    
-         glVertex3f(x2, y2, z2);
-         glVertex3f(x2, y2-2, z2);
-         glVertex3f(x1, y2-2, z2);
+         glVertex3f(x3, y3, z3);    
+         glVertex3f(x4, y4, z4);
+         glVertex3f(x4, y4-2, z4);
+         glVertex3f(x3, y3-2, z3);
 
         //Bord 4
-         glVertex3f(x2, y1, z1);    
-         glVertex3f(x2, y2, z2);
-         glVertex3f(x2, y2-2, z2);
-         glVertex3f(x2, y1-2, z1);
+         glVertex3f(x4, y4, z4);    
+         glVertex3f(x1, y1, z1);
+         glVertex3f(x1, y1-2, z1);
+         glVertex3f(x4, y4-2, z4);
 
         //Face du dessous 
-          glColor3f(0,0,1); //Bleu        
-         glVertex3f(x1, y1-2, z1);    
-         glVertex3f(x2, y1-2, z1);
-         glVertex3f(x2, y2-2, z2);
-         glVertex3f(x1, y2-2, z2);
+            glColor3f(0,0,1); //Bleu        
+        glVertex3f(x1, y1-2, z1);    
+        glVertex3f(x2, y2-2, z2);
+        glVertex3f(x3, y3-2, z3);
+        glVertex3f(x4, y4-2, z4);
         
         glColor3f(1,1,1); //Blanc   
 
@@ -88,15 +98,22 @@ void afficher_plateformes()
     }
 }
 
-void ajouter_plateforme(int x1, int y1, int z1, int x2, int y2, int z2)
+point nouveau_point(int x, int y, int z)
+{
+    point p;
+    p.x = x;
+    p.y = y;
+    p.z = z;
+    return p;
+}
+
+void ajouter_plateforme(point p1, point p2, point p3, point p4)
 {
     plateforme p;
-    p.x1 = x1;
-    p.y1 = y1;
-    p.z1 = z1;
-    p.x2 = x2;
-    p.y2 = y2;
-    p.z2 = z2;
+    p.p1= p1;
+    p.p2= p2;
+    p.p3= p3;
+    p.p4= p4;
     tab_plateformes[nb_plateformes] = p;
     nb_plateformes++;
 }
