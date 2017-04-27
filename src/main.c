@@ -108,10 +108,17 @@ void lancementJeu()
     point p13 = nouveau_point(30, 0, 30);
     point p14 = nouveau_point(30, 0, -30);
 
+    point p21 = nouveau_point(30, -10, 30);
+    point p22 = nouveau_point(30, -20, 90);
+    point p23 = nouveau_point(90, -20, 90);
+    point p24 = nouveau_point(90, -10, 30);
+
+    point p31 = nouveau_point(30, 0, 150);
+    point p32 = nouveau_point(90, 0, 150);
+
     ajouter_plateforme(p11, p12, p13, p14);
-    // ajouter_plateforme(30,-10,30,90,-20,90);
-    // ajouter_plateforme(90,-20,90,30,-15,150);
-    // ajouter_plateforme(-30, -5,30, -60, 5,60);
+    ajouter_plateforme(p21, p22, p23, p24);
+    ajouter_plateforme(p31, p22, p23, p32);
 
 
     glutDisplayFunc(Affichage);
