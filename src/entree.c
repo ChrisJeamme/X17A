@@ -1,4 +1,5 @@
 #include "entree.h"
+#include "jeu.h"
 
 void GestionSpecial(int key, int x, int y)
 { 	
@@ -20,8 +21,12 @@ void GestionSpecial(int key, int x, int y)
         }
         else //On augmente le vecteur vitesse dans la même direction
         {
-            ax = vx*0.2;
-            az = vz*0.2;
+            //On calcule la norme du vecteur vitesse
+            if (normeVitesse < 0.1) //On a pas atteint la vitesse max
+            {
+                ax = vx*0.2;
+                az = vz*0.2;
+            }
         }
     } 
 
