@@ -35,7 +35,7 @@ GLuint tex_sol[2];
 
 //Gestion menus
 
-int nSousmenu1, nMenuprincipal; // Numéros (identifiants) des menus
+int nSousmenu1, nSousmenu2, nMenuprincipal; // Numéros (identifiants) des menus
 
 //Prototypes
 void dessiner_boule(float rayon, float x, float y, float z);
@@ -45,6 +45,8 @@ void ajouter_plateforme(point p1, point p2, point p3, point p4);
 void dessiner_plateformes();
 
 void afficher_plateformes();
+
+void chargementTexture(GLuint* texture, char* chemin);
 
 void trace_grille(int n);
 

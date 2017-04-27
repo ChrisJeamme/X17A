@@ -53,8 +53,8 @@ void initGL()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    chargementTexture(&tex_sol[0], "test2.png");
-    chargementTexture(&tex_sol[1], "test2.png");
+    chargementTexture(&tex_sol[0], "test.png");
+    chargementTexture(&tex_sol[1], "test.png");
 }
 
 void majVecteurs()
@@ -166,8 +166,9 @@ void AffichageMenu()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     glFrustum(-1,1,-1,1,1,200);
-    gluLookAt(ox, oy, oz, 1, 1, 1, 0, 1, 0);
-    afficherText(0,0,1,1,1,"Salut");
+    gluLookAt(0, 0, 0, 1, 0, 0, 0, 1, 0);
+    afficherText(1,0.1,1,1,1,"Boule Magique");
+    afficherText(1,0,1,1,1,"Appuyez sur L pour lancer");
     glutSwapBuffers();
 }
 

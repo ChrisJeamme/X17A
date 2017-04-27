@@ -52,12 +52,13 @@ void afficher_plateformes()
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
 
         //Face dessus
-          glColor3f(0,0,1); //Bleu
+          //glColor3f(0,0,1); //Bleu
          glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
          glTexCoord2i(0,1); glVertex3f(x2, y2, z2);    
           glColor3f(0,0.5,0.5); //Vert      
          glTexCoord2i(1,1); glVertex3f(x3, y3, z3);
          glTexCoord2i(1,0); glVertex3f(x4, y4, z4);
+
 
          //Bord 1
           glColor3f(1,1,1);  //Blanc
@@ -86,11 +87,19 @@ void afficher_plateformes()
          glVertex3f(x4, y4-2, z4);
 
         //Face du dessous 
+<<<<<<< HEAD
             glColor3f(0,0,1); //Bleu        
         glVertex3f(x1, y1-2, z1);    
         glVertex3f(x2, y2-2, z2);
         glVertex3f(x3, y3-2, z3);
         glVertex3f(x4, y4-2, z4);
+=======
+          //glColor3f(0,0,1); //Bleu        
+         glVertex3f(x1, y1-2, z1);    
+         glVertex3f(x2, y1-2, z1);
+         glVertex3f(x2, y2-2, z2);
+         glVertex3f(x1, y2-2, z2);
+>>>>>>> 430441613e20f1412f38ec2046c3b2ab670b1330
         
         glColor3f(1,1,1); //Blanc   
 
@@ -124,10 +133,10 @@ void trace_grille(int n)
     glColor3f(1.0,1.0,1.0); //Blanc
     
     //Afficher X et Y sur le repère
-    // afficherText(10,0,0,1,1,"X");
-    // afficherText(0,10,0,1,1,"Y");
-    // afficherText(-10,0,0,1,1,"X");
-    // afficherText(0,-10,0,1,1,"Y");
+        // afficherText(10,0,0,1,1,"X");
+        // afficherText(0,10,0,1,1,"Y");
+        // afficherText(-10,0,0,1,1,"X");
+        // afficherText(0,-10,0,1,1,"Y");
     // glBegin(GL_LINES);
     // for(int i=-TAILLE; i<=TAILLE; i+=n)
     // {
@@ -170,6 +179,7 @@ void afficherText(float x, float y, int r, int g, int b, const char *texte)
     {
 		glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, texte[i] );
 	}
+    glColor3f(1,1,1);
 }
 
 void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2)
