@@ -46,5 +46,10 @@ void afficher_vecteurs();
 
 void ajouter_pente(int a, int b, int c);
 
+int max(int x1, int x2, int x3);
+
+int min(int x1, int x2, int x3);
+
+
 
 #endif
