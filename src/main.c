@@ -161,8 +161,9 @@ void AffichageMenu()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     glFrustum(-1,1,-1,1,1,200);
-    gluLookAt(ox, oy, oz, 1, 1, 1, 0, 1, 0);
-    afficherText(0,0,1,1,1,"Salut");
+    gluLookAt(0, 0, 0, 1, 0, 0, 0, 1, 0);
+    afficherText(1,0.1,1,1,1,"Boule Magique");
+    afficherText(1,0,1,1,1,"Appuyez sur L pour lancer");
     glutSwapBuffers();
 }
 

@@ -153,6 +153,7 @@ void afficherText(float x, float y, int r, int g, int b, const char *texte)
     {
 		glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, texte[i] );
 	}
+    glColor3f(1,1,1);
 }
 
 void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2)
