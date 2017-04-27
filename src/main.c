@@ -113,6 +113,7 @@ void lancementJeu()
     // ajouter_plateforme(90,-20,90,30,-15,150);
     // ajouter_plateforme(-30, -5,30, -60, 5,60);
 
+    definir_decor(1);
 
     glutDisplayFunc(Affichage);
     glutIdleFunc(Animer);

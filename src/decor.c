@@ -158,6 +158,14 @@ void afficher_decor()
 
 }
 
+void definir_decor(int nombre)
+{
+    // point p1;
+    // point p2;
+    //FINIR CA    
+    // ajouter_element_decor(p1,p2);
+}
+
 point nouveau_point(int x, int y, int z)
 {
     point p;
@@ -174,8 +182,17 @@ void ajouter_plateforme(point p1, point p2, point p3, point p4)
     p.p2= p2;
     p.p3= p3;
     p.p4= p4;
-    tab_plateformes[nb_plateformes] = p;
-    nb_plateformes++;
+    tab_plateformes[nb_plateformes++] = p;
+}
+
+void ajouter_element_decor(point p1, point p2, point p3, point p4)
+{
+    plateforme p;
+    p.p1= p1;
+    p.p2= p2;
+    p.p3= p3;
+    p.p4= p4;
+    tab_decor[nb_element_decor++] = p;
 }
 
 //Tracage de la grille des points
