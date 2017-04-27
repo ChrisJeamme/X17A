@@ -71,8 +71,13 @@ void ajouter_pente(int a, int b, int c)
     float norme = sqrt(Px*Px + Py*Py + Pz*Pz);
     //Vecteur normé
     Px /= norme;
-    Py /= norme;
+    //Py /= norme;
     Pz /= norme;
+    if (Px != 0)
+        Px = 1/Px;
+    if (Pz != 0)
+        Pz = 1/Pz;
+    printf("%2f %2f\n", Px, Pz);
     vx += Px*0.0001;
     vz += Pz*0.0001;
 }
