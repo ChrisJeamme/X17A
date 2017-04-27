@@ -40,7 +40,7 @@ void GestionSpecial(int key, int x, int y)
 
     if (key == GLUT_KEY_DOWN) //On veut ralentir
     {
-        if (normeVitesse > 0.01)
+        if (normeVitesse > 0.005)
         {
             ax -= vx*0.1;
             az -= vz*0.1;

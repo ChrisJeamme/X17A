@@ -85,12 +85,8 @@ void ajouter_pente(int a, int b, int c)
 void maj_vecteur_vitesse()
 {
     vx = vx + ax;//On ajoute l'acceleration
-    if (vx > 0.1 || vx < -0.1) //On limite la vitesse
-        vx -= ax;
     vy = vy + ay + gy; 
     vz = vz + az;
-    if (vz > 0.1 || vz < -0.1)
-        vz -= az;
     //printf("\n\n VITESSE X : %f \n VITESSE Z : %f\n\n",vx, vz);
 }
 
