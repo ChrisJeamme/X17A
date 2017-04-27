@@ -73,7 +73,6 @@ void ajouter_pente(int a, int b, int c)
     Px /= norme;
     Py /= norme;
     Pz /= norme;
-    printf("%f %f %f \n", Px, Py, Pz);
     vx += Px*0.0001;
     vz += Pz*0.0001;
 }
