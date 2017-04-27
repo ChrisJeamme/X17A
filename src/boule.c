@@ -17,8 +17,8 @@ int collision_boule_plateforme()
         int y3 = tab_plateformes[i].p3.y;
         int z3 = tab_plateformes[i].p3.z;
 
-       // if ((bx < x1 && bx < x2 )||( bx > x1 && bx > x2 )||( bz < z1 && bz < z2 )||( bz > z1 && bz > z2))
-       //     continue;
+       if ((bx < min(x1,x2,x3) )||( bx > max(x1,x2,x3) )||( bz < min(z1,z2,z3) )||( bz > max(z1,z2,z3)))
+           continue;
 
         float ABx = x2 - x1;
         float ABy = y2 - y1;
@@ -52,6 +52,29 @@ int collision_boule_plateforme()
     }
     return 0;
 }
+
+int max(int x1, int x2, int x3)
+{
+    if (x1>x2)
+        if (x1>x3)
+            return x1;
+        else return x3;
+    else if (x2>x3)
+            return x2;
+        else return x3;
+}
+
+int min(int x1, int x2, int x3)
+{
+    if (x1<x2)
+        if (x1<x3)
+            return x1;
+        else return x3;
+    else if (x2<x3)
+            return x2;
+        else return x3;
+}
+
 
 void ajouter_pente(int a, int b, int c) //on cherche le vecteur directeur normé de la pente
 {   
