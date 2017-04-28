@@ -3,7 +3,7 @@
 
 #include "GL/gl.h"
 #include "GL/glut.h"
-#include "../lib/SOIL.h"
+#include "../lib/SOIL/SOIL.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
