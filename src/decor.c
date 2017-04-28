@@ -59,13 +59,13 @@ void afficher_plateformes()
         //glColor3f(0,0,1); //Bleu
         glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
         glTexCoord2i(0,1); glVertex3f(x2, y2, z2);    
-        glColor3f(0,0.5,0.5); //Vert      
+        glColor3f(0,0.5,0.5); //Vert
         glTexCoord2i(1,1); glVertex3f(x3, y3, z3);
         glTexCoord2i(1,0); glVertex3f(x4, y4, z4);
 
+        glColor3f(1,1,1);  //Blanc
 
         //Bord 1
-        glColor3f(1,1,1);  //Blanc
         glVertex3f(x1, y1, z1);    
         glVertex3f(x2, y2, z2);
         glVertex3f(x2, y2-2, z2);
@@ -89,8 +89,9 @@ void afficher_plateformes()
         glVertex3f(x1, y1-2, z1);
         glVertex3f(x4, y4-2, z4);
 
-        //Face du dessous 
         glColor3f(0,0,1); //Bleu        
+
+        //Face du dessous 
         glVertex3f(x1, y1-2, z1);    
         glVertex3f(x2, y2-2, z2);
         glVertex3f(x3, y3-2, z3);
@@ -102,13 +103,18 @@ void afficher_plateformes()
     }
 }
 
+float rand_0_1()
+{
+   return (float)rand() / (float)RAND_MAX;
+}
+
 void afficher_decor()
 {
     int x1 = -500;
-    int y1 = -100;
+    int y1 = -101;
     int z1 = -500;
     int x2 = 500;
-    int y2 = -100;
+    int y2 = -101;
     int z2 = 500;
 
     glBegin(GL_QUADS);
@@ -128,45 +134,73 @@ void afficher_decor()
 
     glColor3f(1,1,1); //Blanc   
 
-    glEnd();
 
     int i;
     for(i=0; i<nb_element_decor; i++)
     {
-        glBegin(GL_QUADS);
-    
         int x1 = tab_decor[i].p1.x;
         int y1 = tab_decor[i].p1.y;
         int z1 = tab_decor[i].p1.z;
-        int x2 = tab_decor[i].p2.x;
-        int y2 = tab_decor[i].p2.y;
-        int z2 = tab_decor[i].p2.z;
-        // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        // glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        // glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
+        int x2 = tab_decor[i].p3.x;
+        int y2 = tab_decor[i].p3.y;
+        int z2 = tab_decor[i].p3.z;
+        couleur couleur_cotes = tab_decor[i].couleur_cotes;
+        couleur couleur_dessus = tab_decor[i].couleur_dessus;
+        
 
         //Face dessus
-            glColor3f(1,0,1); //Bleu
-            /*glTexCoord2i(0,0);*/ glVertex3f(x1, y1, z1);    
-            /*glTexCoord2i(0,1);*/ glVertex3f(x2, y1, z1);    
-            glColor3f(0,1,0); //Bleu clair    
-            /*glTexCoord2i(1,1);*/ glVertex3f(x2, y2, z2);
-            /*glTexCoord2i(1,0);*/ glVertex3f(x1, y2, z2);
+            glColor3f(couleur_dessus.r,couleur_dessus.v,couleur_dessus.b);
+                glVertex3f(x1, y1, z1);    
+                glVertex3f(x2, y1, z1);    
+                glVertex3f(x2, y2, z2);
+                glVertex3f(x1, y2, z2);
+
+        //Faces côtés
+            glColor3f(couleur_cotes.r,couleur_cotes.v,couleur_cotes.b);
+                glVertex3f(x1, y1, z1);    
+                glVertex3f(x2, y1, z1); 
+                glVertex3f(x2, -100, z1);
+                glVertex3f(x1, -100, z1);    
+            glColor3f(couleur_cotes.r,couleur_cotes.v,couleur_cotes.b);
+                glVertex3f(x2, y1, z1);    
+                glVertex3f(x2, y2, z2);    
+                glVertex3f(x2, -100, z2);
+                glVertex3f(x2, -100, z1);  
+            glColor3f(couleur_cotes.r,couleur_cotes.v,couleur_cotes.b);
+                glVertex3f(x2, y2, z2);
+                glVertex3f(x1, y2, z2);
+                glVertex3f(x1, -100, z2);
+                glVertex3f(x2, -100, z2);
+            glColor3f(couleur_cotes.r,couleur_cotes.v,couleur_cotes.b);
+                glVertex3f(x1, y2, z2);
+                glVertex3f(x1, y1, z1);
+                glVertex3f(x1, -100, z1);
+                glVertex3f(x1, -100, z2);
 
         glColor3f(1,1,1); //Blanc   
-
-        glEnd();
+       
     }
-
+    glEnd();
 }
 
 void definir_decor(int nombre)
 {
-    // point p1;
-    // point p2;
-    //FINIR CA    
-    // ajouter_element_decor(p1,p2);
+    int largeur_element = 50;
+    int i, j;
+    for(i=-500; i<=500-largeur_element; i+=largeur_element) 
+    {
+        for(j=-500; j<=500-largeur_element; j+=largeur_element)
+        {
+            int hauteur = -100+abs(rand()*2*largeur_element%largeur_element);
+            
+            ajouter_element_decor(
+                nouveau_point(i,hauteur,j),
+                nouveau_point(i+largeur_element,hauteur,j),
+                nouveau_point(i+largeur_element,hauteur,j+largeur_element),
+                nouveau_point(i,hauteur,j+largeur_element)
+            );
+        }
+    }
 }
 
 /*Permet de creer un point avec 3 coordonnées*/
@@ -179,24 +213,45 @@ point nouveau_point(int x, int y, int z)
     return p;
 }
 
+/*Permet de creer une couleur avec 3 float*/
+couleur nouvelle_couleur(float r, float v, float b)
+{
+    couleur c;
+    c.r=r;
+    c.v=v;
+    c.b=b;
+    return c;
+}
+
 /*Ajoute une plate-forme grace a 4 points*/
 void ajouter_plateforme(point p1, point p2, point p3, point p4)
 {
     plateforme p;
-    p.p1= p1;
-    p.p2= p2;
-    p.p3= p3;
-    p.p4= p4;
+    p.p1 = p1;
+    p.p2 = p2;
+    p.p3 = p3;
+    p.p4 = p4;
     tab_plateformes[nb_plateformes++] = p;
 }
 
 void ajouter_element_decor(point p1, point p2, point p3, point p4)
 {
-    plateforme p;
-    p.p1= p1;
-    p.p2= p2;
-    p.p3= p3;
-    p.p4= p4;
+    element_decor p;
+    p.p1 = p1;
+    p.p2 = p2;
+    p.p3 = p3;
+    p.p4 = p4;
+
+    float r = rand_0_1();
+    float v = rand_0_1();
+    float b = rand_0_1();
+
+    float r2 = (r-0.1)>0?r-0.1:0;
+    float v2 = (v-0.1)>0?v-0.1:0;
+    float b2 = (b-0.1)>0?b-0.1:0;
+
+    p.couleur_cotes = nouvelle_couleur(r,v,b);
+    p.couleur_dessus = nouvelle_couleur(r2,v2,b2);
     tab_decor[nb_element_decor++] = p;
 }
 

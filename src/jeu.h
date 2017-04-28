@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 #include "decor.h"
 #include "karbre.h"
 #include "boule.h"
@@ -17,6 +18,7 @@
 #define SENS_MONTRE 1
 #define SENS_INVERSE -1
 
+void gestion_arguments(int argc, char** argv);
 void initGL();
 void majVecteurs();
 void Animer();
@@ -25,5 +27,6 @@ int appartientPlateforme(float x, float y, float z);
 void lancement();
 void lancementJeu();
 
+int no_texture;
 
 #endif

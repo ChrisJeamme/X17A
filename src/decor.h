@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
+#include <math.h>
 
 #define HAUTEUR_FENETRE 800 
 #define LARGEUR_FENETRE 800
@@ -19,6 +21,13 @@ typedef struct struct_point
     int z;
 } point;
 
+typedef struct struct_couleur
+{
+    float r;
+    float v;
+    float b;
+} couleur;
+
 typedef struct struct_plateforme
 {
     point p1;
@@ -27,10 +36,20 @@ typedef struct struct_plateforme
     point p4;
 } plateforme;
 
+typedef struct struct_element_decor
+{
+    point p1;
+    point p2;
+    point p3;
+    point p4;
+    couleur couleur_dessus;
+    couleur couleur_cotes;
+} element_decor;
+
 plateforme tab_plateformes[100];
 int nb_plateformes;
 
-plateforme tab_decor[100];
+element_decor tab_decor[500];
 int nb_element_decor;
 
 //Texture plateformes
@@ -48,12 +67,17 @@ void dessiner_boule(float rayon, float x, float y, float z);
 /*Ajoute une plate-forme grace a 4 points*/
 void ajouter_plateforme(point p1, point p2, point p3, point p4);
 
+/*Ajoute un élément (pavé) au décor du dessous*/
+void ajouter_element_decor(point p1, point p2, point p3, point p4);
+
+
 /*Permet d'afficher toutes les plateformes*/
 void afficher_plateformes();
 
 void afficher_decor();
 
 void definir_decor();
+
 
 /*Permet de charger une texture*/
 void chargementTexture(GLuint* texture, char* chemin);
@@ -68,5 +92,9 @@ void chargementTexture(GLuint* texture, char* chemin);
 
 /*Permet de creer un point avec 3 coordonnées*/
 point nouveau_point(int x, int y, int z);
+
+
+
+float rand_0_1();
 
 #endif

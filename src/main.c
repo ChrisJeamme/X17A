@@ -1,9 +1,9 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "jeu.h"
 
 int main(int argc, char** argv)
 {
+    gestion_arguments(argc,argv);
+    srand(time(NULL));
     glutInit(&argc, argv);
     initGL();
 

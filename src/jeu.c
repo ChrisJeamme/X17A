@@ -15,8 +15,25 @@ void initGL()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    chargementTexture(&tex_sol[0], "test.png");
-    //chargementTexture(&tex_sol[1], "test.png");
+}
+
+void gestion_arguments(int argc, char** argv)
+{
+    int i;
+    if(argc>0)
+    {
+        for(i=0; i<argc; i++)
+        {
+            if(strcmp(argv[i],"-notexture")==0 || strcmp(argv[i],"-notex")==0)
+            {
+                no_texture=1;
+            }
+        }
+    }
+    else
+    {
+        no_texture=0;
+    }
 }
 
 void majVecteurs()
@@ -59,6 +76,12 @@ void lancement()
 
 void lancementJeu()
 {
+    if(!no_texture)
+    {
+        chargementTexture(&tex_sol[0], "test.png");
+        chargementTexture(&tex_sol[1], "test.png");
+    }
+    
     majVecteurs();
     gestionMenu();
 
@@ -130,7 +153,6 @@ void Affichage()
     trace_grille(5);
     glutSwapBuffers();
 }
-
 
 void Animer()
 {
