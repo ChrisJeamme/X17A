@@ -158,21 +158,3 @@ void Animer()
 {
     glutPostRedisplay();
 }
-
-
-int appartientPlateforme(float x, float y, float z)
-{
-    return 0;
-    // int i;
-    // for (i=0; i<nb_plateformes; i++)
-    // {
-    //     int x1 = tab_plateformes[i].x1;
-    //     int y1 = tab_plateformes[i].y1;
-    //     int z1 = tab_plateformes[i].z1;
-    //     int x2 = tab_plateformes[i].x2;
-    //     int y2 = tab_plateformes[i].y2;
-    //     int z2 = tab_plateformes[i].z2;
-    
-       
-    // }
-}

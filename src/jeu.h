@@ -23,7 +23,6 @@ void initGL();
 void majVecteurs();
 void Animer();
 void Affichage();
-int appartientPlateforme(float x, float y, float z);
 void lancement();
 void lancementJeu();
 
