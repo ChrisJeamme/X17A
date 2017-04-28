@@ -1,4 +1,5 @@
 #include "entree.h"
+#include "jeu.h"
 
 void GestionSpecial(int key, int x, int y)
 { 	
@@ -20,8 +21,12 @@ void GestionSpecial(int key, int x, int y)
         }
         else //On augmente le vecteur vitesse dans la même direction
         {
-            ax = vx*0.2;
-            az = vz*0.2;
+            //On calcule la norme du vecteur vitesse
+            if (normeVitesse < 0.1) //On a pas atteint la vitesse max
+            {
+                ax = vx*0.2;
+                az = vz*0.2;
+            }
         }
     } 
 
@@ -35,7 +40,7 @@ void GestionSpecial(int key, int x, int y)
 
     if (key == GLUT_KEY_DOWN) //On veut ralentir
     {
-        if (normeVitesse > 0.01)
+        if (normeVitesse > 0.005)
         {
             ax -= vx*0.1;
             az -= vz*0.1;

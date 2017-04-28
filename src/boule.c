@@ -24,14 +24,14 @@ int collision_boule_plateforme()
            continue;    //si elle est pas au-dessus, on vérifie avec la plateforme suivante
 
         //Vecteur AB
-        float ABx = x2 - x1;
-        float ABy = y2 - y1;
-        float ABz = z2 - z1;
+        float ABx = x1 - x2;
+        float ABy = y1 - y2;
+        float ABz = z1 - z2;
 
         //Vecteur AC
-        float ACx = x3 - x1;
-        float ACy = y3 - y1;
-        float ACz = z3 - z1;
+        float ACx = x3 - x2;
+        float ACy = y3 - y2;
+        float ACz = z3 - z2;
 
         //Produit vectoriel pour avoir vecteur normal au plan (ABC): 
         float a = ABy*ACz - ABz*ACy;
@@ -71,8 +71,12 @@ void ajouter_pente(int a, int b, int c)
     float norme = sqrt(Px*Px + Py*Py + Pz*Pz);
     //Vecteur normé
     Px /= norme;
-    Py /= norme;
+    //Py /= norme;
     Pz /= norme;
+    if (Px != 0)
+        Px = 1/Px;
+    if (Pz != 0)
+        Pz = 1/Pz;
     vx += Px*0.0001;
     vz += Pz*0.0001;
 }
@@ -81,12 +85,8 @@ void ajouter_pente(int a, int b, int c)
 void maj_vecteur_vitesse()
 {
     vx = vx + ax;//On ajoute l'acceleration
-    if (vx > 0.1 || vx < -0.1) //On limite la vitesse
-        vx -= ax;
     vy = vy + ay + gy; 
     vz = vz + az;
-    if (vz > 0.1 || vz < -0.1)
-        vz -= az;
     //printf("\n\n VITESSE X : %f \n VITESSE Z : %f\n\n",vx, vz);
 }
 
