@@ -72,10 +72,10 @@ void afficher_plateformes()
         //Face dessus
         //glColor3f(0,0,1); //Bleu
         glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
-        glTexCoord2i(0,1); glVertex3f(x2, y2, z2);    
+        glTexCoord2i(0,2); glVertex3f(x2, y2, z2);    
         glColor3f(0,0.5,0.5); //Vert
-        glTexCoord2i(1,1); glVertex3f(x3, y3, z3);
-        glTexCoord2i(1,0); glVertex3f(x4, y4, z4);
+        glTexCoord2i(2,2); glVertex3f(x3, y3, z3);
+        glTexCoord2i(2,0); glVertex3f(x4, y4, z4);
 
         glColor3f(1,1,1);  //Blanc
 
@@ -202,51 +202,51 @@ void afficher_cubemap()
     int t = 700;
 
     glBindTexture(GL_TEXTURE_2D, tex_skybox[0]);
-    glBegin(GL_TRIANGLE_STRIP);			// X Négatif		
-        glTexCoord2i(0,1); glVertex3f(-t,-t,-t); 	
+    glBegin(GL_QUADS);			// X Négatif		
+        glTexCoord2i(0,0); glVertex3f(-t,-t,-t); 	
         glTexCoord2i(0,1); glVertex3f(-t,t,-t);
-        glTexCoord2i(1,1); glVertex3f(-t,-t,t);
-        glTexCoord2i(1,0); glVertex3f(-t,t,t);
+        glTexCoord2i(1,1); glVertex3f(-t,t,t);
+        glTexCoord2i(1,0); glVertex3f(-t,-t,t);
     glEnd();
     
     glBindTexture(GL_TEXTURE_2D, tex_skybox[1]);
-    glBegin(GL_TRIANGLE_STRIP);			// X Positif
-        glTexCoord2i(0,1);  glVertex3f(t,-t,-t);
-        glTexCoord2i(0,1);  glVertex3f(t,-t,t);
-        glTexCoord2i(1,1);  glVertex3f(t,t,-t); 
-        glTexCoord2i(1,0);  glVertex3f(t,t,t); 	
+    glBegin(GL_QUADS);			// X Positif
+        glTexCoord2i(0,0);  glVertex3f(t,-t,-t);
+        glTexCoord2i(0,1);  glVertex3f(t,t,-t);
+        glTexCoord2i(1,1);  glVertex3f(t,t,t); 
+        glTexCoord2i(1,0);  glVertex3f(t,-t,t); 	
     glEnd();
     
-    glBindTexture(GL_TEXTURE_2D, tex_skybox[2]);
-    glBegin(GL_TRIANGLE_STRIP);			// Y Négatif	
-        glTexCoord2i(0,1); glVertex3f(-t,-t,-t);
-        glTexCoord2i(0,1); glVertex3f(-t,-t,t);
-        glTexCoord2i(1,1); glVertex3f(t,-t,-t);
-        glTexCoord2i(1,0); glVertex3f(t,-t,t);
-    glEnd();
+    // glBindTexture(GL_TEXTURE_2D, tex_skybox[2]);
+    // glBegin(GL_QUADS);			// Y Négatif	
+    //     glTexCoord2i(0,0); glVertex3f(-t,-t,-t);
+    //     glTexCoord2i(0,1); glVertex3f(-t,-t,t);
+    //     glTexCoord2i(1,1); glVertex3f(t,-t,-t);
+    //     glTexCoord2i(1,0); glVertex3f(t,-t,t);
+    // glEnd();
     
-    glBindTexture(GL_TEXTURE_2D, tex_skybox[3]);
-    glBegin(GL_TRIANGLE_STRIP);			// Y Positif		
-        glTexCoord2i(0,1); glVertex3f(-t,t,-t);
-        glTexCoord2i(0,1); glVertex3f(t,t,-t); 
-        glTexCoord2i(1,1); glVertex3f(-t,t,t);
-        glTexCoord2i(1,0); glVertex3f(t,t,t); 	
-    glEnd();
+    // glBindTexture(GL_TEXTURE_2D, tex_skybox[3]);
+    // glBegin(GL_QUADS);			// Y Positif		
+    //     glTexCoord2i(0,0); glVertex3f(-t,t,-t);
+    //     glTexCoord2i(0,1); glVertex3f(t,t,-t); 
+    //     glTexCoord2i(1,1); glVertex3f(-t,t,t);
+    //     glTexCoord2i(1,0); glVertex3f(t,t,t); 	
+    // glEnd();
     
     glBindTexture(GL_TEXTURE_2D, tex_skybox[4]);
-    glBegin(GL_TRIANGLE_STRIP);			// Z Négatif		
-        glTexCoord2i(0,1);  glVertex3f(-t,-t,-t);
-        glTexCoord2i(0,1);  glVertex3f(t,-t,-t);
-        glTexCoord2i(1,1);  glVertex3f(-t,t,-t);
-        glTexCoord2i(1,0);  glVertex3f(t,t,-t); 
+    glBegin(GL_QUADS);			// Z Négatif		
+        glTexCoord2i(0,0);  glVertex3f(-t,-t,-t);
+        glTexCoord2i(0,1);  glVertex3f(t,t,-t);
+        glTexCoord2i(1,1);  glVertex3f(t,t,-t);
+        glTexCoord2i(1,0);  glVertex3f(t,-t,-t); 
     glEnd();
     
     glBindTexture(GL_TEXTURE_2D, tex_skybox[5]);
-    glBegin(GL_TRIANGLE_STRIP);			// Z Positif	
-        glTexCoord2i(0,1); glVertex3f(-t,-t,t);
-        glTexCoord2i(0,1); glVertex3f(-t,t,t);
-        glTexCoord2i(1,1); glVertex3f(t,-t,t);
-        glTexCoord2i(1,0); glVertex3f(t,t,t); 	
+    glBegin(GL_QUADS);			// Z Positif	
+        glTexCoord2i(0,0);  glVertex3f(-t,-t,t);
+        glTexCoord2i(0,1);  glVertex3f(t,t,t);
+        glTexCoord2i(1,1);  glVertex3f(t,t,t);
+        glTexCoord2i(1,0);  glVertex3f(t,-t,t); 
     glEnd();
 }
 
@@ -313,6 +313,7 @@ void ajouter_element_decor(point p1, point p2, point p3, point p4)
     float v;
     float b;
 
+    //Random sur le vert
     r = 0;
     v = rand_0_1();
     b = 0;
