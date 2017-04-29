@@ -78,8 +78,8 @@ void ajouter_pente(int a, int b, int c)
     Pz *= Py*8;
 
     //On modifie la vitesse de la boule en fonction de la pente      
-    vx += Px*0.0001;
-    vz += Pz*0.0001;
+    ax += Px*0.0001;
+    az += Pz*0.0001;
 }
 
 /*Met a jour le vecteur vitesse*/
@@ -94,8 +94,6 @@ void maj_vecteur_vitesse()
 /*Met a jour la postion de la boule*/
 void maj_position_boule()
 {
-    maj_vecteur_vitesse(); //on récupere le vecteur vitesse
-    bx+=vx; //on ajoute la composante x de la vitesse a la position de la boule en x
     if (!collision_boule_plateforme()) //La boule n'est pas en collision avec une plateforme
     {
         by+= vy; //On modifie la position en fonction du vecteur vitesse en y (la gravité entre en jeu !)
@@ -104,6 +102,8 @@ void maj_position_boule()
     {
         vy = 0; //On est sur une plate-forme, il ne faut pas descendre en dessous
     }
+    maj_vecteur_vitesse(); //on récupere le vecteur vitesse
+    bx+=vx; //on ajoute la composante x de la vitesse a la position de la boule en x
     bz+=vz; //pareil que pour x
 }
 
