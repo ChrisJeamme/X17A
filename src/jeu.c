@@ -57,12 +57,9 @@ void majVecteurs()
     gy = -0.001;
     gz = 0;
     //Position de l'observateur
-    if(!appartientPlateforme(bx, by + brayon*5, bz))
-    {
-        ox = bx;
-        oy = by + brayon*5;
-        oz = bz;
-    }
+    ox = bx;
+    oy = by + brayon*5;
+    oz = bz;
 }
 
 void lancement()
@@ -140,7 +137,7 @@ void Affichage()
 
     //Mise a jour de la caméra
     maj_observateur();
-    gluLookAt(ox, oy, oz, bx, by+brayon, bz+1, 0, 1, 0);
+    gluLookAt(ox, oy, oz, bx, by+brayon, bz+0.0000001, 0, 1, 0);
     //printf("Vecteur caméra: %f %f %f\n", ox, oy, oz);
 
 
