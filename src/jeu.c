@@ -90,12 +90,12 @@ void lancementJeu()
         // chargementTexture(&tex_skybox[3],"4.bmp");
         // chargementTexture(&tex_skybox[4],"5.bmp");
         // chargementTexture(&tex_skybox[5],"6.bmp");
-        chargementTexture(&tex_skybox[0],"skybox.png");
-        chargementTexture(&tex_skybox[1],"skybox.png");
-        chargementTexture(&tex_skybox[2],"skybox.png");
-        chargementTexture(&tex_skybox[3],"skybox.png");
-        chargementTexture(&tex_skybox[4],"skybox.png");
-        chargementTexture(&tex_skybox[5],"skybox.png");
+        chargementTexture(&tex_skybox[0],"img/testBK.png");
+        chargementTexture(&tex_skybox[1],"img/testDN.png");
+        chargementTexture(&tex_skybox[2],"img/testFT.png");
+        chargementTexture(&tex_skybox[3],"img/testLF.png");
+        chargementTexture(&tex_skybox[4],"img/testRT.png");
+        chargementTexture(&tex_skybox[5],"img/testUP.png");
     }
     
     majVecteurs();

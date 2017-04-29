@@ -313,9 +313,9 @@ void ajouter_element_decor(point p1, point p2, point p3, point p4)
     float v;
     float b;
 
-    r = rand_0_1();
+    r = 0;
     v = rand_0_1();
-    b = rand_0_1();
+    b = 0;
 
     float r2 = (r-0.1)>0?r-0.1:0;
     float v2 = (v-0.1)>0?v-0.1:0;
