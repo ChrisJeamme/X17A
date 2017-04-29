@@ -78,8 +78,12 @@ void GererClavier(unsigned char touche, int x, int y)
         }
         else //On augmente le vecteur vitesse dans la même direction
         {
-            ax = vx*0.1;
-            az = vz*0.1;
+            //On calcule la norme du vecteur vitesse
+            if (normeVitesse < 0.1) //On a pas atteint la vitesse max
+            {
+                ax = vx*0.2;
+                az = vz*0.2;
+            }
         }
     }
         
