@@ -53,7 +53,8 @@ element_decor tab_decor[500];
 int nb_element_decor;
 
 //Texture plateformes
-GLuint tex_sol[2];
+GLuint tex_sol[3];
+GLuint tex_skybox[6];
 
 //Gestion menus
 
@@ -78,9 +79,13 @@ void afficher_decor();
 
 void definir_decor();
 
+void afficher_cubemap();
+
 
 /*Permet de charger une texture*/
 void chargementTexture(GLuint* texture, char* chemin);
+
+void chargerTextureCubemap(GLuint* texture, char *x_pos_file, char *x_neg_file, char *y_pos_file, char *y_neg_file, char *z_pos_file, char *z_neg_file);
 
 void trace_grille(int n);
 

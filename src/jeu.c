@@ -7,14 +7,18 @@ void initGL()
     glutInitWindowPosition(50,50);
     glutCreateWindow("La boule magique");
     glEnable(GL_DEPTH_TEST);
-
     glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_CUBE_MAP_ARB); 
 
-    glGenTextures(2,tex_sol);
+    glGenTextures(3, tex_sol);
+    glGenTextures(6, tex_skybox);
+
     glBindTexture(GL_TEXTURE_2D, tex_sol[0]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+
+    //INFO: Les chargements de textures sont faits dans LancementJeu()
 }
 
 void gestion_arguments(int argc, char** argv)
@@ -80,6 +84,18 @@ void lancementJeu()
     {
         chargementTexture(&tex_sol[0], "test.png");
         chargementTexture(&tex_sol[1], "test.png");
+        // chargementTexture(&tex_skybox[0],"1.bmp");
+        // chargementTexture(&tex_skybox[1],"2.bmp");
+        // chargementTexture(&tex_skybox[2],"3.bmp");
+        // chargementTexture(&tex_skybox[3],"4.bmp");
+        // chargementTexture(&tex_skybox[4],"5.bmp");
+        // chargementTexture(&tex_skybox[5],"6.bmp");
+        chargementTexture(&tex_skybox[0],"skybox.png");
+        chargementTexture(&tex_skybox[1],"skybox.png");
+        chargementTexture(&tex_skybox[2],"skybox.png");
+        chargementTexture(&tex_skybox[3],"skybox.png");
+        chargementTexture(&tex_skybox[4],"skybox.png");
+        chargementTexture(&tex_skybox[5],"skybox.png");
     }
     
     majVecteurs();
@@ -123,7 +139,7 @@ void Affichage()
     glLoadIdentity();
     //afficher_vecteurs();
 
-    glFrustum(-1,1,-1,1,1,200);
+    glFrustum(-1,1,-1,1,1,1000);
 
     // char vx_string[50];
     // sprintf(vx_string, "%f", vx);
@@ -149,6 +165,7 @@ void Affichage()
 
     afficher_plateformes();
     afficher_decor();
+    afficher_cubemap();
 
     trace_grille(5);
     glutSwapBuffers();
@@ -159,20 +176,7 @@ void Animer()
     glutPostRedisplay();
 }
 
-
 int appartientPlateforme(float x, float y, float z)
 {
     return 0;
-    // int i;
-    // for (i=0; i<nb_plateformes; i++)
-    // {
-    //     int x1 = tab_plateformes[i].x1;
-    //     int y1 = tab_plateformes[i].y1;
-    //     int z1 = tab_plateformes[i].z1;
-    //     int x2 = tab_plateformes[i].x2;
-    //     int y2 = tab_plateformes[i].y2;
-    //     int z2 = tab_plateformes[i].z2;
-    
-       
-    // }
 }
