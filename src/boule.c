@@ -1,6 +1,6 @@
 #include "boule.h"
 
-/*Calcule si la boule est en collision avec un des plan*/
+/*Calcule si la boule est en collision avec un des plans*/
 int collision_boule_plateforme()
 {
     int i;
