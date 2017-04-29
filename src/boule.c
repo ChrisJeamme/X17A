@@ -69,14 +69,15 @@ void ajouter_pente(int a, int b, int c)
     float Py = a*a + c*c;
     float Pz = c*b;
     float norme = sqrt(Px*Px + Py*Py + Pz*Pz);
-    //Vecteur normé
+    //Vecteur normé  
     Px /= norme;
-    //Py /= norme;
-    Pz /= norme;
-    if (Px != 0)
-        Px = 1/Px;
-    if (Pz != 0)
-        Pz = 1/Pz;
+    Py /= norme;
+    Pz /= norme;    
+    //On se sert de la composante en y de la pente pour affecter à la boule la pente en x et z
+    Px *= Py*8; 
+    Pz *= Py*8;
+
+    //On modifie la vitesse de la boule en fonction de la pente      
     vx += Px*0.0001;
     vz += Pz*0.0001;
 }
