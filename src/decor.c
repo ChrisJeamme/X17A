@@ -69,20 +69,28 @@ void afficher_plateformes()
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 
-        int distancex = 1+((x1>x2)?x1-x2:x2-x1);
-        int distancez = 1+((z1>z2)?z1-z2:z2-z1);
+        int distancex = ((x1>=x3)?x1-x3:x3-x1);
+        int distancez = ((z1>=z3)?z1-z3:z3-z1);
 
-        printf("x1=%d x2=%d\n",x1,x2);
+        if(distancex==0)
+            distancex=1;
+        if(distancez==0)
+            distancez=1;
+
+        printf("(x1>x3)?%d donc %d\n",x1>x3, (x1>x3)?x1-x3:x3-x1);
+        printf("(z1>z3)?%d donc %d\n",z1>z3, (z1>z3)?z1-z3:z3-z1);
+        printf("x1=%d x3=%d\n",x1,x3);
+        printf("z1=%d z3=%d\n",z1,z3);
         printf("dis(X) = %d\n",distancex);
         printf("dis(Z) = %d\n",distancez);
 
         //Face dessus
         glColor3f(0.7,0,0); 
         glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
-        glTexCoord2i(0,distancez); glVertex3f(x2, y2, z2);    
+        glTexCoord2i(0,distancez/10); glVertex3f(x2, y2, z2);    
         glColor3f(0.4,0,0); 
-        glTexCoord2i(distancex,distancez); glVertex3f(x3, y3, z3);
-        glTexCoord2i(distancex,0); glVertex3f(x4, y4, z4);
+        glTexCoord2i(distancex/10,distancez/10); glVertex3f(x3, y3, z3);
+        glTexCoord2i(distancex/10,0); glVertex3f(x4, y4, z4);
 
         glColor3f(0.1,0,0);  //Blanc
 

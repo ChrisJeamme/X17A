@@ -33,20 +33,12 @@ void gestion_arguments(int argc, char** argv)
             {
                 no_texture=1;
             }
-            if(strcmp(argv[i],"-lvl1")==0)
+            if(strcmp(argv[i],"-lvl")==0 && i+1<argc)
             {
-                num_niveau=1;
-            }
-            if(strcmp(argv[i],"-lvl2")==0)
-            {
-                num_niveau=2;
-            }
-            if(strcmp(argv[i],"-lvl3")==0)
-            {
-                num_niveau=2;
+                num_niveau=atoi(argv[++i]);
             }
         }
-        if(num_niveau==0)
+        if(num_niveau==0) //Pas d'argument ou atoi fail
         {
             num_niveau=1;
         }
