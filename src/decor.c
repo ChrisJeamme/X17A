@@ -229,8 +229,8 @@ void afficher_cubemap()
     glBegin(GL_QUADS);			// Y Positif		
         glTexCoord2i(0,0); glVertex3f(-t,t,-t);
         glTexCoord2i(0,1); glVertex3f(t,t,-t); 
-        glTexCoord2i(1,1); glVertex3f(-t,t,t);
-        glTexCoord2i(1,0); glVertex3f(t,t,t); 	
+        glTexCoord2i(1,1); glVertex3f(t,t,t);
+        glTexCoord2i(1,0); glVertex3f(-t,t,t); 	
     glEnd();
     
     glBindTexture(GL_TEXTURE_2D, tex_skybox[4]);

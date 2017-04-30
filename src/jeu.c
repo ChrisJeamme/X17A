@@ -24,6 +24,7 @@ void initGL()
 void gestion_arguments(int argc, char** argv)
 {
     int i;
+    num_niveau = 0;
     if(argc>0)
     {
         for(i=0; i<argc; i++)
@@ -32,11 +33,28 @@ void gestion_arguments(int argc, char** argv)
             {
                 no_texture=1;
             }
+            if(strcmp(argv[i],"-lvl1")==0)
+            {
+                num_niveau=1;
+            }
+            if(strcmp(argv[i],"-lvl2")==0)
+            {
+                num_niveau=2;
+            }
+            if(strcmp(argv[i],"-lvl3")==0)
+            {
+                num_niveau=2;
+            }
+        }
+        if(num_niveau==0)
+        {
+            num_niveau=1;
         }
     }
     else
     {
         no_texture=0;
+        num_niveau=1;
     }
 }
 
@@ -77,6 +95,24 @@ void lancement()
 
 void lancementJeu()
 {
+    majVecteurs();
+    gestionMenu();
+    nb_plateformes = 0;
+    definir_decor(1);
+
+    init_texture();
+    definir_niveau();
+
+    glutDisplayFunc(Affichage);
+    glutIdleFunc(Animer);
+    glutKeyboardFunc(GererClavier);
+    glutSpecialFunc(GestionSpecial);
+
+    glutMainLoop();
+}
+
+void init_texture()
+{
     if(!no_texture)
     {
         chargementTexture(&tex_sol[0], "test.png");
@@ -94,37 +130,57 @@ void lancementJeu()
         chargementTexture(&tex_skybox[4],"img/testFT.png");
         chargementTexture(&tex_skybox[5],"img/testBK.png");
     }
-    
-    majVecteurs();
-    gestionMenu();
+}
 
-    nb_plateformes = 0;
+void definir_niveau()
+{
+    if(num_niveau==1)
+    {
+        point p11 = nouveau_point(-30, 0, -30);
+        point p12 = nouveau_point(-30, 0, 30);
+        point p13 = nouveau_point(30, 0, 30);
+        point p14 = nouveau_point(30, 0, -30);
 
-    point p11 = nouveau_point(-30, 0, -30);
-    point p12 = nouveau_point(-30, 0, 30);
-    point p13 = nouveau_point(30, 0, 30);
-    point p14 = nouveau_point(30, 0, -30);
+        point p21 = nouveau_point(30, -10, 30);
+        point p22 = nouveau_point(30, -20, 90);
+        point p23 = nouveau_point(90, -20, 90);
+        point p24 = nouveau_point(90, -10, 30);
 
-    point p21 = nouveau_point(30, -10, 30);
-    point p22 = nouveau_point(30, -20, 90);
-    point p23 = nouveau_point(90, -20, 90);
-    point p24 = nouveau_point(90, -10, 30);
+        point p31 = nouveau_point(30, 30, 150);
+        point p32 = nouveau_point(90, 30, 150);
 
-    point p31 = nouveau_point(30, 30, 150);
-    point p32 = nouveau_point(90, 30, 150);
+        ajouter_plateforme(p11, p12, p13, p14);
+        ajouter_plateforme(p21, p22, p23, p24);
+        ajouter_plateforme(p31, p22, p23, p32);
+    }
+    if(num_niveau==2)
+    {
+        point p11 = nouveau_point(-15, 0, -15);
+        point p12 = nouveau_point(-15, 0, 15);
+        point p13 = nouveau_point(15, 0, 15);
+        point p14 = nouveau_point(15, 0, -15);
+        ajouter_plateforme(p11, p12, p13, p14);
 
-    ajouter_plateforme(p11, p12, p13, p14);
-    ajouter_plateforme(p21, p22, p23, p24);
-    ajouter_plateforme(p31, p22, p23, p32);
+        point p21 = nouveau_point(80, 0, -15);
+        point p22 = nouveau_point(80, 0, 15);
+        point p23 = nouveau_point(50, 0, 15);
+        point p24 = nouveau_point(50, 0, -15);
+        ajouter_plateforme(p21, p22, p23, p24);
 
-    definir_decor(1);
-
-    glutDisplayFunc(Affichage);
-    glutIdleFunc(Animer);
-    glutKeyboardFunc(GererClavier);
-    glutSpecialFunc(GestionSpecial);
-
-    glutMainLoop();
+        point p31 = nouveau_point(50, 0, -1);
+        point p32 = nouveau_point(50, 0, 1);
+        point p33 = nouveau_point(15, 0, 1);
+        point p34 = nouveau_point(15, 0, -1);
+        ajouter_plateforme(p31, p32, p33, p34);
+    }
+    if(num_niveau==3)
+    {
+        point p11 = nouveau_point(-30, 0, -30);
+        point p12 = nouveau_point(-30, 0, 30);
+        point p13 = nouveau_point(30, 0, 30);
+        point p14 = nouveau_point(30, 0, -30);
+        ajouter_plateforme(p11, p12, p13, p14);
+    }
 }
 
 //Fonction Affichage pour flutDisplayFunc
@@ -172,7 +228,6 @@ void Animer()
 {
     glutPostRedisplay();
 }
-
 
 int appartientPlateforme(float x, float y, float z)
 {

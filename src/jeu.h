@@ -25,8 +25,11 @@ void Animer();
 void Affichage();
 void lancement();
 void lancementJeu();
+void init_texture();
+void definir_niveau();
 
 int no_texture;
+int num_niveau;
 
 #endif
 
