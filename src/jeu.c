@@ -175,7 +175,7 @@ void definir_niveau()
 
         //Coordonnées du centre de la boule
         bx = 0;
-        by = 50;
+        by = 15;
         bz = 0;
     }
     if(num_niveau==3)
