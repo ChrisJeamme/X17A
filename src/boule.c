@@ -85,8 +85,8 @@ void ajouter_pente(int a, int b, int c)
 /*Met a jour le vecteur vitesse*/
 void maj_vecteur_vitesse()
 {
-    float fx = (vx + ax)*0.1;
-    float fz = (vz + az)*0.1;
+    float fx = (vx + ax)*0.001;
+    float fz = (vz + az)*0.001;
     
 
     vx = vx + ax - fx;//On ajoute l'acceleration
