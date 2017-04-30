@@ -83,6 +83,9 @@ void majVecteurs()
     ox = bx;
     oy = by + brayon*5;
     oz = bz;
+    //Frottement
+    fx = 0;
+    fz = 0;
 }
 
 void lancement()

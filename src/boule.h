@@ -32,6 +32,9 @@ float gz;
 float ox;
 float oy;
 float oz;
+//Frottement
+float fx;
+float fz;
 
 /*Calcule si la boule est en collision avec un des plan*/
 int collison_boule_plateforme();
