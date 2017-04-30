@@ -62,10 +62,11 @@ void majVecteurs()
 {
     //Rayon de la boule
     brayon = 2;
-    //Coordonnées du centre de la boule
-    bx = 0;
-    by = 50;
-    bz = 0;
+    // FAIT DANS definir_niveau()
+    // //Coordonnées du centre de la boule
+    // bx = 0;
+    // by = 50;
+    // bz = 0;
     //Vecteur de vitesse de la boule
     vx = 0;
     vy = 0;
@@ -116,7 +117,7 @@ void init_texture()
     if(!no_texture)
     {
         chargementTexture(&tex_sol[0], "test.png");
-        chargementTexture(&tex_sol[1], "test.png");
+        chargementTexture(&tex_sol[1], "test3.png");
         chargementTexture(&tex_skybox[0],"img/testLF.png");
         chargementTexture(&tex_skybox[1],"img/testRT.png");
         chargementTexture(&tex_skybox[2],"img/testDN.png");
@@ -146,6 +147,11 @@ void definir_niveau()
         ajouter_plateforme(p11, p12, p13, p14);
         ajouter_plateforme(p21, p22, p23, p24);
         ajouter_plateforme(p31, p22, p23, p32);
+
+        //Coordonnées du centre de la boule
+        bx = 0;
+        by = 50;
+        bz = 0;
     }
     if(num_niveau==2)
     {
@@ -166,6 +172,11 @@ void definir_niveau()
         point p33 = nouveau_point(15, 0, 1);
         point p34 = nouveau_point(15, 0, -1);
         ajouter_plateforme(p31, p32, p33, p34);
+
+        //Coordonnées du centre de la boule
+        bx = 0;
+        by = 50;
+        bz = 0;
     }
     if(num_niveau==3)
     {
@@ -174,6 +185,11 @@ void definir_niveau()
         point p13 = nouveau_point(30, 0, 30);
         point p14 = nouveau_point(30, 0, -30);
         ajouter_plateforme(p11, p12, p13, p14);
+
+        //Coordonnées du centre de la boule
+        bx = 0;
+        by = 50;
+        bz = 0;
     }
 }
 
@@ -193,6 +209,11 @@ void Affichage()
     // afficherText(10,0,0,1,1,vx_string);
 
     maj_position_boule();
+
+    if(bx>LIMITE_MAP || bx<-LIMITE_MAP || bz>LIMITE_MAP || bz<-LIMITE_MAP)
+    {
+        bx=0; by=50; bz=0;
+    }
     
     ax=0; ay=0; az=0;
 
@@ -204,7 +225,6 @@ void Affichage()
     //Mise a jour de la caméra
     maj_observateur();
     gluLookAt(ox, oy, oz, bx, by+brayon, bz+0.0000001, 0, 1, 0);
-    //printf("Vecteur caméra: %f %f %f\n", ox, oy, oz);
 
 
     //Affichage Boule

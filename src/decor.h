@@ -77,7 +77,7 @@ void afficher_plateformes();
 
 void afficher_decor();
 
-void definir_decor();
+void definir_decor(int largeur_element);
 
 void afficher_cubemap();
 
