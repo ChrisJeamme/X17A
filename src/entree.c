@@ -56,9 +56,13 @@ void GestionSpecial(int key, int x, int y)
 
 void GererClavierMenu(unsigned char touche, int x, int y)
 {
-    if(touche=='l')
+    if(touche=='l' || touche == 13 || touche == 32) //L ou Espace ou Entree
     {
         lancementJeu();
+    }
+    if (touche == 27) //Touche Echap => ferme le programme
+    {
+        exit(0);
     }
 }
 

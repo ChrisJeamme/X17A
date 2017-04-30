@@ -18,7 +18,7 @@
 #define SENS_MONTRE 1
 #define SENS_INVERSE -1
 #define LARGEUR_ELEMENT_DECOR 50
-#define LIMITE_MAP 20
+#define LIMITE_MAP 450
 
 void gestion_arguments(int argc, char** argv);
 void initGL();
@@ -29,6 +29,7 @@ void lancement();
 void lancementJeu();
 void init_texture();
 void definir_niveau();
+void verification_limites();
 
 int no_texture;
 int num_niveau;

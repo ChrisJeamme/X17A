@@ -210,12 +210,7 @@ void Affichage()
 
     maj_position_boule();
 
-    if(bx>LIMITE_MAP || bx<-LIMITE_MAP || bz>LIMITE_MAP || bz<-LIMITE_MAP || by<-100)
-    {
-        bx=0; by=50; bz=0;
-        ax=0; ay=0; az=0;
-        vx=0; vy=0; vz=0;
-    }
+    verification_limites();
     
     ax=0; ay=0; az=0;
 
@@ -238,6 +233,16 @@ void Affichage()
 
     trace_grille(5);
     glutSwapBuffers();
+}
+
+void verification_limites()
+{
+    if(bx>LIMITE_MAP || bx<-LIMITE_MAP || bz>LIMITE_MAP || bz<-LIMITE_MAP || by<-100)
+    {
+        bx=0; by=50; bz=0;
+        ax=0; ay=0; az=0;
+        vx=0; vy=0; vz=0;
+    }
 }
 
 void Animer()
