@@ -13,10 +13,12 @@ void AffichageMenu()
 
 void gestionMenu()
 {
-    // nSousmenu1 = glutCreateMenu(vRappelSousMenu1);
-	// glutAddMenuEntry("Elément 1 du sous-menu 1", 11);
+    nSousmenuChoixNiveau = glutCreateMenu(vRappelSousmenuChoixNiveau);
+	glutAddMenuEntry("Niveau 1", 1);
+    glutAddMenuEntry("Niveau 2", 2);
+    glutAddMenuEntry("Niveau 3", 3);
 	nMenuprincipal = glutCreateMenu(vRappelMenuPrincipal);
-	// glutAddSubMenu("Sous-menu 1", nSousmenu1);
+	glutAddSubMenu("Choix du niveau", nSousmenuChoixNiveau);
     glutAddMenuEntry("Reset", MENU_RESET);
 	glutAddMenuEntry("Quitter", MENU_QUITTER);
 	// glutAddMenuEntry("Elément 2", 2);
@@ -26,6 +28,11 @@ void gestionMenu()
 void vRappelSousMenu1(int i)
 {
 	printf("rappel de l'element %d\n", i);
+}
+
+void vRappelSousmenuChoixNiveau(int i)
+{
+    num_niveau = i;
 }
 
 void vRappelMenuPrincipal(int i)

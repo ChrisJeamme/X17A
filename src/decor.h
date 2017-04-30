@@ -58,7 +58,7 @@ GLuint tex_skybox[6];
 
 //Gestion menus
 
-int nSousmenu1, nSousmenu2, nMenuprincipal; // Numéros (identifiants) des menus
+int nSousmenu1, nSousmenu2, nMenuprincipal, nSousmenuChoixNiveau; // Numéros (identifiants) des menus
 
 //Prototypes
 

@@ -17,6 +17,7 @@
 #define TAILLE 50 
 #define SENS_MONTRE 1
 #define SENS_INVERSE -1
+#define LARGEUR_ELEMENT_DECOR 50
 
 void gestion_arguments(int argc, char** argv);
 void initGL();

@@ -98,7 +98,7 @@ void lancementJeu()
     majVecteurs();
     gestionMenu();
     nb_plateformes = 0;
-    definir_decor(1);
+    definir_decor(LARGEUR_ELEMENT_DECOR);
 
     init_texture();
     definir_niveau();
@@ -117,12 +117,6 @@ void init_texture()
     {
         chargementTexture(&tex_sol[0], "test.png");
         chargementTexture(&tex_sol[1], "test.png");
-        // chargementTexture(&tex_skybox[0],"1.bmp");
-        // chargementTexture(&tex_skybox[1],"2.bmp");
-        // chargementTexture(&tex_skybox[2],"3.bmp");
-        // chargementTexture(&tex_skybox[3],"4.bmp");
-        // chargementTexture(&tex_skybox[4],"5.bmp");
-        // chargementTexture(&tex_skybox[5],"6.bmp");
         chargementTexture(&tex_skybox[0],"img/testLF.png");
         chargementTexture(&tex_skybox[1],"img/testRT.png");
         chargementTexture(&tex_skybox[2],"img/testDN.png");

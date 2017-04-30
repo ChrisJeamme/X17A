@@ -70,14 +70,14 @@ void afficher_plateformes()
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 
         //Face dessus
-        //glColor3f(0,0,1); //Bleu
+        glColor3f(0.7,0,0); 
         glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
         glTexCoord2i(0,2); glVertex3f(x2, y2, z2);    
-        glColor3f(0,0.5,0.5); //Vert
+        glColor3f(0.4,0,0); 
         glTexCoord2i(2,2); glVertex3f(x3, y3, z3);
         glTexCoord2i(2,0); glVertex3f(x4, y4, z4);
 
-        glColor3f(1,1,1);  //Blanc
+        glColor3f(0.1,0,0);  //Blanc
 
         //Bord 1
         glVertex3f(x1, y1, z1);    
@@ -103,7 +103,7 @@ void afficher_plateformes()
         glVertex3f(x1, y1-2, z1);
         glVertex3f(x4, y4-2, z4);
 
-        glColor3f(0,0,1); //Bleu        
+        glColor3f(0,0,0); //Noir      
 
         //Face du dessous 
         glVertex3f(x1, y1-2, z1);    
@@ -124,27 +124,7 @@ float rand_0_1()
 
 void afficher_decor()
 {
-    int x1 = -500;
-    int y1 = -101;
-    int z1 = -500;
-    int x2 = 500;
-    int y2 = -101;
-    int z2 = 500;
-
     glBegin(GL_QUADS);
-    
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    // glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
-
-    //Face dessus
-        glColor3f(0,0,1); //Bleu
-        /*glTexCoord2i(0,0);*/ glVertex3f(x1, y1, z1);    
-        /*glTexCoord2i(0,1);*/ glVertex3f(x2, y1, z1);    
-        glColor3f(0,0.5,0.5); //Bleu clair    
-        /*glTexCoord2i(1,1);*/ glVertex3f(x2, y2, z2);
-        /*glTexCoord2i(1,0);*/ glVertex3f(x1, y2, z2);
 
     glColor3f(1,1,1); //Blanc   
 
@@ -250,9 +230,8 @@ void afficher_cubemap()
     glEnd();
 }
 
-void definir_decor(int nombre)
+void definir_decor(int largeur_element)
 {
-    int largeur_element = 50;
     int i, j;
     for(i=-500; i<=500-largeur_element; i+=largeur_element) 
     {
