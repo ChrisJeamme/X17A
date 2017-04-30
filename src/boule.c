@@ -86,12 +86,14 @@ void ajouter_pente(int a, int b, int c)
 void maj_vecteur_vitesse()
 {
     //Frottement
-    float fx = (vx + ax)*0.001;
-    float fz = (vz + az)*0.001;
+    //float fx = (vx + ax)*0.001;
+    //float fz = (vz + az)*0.001;
 
-    vx = vx + ax - fx;//On ajoute l'acceleration
+    vx = vx + ax + fx;//On ajoute l'acceleration et les forces de frottements
     vy = vy + ay + gy; 
-    vz = vz + az - fz;
+    vz = vz + az + fz;
+
+    printf("vx : %f   vz : %f \nfx : %f   vz : %f\n\n",vx,vz,fx,fz);
     //printf("\n\n VITESSE X : %f \n VITESSE Z : %f\n\n",vx, vz);
 }
 
@@ -100,10 +102,13 @@ void maj_position_boule()
 {
     if (!collision_boule_plateforme()) //La boule n'est pas en collision avec une plateforme
     {
+        fx = fz = 0; //Plus de frottements
         by+= vy; //On modifie la position en fonction du vecteur vitesse en y (la gravité entre en jeu !)
     }
     else
-    {
+    { 
+        fx = -vx*0.0005; //Frottements de la plateforme
+        fz = -vz*0.0005;
         vy = 0; //On est sur une plate-forme, il ne faut pas descendre en dessous
     }
     maj_vecteur_vitesse(); //on récupere le vecteur vitesse
