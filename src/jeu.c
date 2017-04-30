@@ -210,9 +210,11 @@ void Affichage()
 
     maj_position_boule();
 
-    if(bx>LIMITE_MAP || bx<-LIMITE_MAP || bz>LIMITE_MAP || bz<-LIMITE_MAP)
+    if(bx>LIMITE_MAP || bx<-LIMITE_MAP || bz>LIMITE_MAP || bz<-LIMITE_MAP || by<-100)
     {
         bx=0; by=50; bz=0;
+        ax=0; ay=0; az=0;
+        vx=0; vy=0; vz=0;
     }
     
     ax=0; ay=0; az=0;
