@@ -77,12 +77,12 @@ void afficher_plateformes()
         if(distancez==0)
             distancez=1;
 
-        printf("(x1>x3)?%d donc %d\n",x1>x3, (x1>x3)?x1-x3:x3-x1);
-        printf("(z1>z3)?%d donc %d\n",z1>z3, (z1>z3)?z1-z3:z3-z1);
-        printf("x1=%d x3=%d\n",x1,x3);
-        printf("z1=%d z3=%d\n",z1,z3);
-        printf("dis(X) = %d\n",distancex);
-        printf("dis(Z) = %d\n",distancez);
+        // printf("(x1>x3)?%d donc %d\n",x1>x3, (x1>x3)?x1-x3:x3-x1);
+        // printf("(z1>z3)?%d donc %d\n",z1>z3, (z1>z3)?z1-z3:z3-z1);
+        // printf("x1=%d x3=%d\n",x1,x3);
+        // printf("z1=%d z3=%d\n",z1,z3);
+        // printf("dis(X) = %d\n",distancex);
+        // printf("dis(Z) = %d\n",distancez);
 
         //Face dessus
         glColor3f(0.7,0,0); 

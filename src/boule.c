@@ -118,8 +118,6 @@ void maj_position_boule()
 /*Met a jour la position de l'observateur*/
 void maj_observateur()
 {
-    float normeDirection = sqrt(dx*dx + dz*dz);
-    float normeVitesse = sqrt(vx*vx + vz*vz);
     if (vx == 0 && vz == 0)
     {
         ox = bx - 3*dx;
