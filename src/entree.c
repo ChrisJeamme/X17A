@@ -155,7 +155,7 @@ void GererClavier(unsigned char touche, int x, int y)
     if(touche=='r')
     {
         vx=0;        vy=0;        vz=0;
-        bx=1;        by=50;        bz=1;
+        bx=0;        by=50;        bz=0.000001;
     }
 
 
