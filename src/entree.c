@@ -12,10 +12,9 @@ void GestionSpecial(int key, int x, int y)
             dz = sin(-0.1)*dx + cos(-0.1)*dz;
             dx = dxp;
         }
-        float changementDirectionX = vz;
-        float changementDirectionZ = -vx;
-        ax = changementDirectionX*0.1;
-        az = changementDirectionZ*0.1;
+        float vxp = cos(-0.1)*vx - sin(-0.1)*vz;
+        vz = sin(-0.1)*vx + cos(-0.1)*vz;
+        vx = vxp;
     }
 
     if (key == GLUT_KEY_UP) // On accelère
@@ -45,10 +44,9 @@ void GestionSpecial(int key, int x, int y)
             dz = sin(0.1)*dx + cos(0.1)*dz;
             dx = dxp;
         }
-        float changementDirectionX = -vz;
-        float changementDirectionZ = vx;
-        ax = changementDirectionX*0.1;
-        az = changementDirectionZ*0.1;
+        float vxp = cos(0.1)*vx - sin(0.1)*vz;
+        vz = sin(0.1)*vx + cos(0.1)*vz;
+        vx = vxp;
     }
 
     if (key == GLUT_KEY_DOWN) //On veut ralentir
@@ -131,10 +129,9 @@ void GererClavier(unsigned char touche, int x, int y)
             dz = sin(-0.1)*dx + cos(-0.1)*dz;
             dx = dxp;
         }
-        float changementDirectionX = vz;
-        float changementDirectionZ = -vx;
-        ax = changementDirectionX*0.1;
-        az = changementDirectionZ*0.1;
+        float vxp = cos(-0.1)*vx - sin(-0.1)*vz;
+        vz = sin(-0.1)*vx + cos(-0.1)*vz;
+        vx = vxp;
     }
     
     if(touche=='d') //A droite
@@ -145,10 +142,9 @@ void GererClavier(unsigned char touche, int x, int y)
             dz = sin(0.1)*dx + cos(0.1)*dz;
             dx = dxp;
         }
-        float changementDirectionX = -vz;
-        float changementDirectionZ = vx;
-        ax = changementDirectionX*0.1;
-        az = changementDirectionZ*0.1;
+        float vxp = cos(0.1)*vx - sin(0.1)*vz;
+        vz = sin(0.1)*vx + cos(0.1)*vz;
+        vx = vxp;
     }
     
     //Intteruption
