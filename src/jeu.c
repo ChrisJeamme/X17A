@@ -162,10 +162,10 @@ void definir_niveau()
         point p24 = nouveau_point(50, 0, -15);
         ajouter_plateforme(p21, p22, p23, p24);
 
-        point p31 = nouveau_point(50, 0, -1);
+        point p31 = nouveau_point(50, 0, 0);
         point p32 = nouveau_point(50, 0, 1);
         point p33 = nouveau_point(15, 0, 1);
-        point p34 = nouveau_point(15, 0, -1);
+        point p34 = nouveau_point(15, 0, 0);
         ajouter_plateforme(p31, p32, p33, p34);
 
         //Coordonnées du centre de la boule
