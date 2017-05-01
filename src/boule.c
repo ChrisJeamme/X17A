@@ -93,7 +93,6 @@ void maj_vecteur_vitesse()
     vy = vy + ay + gy; 
     vz = vz + az + fz;
 
-    printf("vx : %f   vz : %f \nfx : %f   vz : %f\n\n",vx,vz,fx,fz);
     //printf("\n\n VITESSE X : %f \n VITESSE Z : %f\n\n",vx, vz);
 }
 
@@ -119,8 +118,16 @@ void maj_position_boule()
 /*Met a jour la position de l'observateur*/
 void maj_observateur()
 {
-    ox = bx - vx*200;
-    oz = bz - vz*200;
+    if (vx == 0 && vz == 0)
+    {
+        ox = bx - dx;
+        oz = bz - dz;
+    }
+    else 
+    {
+        ox = bx - vx*200;
+        oz = bz - vz*200;
+    }
     oy = by + brayon*5;
 }
 

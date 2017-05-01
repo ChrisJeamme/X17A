@@ -78,6 +78,9 @@ void majVecteurs()
     //Frottement
     fx = 0;
     fz = 0;
+    //Direction avant de s'arrêter, on initialise pour partir direction x
+    dx = 1;
+    dz = 0;
 }
 
 void lancement()

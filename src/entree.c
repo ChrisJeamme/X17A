@@ -6,6 +6,12 @@ void GestionSpecial(int key, int x, int y)
     float normeVitesse = sqrt(vx*vx+vz*vz);
     if (key == GLUT_KEY_LEFT) //A gauche
     {
+        if (vx == 0 && vz == 0) //La boule est à l'arret
+        {
+            float dxp = cos(-0.1)*dx - sin(-0.1)*dz;
+            dz = sin(-0.1)*dx + cos(-0.1)*dz;
+            dx = dxp;
+        }
         float changementDirectionX = vz;
         float changementDirectionZ = -vx;
         ax = changementDirectionX*0.1;
@@ -14,10 +20,11 @@ void GestionSpecial(int key, int x, int y)
 
     if (key == GLUT_KEY_UP) // On accelère
     {
-        if (normeVitesse < 0.01) //La boule est à l'arrêt, il faut choisir une direction au hasard
-        {     
-            vx = 0.01;
-            vz = 0.01;
+        if (normeVitesse == 0) //La boule est à l'arrêt, il faut choisir une direction au hasard
+        {
+            float normeDirection = sqrt(dx*dx+ dz*dz);     
+            vx = dx/normeDirection * 0.01;
+            vz = dz/normeDirection * 0.01;
         }
         else //On augmente le vecteur vitesse dans la même direction
         {
@@ -32,6 +39,12 @@ void GestionSpecial(int key, int x, int y)
 
     if (key == GLUT_KEY_RIGHT)  //A droite
     {
+        if (vx == 0 && vz == 0) //La boule est à l'arret
+        {
+            float dxp = cos(0.1)*dx - sin(0.1)*dz;
+            dz = sin(0.1)*dx + cos(0.1)*dz;
+            dx = dxp;
+        }
         float changementDirectionX = -vz;
         float changementDirectionZ = vx;
         ax = changementDirectionX*0.1;
@@ -44,6 +57,8 @@ void GestionSpecial(int key, int x, int y)
         {
             ax -= vx*0.1;
             az -= vz*0.1;
+            dx = vx;
+            dz = vz;
         }
         else 
         {
@@ -75,10 +90,11 @@ void GererClavier(unsigned char touche, int x, int y)
     float normeVitesse = sqrt(vx*vx+vz*vz);
     if(touche=='z') //On veut accélerer
     {
-        if (normeVitesse < 0.01) //La boule est à l'arrêt, il faut choisir une direction au hasard
+        if (normeVitesse == 0) //La boule est à l'arrêt, il faut choisir une direction au hasard
         {     
-            vx = 0.01;
-            vz = 0.01;
+            float normeDirection = sqrt(dx*dx+ dz*dz);     
+            vx = dx/normeDirection * 0.01;
+            vz = dz/normeDirection * 0.01;
         }
         else //On augmente le vecteur vitesse dans la même direction
         {
@@ -97,6 +113,8 @@ void GererClavier(unsigned char touche, int x, int y)
         {
             ax -= vx*0.1;
             az -= vz*0.1;
+            dx = vx;
+            dz = vz;
         }
         else 
         {
@@ -107,6 +125,12 @@ void GererClavier(unsigned char touche, int x, int y)
 
     if(touche=='q') //A gauche
     {
+        if (vx == 0 && vz == 0) //La boule est à l'arret
+        {
+            float dxp = cos(-0.1)*dx - sin(-0.1)*dz;
+            dz = sin(-0.1)*dx + cos(-0.1)*dz;
+            dx = dxp;
+        }
         float changementDirectionX = vz;
         float changementDirectionZ = -vx;
         ax = changementDirectionX*0.1;
@@ -115,6 +139,12 @@ void GererClavier(unsigned char touche, int x, int y)
     
     if(touche=='d') //A droite
     {
+        if (vx == 0 && vz == 0) //La boule est à l'arret
+        {
+            float dxp = cos(0.1)*dx - sin(0.1)*dz;
+            dz = sin(0.1)*dx + cos(0.1)*dz;
+            dx = dxp;
+        }
         float changementDirectionX = -vz;
         float changementDirectionZ = vx;
         ax = changementDirectionX*0.1;
