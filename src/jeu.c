@@ -29,10 +29,12 @@ void gestion_arguments(int argc, char** argv)
     {
         for(i=0; i<argc; i++)
         {
+            //Gestion de l'argument de debug pour ne pas afficher de texture
             if(strcmp(argv[i],"-notexture")==0 || strcmp(argv[i],"-notex")==0)
             {
                 no_texture=1;
             }
+            //Gestion du niveau spécifié en argument
             if(strcmp(argv[i],"-lvl")==0 && i+1<argc)
             {
                 num_niveau=atoi(argv[++i]);
@@ -43,7 +45,7 @@ void gestion_arguments(int argc, char** argv)
             num_niveau=1;
         }
     }
-    else
+    else // Cas normal: Texture et niveau 1
     {
         no_texture=0;
         num_niveau=1;
