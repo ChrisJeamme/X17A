@@ -223,7 +223,7 @@ void Affichage()
     maj_observateur();
     gluLookAt(ox, oy, oz, bx, by+brayon, bz+0.0000001, 0, 1, 0);
 
-
+    portail(0,0,0);
     //Affichage Boule
     dessiner_boule(brayon,bx,by,bz);
 

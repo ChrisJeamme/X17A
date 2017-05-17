@@ -418,6 +418,60 @@ void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2)
 }
 
 
+void parallelepipede(int x1, int y1, int z1, int x2, int y2, int z2)
+{
+        glBegin(GL_QUADS);
+
+        //Face 1
+        glVertex3f(x1, y1, z1);    
+        glVertex3f(x1, y2, z1);
+        glVertex3f(x2, y2, z1);
+        glVertex3f(x2, y1, z1);
+
+        //Bord 2
+        glVertex3f(x1, y1, z1);    
+        glVertex3f(x2, y1, z1);
+        glVertex3f(x2, y1, z2);
+        glVertex3f(x1, y1, z2);
+
+        //Bord 3
+        glVertex3f(x1, y1, z1);    
+        glVertex3f(x1, y1, z2);
+        glVertex3f(x1, y2, z2);
+        glVertex3f(x1, y2, z1);
+
+        //Face 4
+        glVertex3f(x1, y1, z2);    
+        glVertex3f(x1, y2, z2);
+        glVertex3f(x2, y2, z2);
+        glVertex3f(x2, y1, z2);
+
+        //Bord 5
+        glVertex3f(x1, y2, z1);    
+        glVertex3f(x2, y2, z1);
+        glVertex3f(x2, y2, z2);
+        glVertex3f(x1, y2, z2);
+
+        //Bord 6
+        glVertex3f(x2, y1, z1);    
+        glVertex3f(x2, y1, z2);
+        glVertex3f(x2, y2, z2);
+        glVertex3f(x2, y2, z1);
+ 
+
+        glEnd();
+}
+
+
+void portail(int x1, int y1, int z1)
+{
+    parallelepipede(x1,y1,z1, x1+2, y1+7, z1+2);
+    parallelepipede(x1+12,y1,z1, x1+14, y1+7, z1+2);
+    parallelepipede(x1,y1+7,z1, x1+14, y1+9, z1+2);
+    
+}
+
+
 // void afficher_cubemap()
 // {
 //     int t = 500;
