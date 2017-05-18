@@ -40,14 +40,18 @@ float dx;
 float dz;
 
 
-/*Renvoie vrai si la boule est en collision avec la plateforme*/
+/*Renvoie 1 si la boule est en collision avec la plateforme p en argument*/
+/*Si c'est une plateforme basique (type 1) on ajoute la pente*/
+/*Si c'est une plateforme saut (type 2) on met une accélération en y*/
 int collision_boule_une_plateforme(plateforme p, int type);
 
-/*Calcule si la boule est en collision avec un des plan*/
+/*Parcours les plateformes pour savoir si on est sur une plateforme ou non*/
 int collison_boule_plateformes();
 
+/*Calcule si la boule est en collision avec un objet*/
 int collision_boule_objet();
 
+/*Calcule si a boule est en collision avec une face*/
 int collision_boule_face(int x1, int z1, int x2, int z2);
 
 /*On modifie les vecteurs de la boule en fonction de la pente de la plate-forme*/
@@ -61,12 +65,6 @@ void maj_position_boule();
 
 /*Met a jour la position de l'observateur*/
 void maj_observateur();
-
-/*maximum entre 3 entiers*/
-int max(int x1, int x2, int x3);
-
-/*minimum entre 3 entiers*/
-int min(int x1, int x2, int x3);
 
 /*Fonction de débeugage*/
 void afficher_vecteurs();

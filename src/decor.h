@@ -161,6 +161,11 @@ void parallelepipede(int x1, int y1, int z1, int x2, int y2, int z2);
 
 void portail(point p, char orientation);
 
+/*maximum entre 3 entiers*/
+int max(int x1, int x2, int x3);
+
+/*minimum entre 3 entiers*/
+int min(int x1, int x2, int x3);
 
 float rand_0_1();
 

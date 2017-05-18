@@ -1,5 +1,8 @@
 #include "boule.h"
 
+/*Renvoie 1 si la boule est en collision avec la plateforme p en argument*/
+/*Si c'est une plateforme basique (type 1) on ajoute la pente*/
+/*Si c'est une plateforme saut (type 2) on met une accélération en y*/
 int collision_boule_une_plateforme(plateforme p, int type)
 {
     //On récupère 3 points qui forment la plateforme
@@ -17,7 +20,7 @@ int collision_boule_une_plateforme(plateforme p, int type)
 
     //On regarde la position de la boule en x et z par rapport à la plate-forme
     if ((bx < min(x1,x2,x3) )||( bx > max(x1,x2,x3) )||( bz < min(z1,z2,z3) )||( bz > max(z1,z2,z3)))
-        return 0;    //si elle est pas au-dessus, on vérifie avec la plateforme suivante
+        return 0;    //si elle est pas au-dessus, on renvoie 0
 
     //Vecteur AB
     float ABx = x1 - x2;
@@ -55,13 +58,13 @@ int collision_boule_une_plateforme(plateforme p, int type)
         }
         else //plate-forme saut
         {
-            ay = 0.4;
+            ay = 0.5;
         }
         return 1;
     }
 }
 
-/*Calcule si la boule est en collision avec un des plans*/
+/*Parcours les plateformes pour savoir si on est sur une plateforme ou non*/
 int collision_boule_plateformes()
 {
     int i;
@@ -70,19 +73,21 @@ int collision_boule_plateformes()
         if (collision_boule_une_plateforme(tab_plateformes[i], 1))
             return 1; //La boule est en collision avec une plateforme basique
     }
-    for (i=0; i<nb_sauts; i++)
+    for (i=0; i<nb_sauts; i++) //On parcourt les plateformes de saut
     {
         if (collision_boule_une_plateforme(tab_sauts[i], 2))
-            return 2;
+            return 2; //On renvoie 2
     }
     return 0; //On a trouvé aucun plate-forme telle que la boule soit en collision. On renvoie 0.
 }
 
+/*Calcule si la boule est en collision avec un objet*/
 int collision_boule_objet()
 {
     int i;
-    for (i=0; i<nb_objets; i++)
+    for (i=0; i<nb_objets; i++) //On parcourt les objets
     {
+        /*On va vérifier si la boules est en collision avec une des 4 faces qui constituent le contour de l'objet*/
         objet o = tab_objets[i];
         int x1 = o.p1.x;
         int z1 = o.p1.z;
@@ -94,6 +99,7 @@ int collision_boule_objet()
     return 0;
 }
 
+/*Calcule si a boule est en collision avec une face*/
 int collision_boule_face(int x1, int z1, int x2, int z2)
 {
     if (x1 == x2) // equation de la droite x = x1
@@ -113,8 +119,9 @@ int collision_boule_face(int x1, int z1, int x2, int z2)
             }
             if (bz >= zmin && bz <= zmax)
             {
-                vx = -vx;
-                return 1;
+                //Collision
+                vx = -vx; //rebondit dans la direction opposé en x
+                return 1; 
             }
             else 
                 return 0;
@@ -139,7 +146,8 @@ int collision_boule_face(int x1, int z1, int x2, int z2)
             }
             if (bx >= xmin && bx <= xmax)
             {
-                vz = -vz;
+                //Collision
+                vz = -vz; //Rebondit à l'opposé en y
                 return 1;
             }
             else 
@@ -176,21 +184,15 @@ void ajouter_pente(int a, int b, int c)
 /*Met a jour le vecteur vitesse*/
 void maj_vecteur_vitesse()
 {
-    //Frottement
-    //float fx = (vx + ax)*0.001;
-    //float fz = (vz + az)*0.001;
-
     vx = vx + ax + fx;//On ajoute l'acceleration et les forces de frottements
     vy = vy + ay + gy; 
     vz = vz + az + fz;
-
-    //printf("\n\n VITESSE X : %f \n VITESSE Z : %f\n\n",vx, vz);
 }
 
 /*Met a jour la postion de la boule*/
 void maj_position_boule()
 {
-    int type_plateforme = collision_boule_plateformes();
+    int type_plateforme = collision_boule_plateformes(); //0, 1 ou 2
     if (type_plateforme == 0) //La boule n'est pas en collision avec une plateforme
     {
         fx = fz = 0; //Plus de frottements
@@ -204,7 +206,7 @@ void maj_position_boule()
     }
     else //Plateforme de saut
     {
-        by += ay;
+        by += ay; //On ajoute l'accélération en y
     }
     maj_vecteur_vitesse(); //on récupere le vecteur vitesse
     bx+=vx; //on ajoute la composante x de la vitesse a la position de la boule en x
@@ -224,34 +226,7 @@ void maj_observateur()
         ox = bx - vx*200;
         oz = bz - vz*200;
     }
-    // ox = bx - 4*dx/normeDirection - vx*200;
-    // oz = bz - 4*dz/normeDirection - vz*200;
-    
     oy = by + brayon*5;
-}
-
-/*maximum entre 3 entiers*/
-int max(int x1, int x2, int x3)
-{
-    if (x1>x2)
-        if (x1>x3)
-            return x1;
-        else return x3;
-    else if (x2>x3)
-            return x2;
-        else return x3;
-}
-
-/*minimum entre 3 entiers*/
-int min(int x1, int x2, int x3)
-{
-    if (x1<x2)
-        if (x1<x3)
-            return x1;
-        else return x3;
-    else if (x2<x3)
-            return x2;
-        else return x3;
 }
 
 /*Fonction de débeugage*/

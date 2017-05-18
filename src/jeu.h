@@ -9,7 +9,6 @@
 #include "decor.h"
 #include "karbre.h"
 #include "entree.h"
-#include "gui.h"
 #include "menu.h"
 #include "niveaux.h"
 
