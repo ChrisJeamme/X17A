@@ -230,8 +230,6 @@ void Affichage()
     // point p=nouveau_point(0,0,0);
     // portail(p, 'z');
 
-    printf("Collision boule objet: %d \n", collision_boule_objet());
-
     //Affichage Boule
     dessiner_boule(brayon,bx,by,bz);
 
