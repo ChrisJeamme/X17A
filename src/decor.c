@@ -564,6 +564,51 @@ void portail(point p, char orientation)
 
 }
 
+void generer_objet_sur_plateforme(plateforme p)
+{
+    //On recupère les limites de la plateforme 
+    int xmin = min(p.p1.x, p.p2.x, p.p3.x);
+    int xmax = max(p.p1.x, p.p2.x, p.p3.x)-5;
+    int zmin = min(p.p1.z, p.p2.z, p.p3.z);
+    int zmax = max(p.p1.z, p.p2.z, p.p3.z)-5;
+    int y = p.p1.y;
+
+    int x1 = rand()%(xmax-xmin) +xmin;
+    int z1 = rand()%(zmax-zmin) +zmin;
+
+    int dx = rand()%(5)+1;
+    int dz = rand()%(5)+1;
+    int dy = rand()%(3)+4;
+
+    ajouter_objet(nouveau_point(x1,y,z),nouveau_point(x1+dx, y+dy, z1+dz));
+
+}
+
+}
+
+/*maximum entre 3 entiers*/
+int max(int x1, int x2, int x3)
+{
+    if (x1>x2)
+        if (x1>x3)
+            return x1;
+        else return x3;
+    else if (x2>x3)
+            return x2;
+        else return x3;
+}
+
+/*minimum entre 3 entiers*/
+int min(int x1, int x2, int x3)
+{
+    if (x1<x2)
+        if (x1<x3)
+            return x1;
+        else return x3;
+    else if (x2<x3)
+            return x2;
+        else return x3;
+}
 
 // void afficher_cubemap()
 // {

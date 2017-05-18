@@ -229,30 +229,6 @@ void maj_observateur()
     oy = by + brayon*5;
 }
 
-/*maximum entre 3 entiers*/
-int max(int x1, int x2, int x3)
-{
-    if (x1>x2)
-        if (x1>x3)
-            return x1;
-        else return x3;
-    else if (x2>x3)
-            return x2;
-        else return x3;
-}
-
-/*minimum entre 3 entiers*/
-int min(int x1, int x2, int x3)
-{
-    if (x1<x2)
-        if (x1<x3)
-            return x1;
-        else return x3;
-    else if (x2<x3)
-            return x2;
-        else return x3;
-}
-
 /*Fonction de débeugage*/
 void afficher_vecteurs()
 {

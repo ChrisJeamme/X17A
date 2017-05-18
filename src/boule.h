@@ -66,12 +66,6 @@ void maj_position_boule();
 /*Met a jour la position de l'observateur*/
 void maj_observateur();
 
-/*maximum entre 3 entiers*/
-int max(int x1, int x2, int x3);
-
-/*minimum entre 3 entiers*/
-int min(int x1, int x2, int x3);
-
 /*Fonction de débeugage*/
 void afficher_vecteurs();
 
