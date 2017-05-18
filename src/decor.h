@@ -9,10 +9,10 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
+#include "jeu.h"
 
-#define HAUTEUR_FENETRE 800 
-#define LARGEUR_FENETRE 800
-#define TAILLE 50
+#define NOMBRE_MAX_PLATEFORMES 100
+#define NOMBRE_MAX_DECOR 500
 
 typedef struct struct_point
 {
@@ -46,11 +46,13 @@ typedef struct struct_element_decor
     couleur couleur_cotes;
 } element_decor;
 
-plateforme tab_plateformes[100];
+plateforme tab_plateformes[NOMBRE_MAX_PLATEFORMES];
 int nb_plateformes;
 
-element_decor tab_decor[500];
+element_decor tab_decor[NOMBRE_MAX_DECOR];
 int nb_element_decor;
+
+point goal;
 
 //Texture plateformes
 GLuint tex_sol[3];
@@ -60,6 +62,15 @@ GLuint tex_skybox[6];
 
 int nSousmenu1, nSousmenu2, nMenuprincipal, nSousmenuChoixNiveau; // Numéros (identifiants) des menus
 
+//Pour les niveaux
+
+int nombre_niveau;
+point point_depart_niveau[100];
+point point_arrivee_niveau[100];
+int nombre_plateforme_niveau[100];
+int nombre_obstacle_niveau[100];
+plateforme *plateforme_niveau[100];
+
 //Prototypes
 
 /*Permet de dessiner la boule avec un rayon donné et les coordonnées du centre*/
@@ -67,6 +78,9 @@ void dessiner_boule(float rayon, float x, float y, float z);
 
 /*Ajoute une plate-forme grace a 4 points*/
 void ajouter_plateforme(point p1, point p2, point p3, point p4);
+
+/*Ajoute une plate-forme qui existe déjà au niveau*/
+void ajouter_plateforme_charge(plateforme p);
 
 /*Ajoute un élément (pavé) au décor du dessous*/
 void ajouter_element_decor(point p1, point p2, point p3, point p4);
