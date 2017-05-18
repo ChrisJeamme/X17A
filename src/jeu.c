@@ -95,10 +95,20 @@ void lancementJeu()
     majVecteurs();
     gestionMenu();
     nb_plateformes = 0;
+    nb_objets = 0;
     definir_decor(LARGEUR_ELEMENT_DECOR);
 
     init_texture();
     definir_niveau();
+
+    point p1 = nouveau_point(0,0,0);
+    point p2 = nouveau_point(15,4,15);
+
+    point p3 = nouveau_point(15,0,15);
+    point p4 = nouveau_point(21,8, 23);
+
+    //ajouter_objet(p1, p2);
+    ajouter_objet(p3, p4);
 
     glutDisplayFunc(Affichage);
     glutIdleFunc(Animer);
@@ -213,11 +223,16 @@ void Affichage()
     maj_observateur();
     gluLookAt(ox, oy, oz, bx, by+brayon, bz+0.0000001, 0, 1, 0);
 
-    portail(0,0,0);
+    // point p=nouveau_point(0,0,0);
+    // portail(p, 'z');
+
+    printf("Collision boule objet: %d \n", collision_boule_objet());
+
     //Affichage Boule
     dessiner_boule(brayon,bx,by,bz);
 
     afficher_plateformes();
+    afficher_objets();
     afficher_decor();
     afficher_cubemap();
 

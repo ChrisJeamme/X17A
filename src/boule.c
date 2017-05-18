@@ -94,8 +94,12 @@ int collision_boule_face(int x1, int z1, int x2, int z2)
                 zmax = z1 + sqrt(2)/2;
             }
             if (bz >= zmin && bz <= zmax)
+            {
+                vx = -vx;
                 return 1;
-            else return 0;
+            }
+            else 
+                return 0;
         }
         else 
             return 0;
@@ -116,7 +120,10 @@ int collision_boule_face(int x1, int z1, int x2, int z2)
                 xmax = x1 + sqrt(2)/2;
             }
             if (bx >= xmin && bz <= xmax)
+            {
+                vz=-vz;
                 return 1;
+            }
             else return 0;
         }
         else 
