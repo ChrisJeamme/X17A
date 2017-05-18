@@ -99,6 +99,9 @@ void lancementJeu()
     nb_sauts = 0;
     definir_decor(LARGEUR_ELEMENT_DECOR);
 
+    importer_niveaux();
+    afficher_niveaux();
+
     init_texture();
     definir_niveau();
 
@@ -140,6 +143,7 @@ void init_texture()
 void definir_niveau()
 {
     int i;
+
     //On ajoute chaque plateforme
     for(i=0; i<nombre_plateforme_niveau[num_niveau]; i++)
     {
