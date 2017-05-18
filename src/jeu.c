@@ -99,8 +99,8 @@ void lancementJeu()
     nb_sauts = 0;
     definir_decor(LARGEUR_ELEMENT_DECOR);
 
-    // importer_niveaux();
-    // afficher_niveaux();
+    importer_niveaux();
+    afficher_niveaux();
 
     init_texture();
     definir_niveau();
@@ -144,45 +144,22 @@ void definir_niveau()
 {
     int i;
 
-    //On ajoute chaque plateforme
-    // for(i=0; i<nombre_plateforme_niveau[num_niveau]; i++)
-    // {
-    //     ajouter_plateforme_charge(plateforme_niveau[num_niveau][i]);
-    // }
+    // On ajoute chaque plateforme
+    for(i=0; i<nombre_plateforme_niveau[num_niveau]; i++)
+    {
+        ajouter_plateforme_charge(plateforme_niveau[num_niveau][i]);
+    }
 
-    // //On fixe le point de départ
-    // bx = point_depart_niveau[num_niveau].x;
-    // by = point_depart_niveau[num_niveau].y;
-    // bz = point_depart_niveau[num_niveau].z;
+    //On fixe le point de départ
+    bx = point_depart_niveau[num_niveau].x;
+    by = point_depart_niveau[num_niveau].y;
+    bz = point_depart_niveau[num_niveau].z;
 
-    // //On fixe le point d'arrivée
-    // goal = nouveau_point(   point_arrivee_niveau[num_niveau].x,
-    //                         point_arrivee_niveau[num_niveau].y,
-    //                         point_arrivee_niveau[num_niveau].z);
+    //On fixe le point d'arrivée
+    goal = nouveau_point(   point_arrivee_niveau[num_niveau].x,
+                            point_arrivee_niveau[num_niveau].y,
+                            point_arrivee_niveau[num_niveau].z);
 
-
-
-     point p11 = nouveau_point(-30, 0, -30);
-        point p12 = nouveau_point(-30, 0, 30);
-        point p13 = nouveau_point(30, 0, 30);
-        point p14 = nouveau_point(30, 0, -30);
-
-        point p21 = nouveau_point(30, -10, 30);
-        point p22 = nouveau_point(30, -20, 90);
-        point p23 = nouveau_point(90, -20, 90);
-        point p24 = nouveau_point(90, -10, 30);
-
-        point p31 = nouveau_point(30, 30, 150);
-        point p32 = nouveau_point(90, 30, 150);
-
-        ajouter_plateforme(p11, p12, p13, p14);
-        ajouter_plateforme(p21, p22, p23, p24);
-        ajouter_plateforme(p31, p22, p23, p32);
-
-        //Coordonnées du centre de la boule
-        bx = 0;
-        by = 50;
-bz = 0;
 
     
     // if(num_niveau==2)
