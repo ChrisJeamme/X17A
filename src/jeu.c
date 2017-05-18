@@ -1,5 +1,6 @@
 #include "jeu.h"
 
+/*Initialise les paramètre nécessaires à OpenGL*/
 void initGL()
 {
     glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE | GLUT_DEPTH);
@@ -21,6 +22,7 @@ void initGL()
     //INFO: Les chargements de textures sont faits dans LancementJeu()
 }
 
+/*Gère les arguments de l'appel du programme*/
 void gestion_arguments(int argc, char** argv)
 {
     int i;
@@ -48,6 +50,7 @@ void gestion_arguments(int argc, char** argv)
     }
 }
 
+/*Initialise les vecteurs au début du jeu*/
 void majVecteurs()
 {
     //Rayon de la boule
@@ -81,6 +84,7 @@ void majVecteurs()
     dz = 0;
 }
 
+/*Lance le jeu*/
 void lancement()
 {
     //Menu
@@ -90,6 +94,7 @@ void lancement()
     glutMainLoop();
 }
 
+/*Appeler via le menu pour lancer le jeu*/
 void lancementJeu()
 {
     majVecteurs();
@@ -105,18 +110,6 @@ void lancementJeu()
     init_texture();
     definir_niveau();
 
-
-    point p3 = nouveau_point(15,0,15);
-    point p4 = nouveau_point(21,8, 23);
-
-    point p21 = nouveau_point(30, -20, -20);
-    point p22 = nouveau_point(30, -20, 20);
-    point p23 = nouveau_point(60, -20, 20);
-    point p24 = nouveau_point(60, -20, -20);
-    //ajouter_objet(p1, p2);
-    ajouter_objet(p3, p4);
-    ajouter_saut(p21,p22,p23,p24);
-
     glutDisplayFunc(Affichage);
     glutIdleFunc(Animer);
     glutKeyboardFunc(GererClavier);
@@ -125,6 +118,7 @@ void lancementJeu()
     glutMainLoop();
 }
 
+/*Permet d'appliquer des textures aux objets*/
 void init_texture()
 {
     if(!no_texture)
@@ -140,6 +134,7 @@ void init_texture()
     }
 }
 
+/*Definit les niveaux du jeu*/
 void definir_niveau()
 {
     int i;
@@ -203,7 +198,6 @@ void definir_niveau()
 }
 
 //Fonction Affichage pour flutDisplayFunc
-
 void Affichage()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -247,6 +241,7 @@ void Affichage()
     glutSwapBuffers();
 }
 
+/*Vérifie si on est encore dans les limites du monde*/
 void verification_limites()
 {
     if(bx>LIMITE_MAP || bx<-LIMITE_MAP || bz>LIMITE_MAP || bz<-LIMITE_MAP || by<-100)
@@ -260,9 +255,4 @@ void verification_limites()
 void Animer()
 {
     glutPostRedisplay();
-}
-
-int appartientPlateforme(float x, float y, float z)
-{
-    return 0;
 }
