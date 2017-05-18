@@ -137,7 +137,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                         //Allocation de la mémoire pour le tableau d'obstacle de ce niveau
 
                         obstacle_niveau[numero_niveau] = NULL;
-                        obstacle_niveau[numero_niveau] = (plateforme*) malloc(sizeof(plateforme)*nombre_obstacle_niveau[numero_niveau]);
+                        obstacle_niveau[numero_niveau] = (couple_points*) malloc(sizeof(couple_points)*nombre_obstacle_niveau[numero_niveau]);
                         for(j=0; j<nombre_obstacle_niveau[numero_niveau]; j++)
                         {
                             couple_points couple;
@@ -163,7 +163,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
 
                         break;
                     case 'a': //Coordonnées de l'arrivée
-                        sscanf(chaine, "%c (%d,%d,%d)", &goal_orientation[numero_niveau],
+                        sscanf(chaine, "%c (%d,%d,%d)", &orientation_arrive_niveau[numero_niveau],
                                                         &point_arrivee_niveau[numero_niveau].x,
                                                         &point_arrivee_niveau[numero_niveau].y,
                                                         &point_arrivee_niveau[numero_niveau].z);
@@ -211,7 +211,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                         num_obstacle++;
                         break;
                     default:
-                        fprintf(stderr,"Erreur d'état (chargement sauvegarde");
+                        fprintf(stderr,"Erreur d'état (chargement sauvegarde)\n");
                         break;
                     }
                 }

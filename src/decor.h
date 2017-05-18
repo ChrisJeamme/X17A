@@ -94,7 +94,7 @@ int nSousmenu1, nSousmenu2, nMenuprincipal, nSousmenuChoixNiveau; // Numéros (i
 int nombre_niveau;
 point *point_depart_niveau;
 point *point_arrivee_niveau;
-int *orientation_arrive_niveau;
+char *orientation_arrive_niveau;
 int *nombre_plateforme_niveau;
 int *nombre_saut_niveau;
 int *nombre_obstacle_niveau;
@@ -112,6 +112,9 @@ void ajouter_plateforme(point p1, point p2, point p3, point p4);
 
 /*Ajoute une plate-forme qui existe déjà au niveau*/
 void ajouter_plateforme_charge(plateforme p);
+
+/*Pareil pour plateforme de saut*/
+void ajouter_saut_charge(plateforme p);
 
 /*Ajoute une plateforme de saut*/
 void ajouter_saut(point p1, point p2, point p3, point p4);
