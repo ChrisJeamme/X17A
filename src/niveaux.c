@@ -3,6 +3,13 @@
 void importer_niveaux()
 {
     fixer_nombre_niveaux(); //Cherche dans le répertoire
+
+    if(num_niveau<0||num_niveau>=nombre_niveau)
+    {
+        fprintf(stderr,"Niveau choisi incorrect\n");
+        exit(-1);
+    }
+
     initialiser_tableaux_niveaux(); //Alloue la mémoire pour les niveaux
 
     int i;
@@ -22,18 +29,12 @@ void fixer_nombre_niveaux()
     if (rep == NULL) 
         exit(1);  
 
-    nombre_niveau = 0;
+    nombre_niveau = -2;
 
+    //On compte le nombre de fichiers
     while ((fichier = readdir(rep)) != NULL)
     {
-        char nom_fichier[11];
-        sprintf(nom_fichier, "%d.lvl", nombre_niveau+1);
-
-        //Vérification du nom
-        if(strcmp(fichier->d_name,nom_fichier)==0)
-        {
-            nombre_niveau++;
-        }
+        nombre_niveau++;
     }
 
     printf("%d niveau(x) trouvé(s)\n",nombre_niveau);

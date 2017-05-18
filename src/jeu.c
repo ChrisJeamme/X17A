@@ -39,13 +39,7 @@ void gestion_arguments(int argc, char** argv)
             //Gestion du niveau spécifié en argument
             if(strcmp(argv[i],"-lvl")==0 && i+1<argc)
             {
-                if(atoi(argv[i])<nombre_niveau)
-                    num_niveau=atoi(argv[++i])-1;
-                else
-                {
-                    fprintf(stderr,"Niveau choisi incorrect\n");
-                    exit(-1);
-                }
+                num_niveau=atoi(argv[++i])-1;
             }
         }
     }
@@ -109,9 +103,6 @@ void lancementJeu()
     nb_objets = 0;
     nb_sauts = 0;
     definir_decor(LARGEUR_ELEMENT_DECOR);
-
-    importer_niveaux();
-    afficher_niveaux();
 
     init_texture();
     definir_niveau();
