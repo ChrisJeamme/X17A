@@ -12,6 +12,7 @@
 #include "jeu.h"
 
 #define NOMBRE_MAX_PLATEFORMES 100
+#define NOMBRE_MAX_OBJETS 100
 #define NOMBRE_MAX_DECOR 500
 
 typedef struct struct_point
@@ -36,6 +37,13 @@ typedef struct struct_plateforme
     point p4;
 } plateforme;
 
+typedef struct struct_objet
+{
+    point p1;
+    point p2;
+    couleur coul;
+} objet;
+
 typedef struct struct_element_decor
 {
     point p1;
@@ -48,6 +56,9 @@ typedef struct struct_element_decor
 
 plateforme tab_plateformes[NOMBRE_MAX_PLATEFORMES];
 int nb_plateformes;
+
+objet tab_objets[NOMBRE_MAX_OBJETS];
+int nb_objets;
 
 element_decor tab_decor[NOMBRE_MAX_DECOR];
 int nb_element_decor;
@@ -81,6 +92,12 @@ void ajouter_plateforme(point p1, point p2, point p3, point p4);
 
 /*Ajoute une plate-forme qui existe déjà au niveau*/
 void ajouter_plateforme_charge(plateforme p);
+
+/*Ajoute un objet dans le monde*/
+void ajouter_objet(point p1, point p2);
+
+/*Affiche les objets*/
+void afficher_objets();
 
 /*Ajoute un élément (pavé) au décor du dessous*/
 void ajouter_element_decor(point p1, point p2, point p3, point p4);

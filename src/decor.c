@@ -132,6 +132,21 @@ void afficher_plateformes()
     }
 }
 
+void afficher_objets()
+{
+    int i;
+    for (i=0; i<nb_objets; i++)
+    {
+        int x1 = tab_objets[i].p1.x;
+        int x2 = tab_objets[i].p2.x;
+        int y1 = tab_objets[i].p1.y;
+        int y2 = tab_objets[i].p2.y;
+        int z1 = tab_objets[i].p1.z;
+        int z2 = tab_objets[i].p2.z;
+        parallelepipede(x1,y1,z1, x2,y2,z2);
+    }
+}
+
 float rand_0_1()
 {
    return (float)rand() / (float)RAND_MAX;
@@ -293,6 +308,23 @@ void ajouter_plateforme(point p1, point p2, point p3, point p4)
     p.p3 = p3;
     p.p4 = p4;
     tab_plateformes[nb_plateformes++] = p;
+}
+
+/*Ajoute un objet dans le monde*/
+void ajouter_objet(point p1, point p2)
+{
+    objet o;
+    o.p1 = p1;
+    o.p2 = p2;
+    
+    //Random sur le vert
+    float r = 0;
+    float v = rand_0_1();
+    float b = 0;
+
+    o.coul = nouvelle_couleur(r,v,b);
+
+    tab_objets[nb_objets++] = o;
 }
 
 /*Ajoute une plate-forme qui existe déjà au niveau*/

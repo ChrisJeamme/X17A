@@ -62,21 +62,30 @@ int collision_boule_plateforme()
 
 int collision_boule_objet()
 {
+    int i;
+    for (i=0; i<nb_objets; i++)
+    {
+        objet o = tab_objets[i];
+        int x1 = o.p1.x;
+        int z1 = o.p1.z;
+        int x2 = o.p2.x;
+        int z2 = o.p2.z;
+        if (collision_boule_face(x1,z1,x2,z1) || collision_boule_face(x1,z1,x1,z2) || collision_boule_face(x1,z2,x2,z2) || collision_boule_face(x2,z1,x2,z2))
+            return 1;
+    }
     return 0;
 }
 
 int collision_boule_face(int x1, int z1, int x2, int z2)
 {
-    int d;
-    if (x1 == x2)
+    if (x1 == x2) // equation de la droite x = x1
     {
-        d = x1;
-        if ( abs(bx - d) <= brayon )
+        if ( fabs(bx - x1) <= brayon )
         {
             float zmin, zmax;
             if (z1 < z2)
             {
-                zmin = z1 - sqrt(2)/2;
+                zmin = z1 - sqrt(2)/2; //Boule
                 zmax = z2 + sqrt(2)/2;
             }
             else 
@@ -91,10 +100,9 @@ int collision_boule_face(int x1, int z1, int x2, int z2)
         else 
             return 0;
     }
-    else
+    else //equation de la droite z = z1
     {
-        d = z1;
-        if ( abs(bz - d) <= brayon )
+        if ( fabs(bz - z1) <= brayon )
         {
             float xmin, xmax;
             if (x1 < x2)

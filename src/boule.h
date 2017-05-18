@@ -42,6 +42,7 @@ float dz;
 /*Calcule si la boule est en collision avec un des plan*/
 int collison_boule_plateforme();
 
+int collision_boule_objet();
 
 int collision_boule_face(int x1, int z1, int x2, int z2);
 
