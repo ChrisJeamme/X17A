@@ -44,7 +44,7 @@ void gestion_arguments(int argc, char** argv)
     else // Cas normal: Texture et niveau 1
     {
         no_texture=0;
-        num_niveau=1;
+        num_niveau=0;
     }
 }
 
