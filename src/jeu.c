@@ -37,7 +37,13 @@ void gestion_arguments(int argc, char** argv)
             //Gestion du niveau spécifié en argument
             if(strcmp(argv[i],"-lvl")==0 && i+1<argc)
             {
-                num_niveau=atoi(argv[++i])-1;
+                if(atoi(argv[i])<nombre_niveau)
+                    num_niveau=atoi(argv[++i])-1;
+                else
+                {
+                    fprintf(stderr,"Niveau choisi incorrect\n");
+                    exit(-1);
+                }
             }
         }
     }
