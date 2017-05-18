@@ -33,6 +33,7 @@ void lancementJeu();
 void init_texture();
 void definir_niveau();
 void verification_limites();
+void niveau_superieur();
 
 int no_texture;
 

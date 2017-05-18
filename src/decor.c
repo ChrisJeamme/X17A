@@ -379,48 +379,6 @@ void ajouter_element_decor(point p1, point p2, point p3, point p4)
     tab_decor[nb_element_decor++] = p;
 }
 
-/*Tracage de la grille des points*/
-void trace_grille(int n)
-{
-    glColor3f(1.0,1.0,1.0); //Blanc
-    
-    //Afficher X et Y sur le repère
-        // afficherText(10,0,0,1,1,"X");
-        // afficherText(0,10,0,1,1,"Y");
-        // afficherText(-10,0,0,1,1,"X");
-        // afficherText(0,-10,0,1,1,"Y");
-    // glBegin(GL_LINES);
-    // for(int i=-TAILLE; i<=TAILLE; i+=n)
-    // {
-    //     glVertex2i(-TAILLE, i);
-    //     glVertex2i(TAILLE, i);
-    //     glVertex2i(i, TAILLE);
-    //     glVertex2i(i, -TAILLE);
-        
-    // }
-    // glEnd();
-
-    glColor3f(1.0,0.0,0.0); //Rouge
-
-    glBegin(GL_LINES);  //X
-        glVertex3i(-TAILLE,0,0);
-        glVertex3i(TAILLE,0,0);
-    glEnd();
-
-    glBegin(GL_LINES); //Y
-        glVertex3i(0,-TAILLE,0);
-        glVertex3i(0,TAILLE,0);
-    glEnd();
-
-    glBegin(GL_LINES); //Z
-        glVertex3i(0,0,-TAILLE);
-        glVertex3i(0,0,TAILLE);
-    glEnd();
-
-    glFlush();
-
-    glColor3f(1.0,1.0,1.0); //Blanc
-}
 
 void afficherText(float x, float y, int r, int g, int b, const char *texte) 
 {
@@ -432,47 +390,6 @@ void afficherText(float x, float y, int r, int g, int b, const char *texte)
 		glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, texte[i] );
 	}
     glColor3f(1,1,1);
-}
-
-void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2)
-{
-    glBegin(GL_QUADS);
-        //Face dessous
-        glVertex3f(x1, y1, z1);    
-        glVertex3f(x2, y1, z1);
-        glVertex3f(x2, y1, z2);
-        glVertex3f(x1, y1, z2);
-
-        //Face dessus
-        glVertex3f(x1, y2, z1);    
-        glVertex3f(x2, y2, z1);
-        glVertex3f(x2, y2, z2);
-        glVertex3f(x1, y2, z2);
-
-        //Face devant
-        glVertex3f(x1, y1, z1);    
-        glVertex3f(x2, y1, z1);  
-        glVertex3f(x2, y2, z1);
-        glVertex3f(x1, y2, z1);
-
-        //Face derrière
-        glVertex3f(x1, y1, z2);    
-        glVertex3f(x2, y1, z2);  
-        glVertex3f(x2, y2, z2);
-        glVertex3f(x1, y2, z2);
-
-        //Face gauche
-        glVertex3f(x1, y1, z1);    
-        glVertex3f(x1, y2, z1);  
-        glVertex3f(x1, y2, z2);
-        glVertex3f(x1, y1, z2);    
-
-        //Face droite
-        glVertex3f(x2, y1, z1);    
-        glVertex3f(x2, y2, z1);  
-        glVertex3f(x2, y2, z2);
-        glVertex3f(x2, y1, z2);  
-    glEnd();
 }
 
 
@@ -548,15 +465,8 @@ void portail(point p, char orientation)
 
     glColor3f(1,1,1); //Blanc   
 
-    ajouter_objet(nouveau_point(base1x-1, y, base1z-1), nouveau_point(base1x+1,y+8,base1z+1));
-    //parallelepipede(base1x-1, y, base1z-1, base1x+1,y+8,base1z+1);
-    //Deuxième pilier
-    ajouter_objet(nouveau_point(base2x-1, y, base2z-1), nouveau_point(base2x+1,y+8,base2z+1));
-    //parallelepipede(base2x-1, y, base2z-1, base2x+1,y+8,base2z+1);
-    //Partie supérieure
     parallelepipede(base1x-1, y+8, base1z-1, base2x+1,y+10,base2z+1);
-    
-    glColor3f(0,1,1); //Cyan       
+      
     //Enfin, la partie centrale où il faudra appliquer la texture
     glBegin(GL_QUADS);
         glVertex3f(base1x, y, base1z);    
@@ -564,8 +474,36 @@ void portail(point p, char orientation)
         glVertex3f(base2x, y+9, base2z);
         glVertex3f(base2x, y, base2z);
     glEnd();
+ 
+}
+
+void ajouter_pilier_portail(point p, char orientation)
+{
+    int x1 = p.x;
+    int y = p.y;
+    int z1 = p.z;
+
+    float base1x, base1z, base2x, base2z;
+    if (orientation == 'x')
+    {    
+        base1x = x1-5;
+        base1z = z1;
+        base2x = x1+5;
+        base2z = z1;
+    }
+    else
+    {
+        base1x = x1;
+        base1z = z1-5;
+        base2x = x1;
+        base2z = z1+5;
+    }
 
     glColor3f(1,1,1); //Blanc   
+
+    ajouter_objet(nouveau_point(base1x-1, y, base1z-1), nouveau_point(base1x+1,y+8,base1z+1));
+    //Deuxième pilier
+    ajouter_objet(nouveau_point(base2x-1, y, base2z-1), nouveau_point(base2x+1,y+8,base2z+1));
 
 }
 
@@ -612,58 +550,3 @@ int min(int x1, int x2, int x3)
             return x2;
         else return x3;
 }
-
-// void afficher_cubemap()
-// {
-//     int t = 500;
-//     int n = 1;
-
-//     glBindTexture(GL_TEXTURE_2D, tex_skybox[0]);
-//     glBegin(GL_TRIANGLE_STRIP);			// X Négatif		
-//         glTexCoord3f(-n,-n,-n); glVertex3f(-t,-t,-t); 	
-//         glTexCoord3f(-n,n,-n); glVertex3f(-t,t,-t);
-//         glTexCoord3f(-n,-n,n); glVertex3f(-t,-t,t);
-//         glTexCoord3f(-n,n,n); glVertex3f(-t,t,t);
-//     glEnd();
-    
-//     glBindTexture(GL_TEXTURE_2D, tex_skybox[1]);
-//     glBegin(GL_TRIANGLE_STRIP);			// X Positif
-//         glTexCoord3f(n, -n,-n); glVertex3f(t,-t,-t);
-//         glTexCoord3f(n,-n,n); glVertex3f(t,-t,t);
-//         glTexCoord3f(n,n,-n); glVertex3f(t,t,-t); 
-//         glTexCoord3f(n,n,n); glVertex3f(t,t,t); 	
-//     glEnd();
-    
-//     glBindTexture(GL_TEXTURE_2D, tex_skybox[2]);
-//     glBegin(GL_TRIANGLE_STRIP);			// Y Négatif	
-//         glTexCoord3f(-n,-n,-n); glVertex3f(-t,-t,-t);
-//         glTexCoord3f(-n,-n,n); glVertex3f(-t,-t,t);
-//         glTexCoord3f(n, -n,-n); glVertex3f(t,-t,-t);
-//         glTexCoord3f(n,-n,n); glVertex3f(t,-t,t);
-//     glEnd();
-    
-//     glBindTexture(GL_TEXTURE_2D, tex_skybox[3]);
-//     glBegin(GL_TRIANGLE_STRIP);			// Y Positif		
-//         glTexCoord3f(-n,n,-n); glVertex3f(-t,t,-t);
-//         glTexCoord3f(n,n,-n); glVertex3f(t,t,-t); 
-//         glTexCoord3f(-n,n,n); glVertex3f(-t,t,t);
-//         glTexCoord3f(n,n,n); glVertex3f(t,t,t); 	
-//     glEnd();
-    
-//     glBindTexture(GL_TEXTURE_2D, tex_skybox[4]);
-//     glBegin(GL_TRIANGLE_STRIP);			// Z Négatif		
-//         glTexCoord3f(-n,-n,-n); glVertex3f(-t,-t,-t);
-//         glTexCoord3f(n, -n,-n); glVertex3f(t,-t,-t);
-//         glTexCoord3f(-n,n,-n); glVertex3f(-t,t,-t);
-//         glTexCoord3f(n,n,-n); glVertex3f(t,t,-t); 
-//     glEnd();
-    
-//     glBindTexture(GL_TEXTURE_2D, tex_skybox[5]);
-//     glBegin(GL_TRIANGLE_STRIP);			// Z Positif	
-//         glTexCoord3f(-n,-n,n); glVertex3f(-t,-t,t);
-//         glTexCoord3f(-n,n,n); glVertex3f(-t,t,t);
-//         glTexCoord3f(n,-n,n); glVertex3f(t,-t,t);
-//         glTexCoord3f(n,n,n); glVertex3f(t,t,t); 	
-//     glEnd();
-//     glDepthMask(GL_TRUE);
-// }

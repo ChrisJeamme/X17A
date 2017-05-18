@@ -211,6 +211,18 @@ void maj_position_boule()
     maj_vecteur_vitesse(); //on récupere le vecteur vitesse
     bx+=vx; //on ajoute la composante x de la vitesse a la position de la boule en x
     bz+=vz; //pareil que pour x
+    
+    //Test de fin du niveau
+    float a_bx = bx - goal.x;
+    float a_by = by - goal.y - brayon;
+    float a_bz = bz - goal.z;
+    float distance_arrivee = sqrt(a_bx*a_bx + a_by*a_by + a_bz*a_bz);
+    printf("%f\n",distance_arrivee);
+    if (distance_arrivee <= brayon)
+    {
+        niveau_superieur();
+    }
+
 }
 
 /*Met a jour la position de l'observateur*/

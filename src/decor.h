@@ -146,11 +146,7 @@ void chargementTexture(GLuint* texture, char* chemin);
 
 void chargerTextureCubemap(GLuint* texture, char *x_pos_file, char *x_neg_file, char *y_pos_file, char *y_neg_file, char *z_pos_file, char *z_neg_file);
 
-void trace_grille(int n);
-
 void afficherText(float x, float y, int r, int g, int b, const char *texte);
-
-void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2);
 
 void chargementTexture(GLuint* texture, char* chemin);
 
@@ -160,6 +156,8 @@ point nouveau_point(int x, int y, int z);
 void parallelepipede(int x1, int y1, int z1, int x2, int y2, int z2);
 
 void portail(point p, char orientation);
+
+void ajouter_pilier_portail(point p, char orientation);
 
 /*maximum entre 3 entiers*/
 int max(int x1, int x2, int x3);
