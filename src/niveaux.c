@@ -97,6 +97,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                         //Allocation de la mémoire pour le tableau de plateforme de ce niveau
 
                         plateforme_niveau[numero_niveau] = NULL;
+                        printf("Plateformes sur ce niveau : %d",nombre_plateforme_niveau[numero_niveau]);
                         plateforme_niveau[numero_niveau] = (plateforme*) malloc(sizeof(plateforme)*nombre_plateforme_niveau[numero_niveau]);
                         for(j=0; j<nombre_plateforme_niveau[numero_niveau]; j++)
                         {

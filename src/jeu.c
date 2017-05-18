@@ -153,7 +153,7 @@ void definir_niveau()
     // On ajoute chaque plateforme de saut
     for(i=0; i<nombre_saut_niveau[num_niveau]; i++)
     {
-        ajouter_saut_charge(plateforme_niveau[num_niveau][i]);
+        ajouter_saut_charge(saut_niveau[num_niveau][i]);
     }
 
     //On fixe le point de départ
