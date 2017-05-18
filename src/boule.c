@@ -1,61 +1,79 @@
 #include "boule.h"
 
+int collision_boule_une_plateforme(plateforme p, int type)
+{
+    //On récupère 3 points qui forment la plateforme
+    int x1 = p.p1.x;
+    int y1 = p.p1.y;
+    int z1 = p.p1.z;
+
+    int x2 = p.p2.x;
+    int y2 = p.p2.y;
+    int z2 = p.p2.z;
+
+    int x3 = p.p3.x;
+    int y3 = p.p3.y;
+    int z3 = p.p3.z;
+
+    //On regarde la position de la boule en x et z par rapport à la plate-forme
+    if ((bx < min(x1,x2,x3) )||( bx > max(x1,x2,x3) )||( bz < min(z1,z2,z3) )||( bz > max(z1,z2,z3)))
+        return 0;    //si elle est pas au-dessus, on vérifie avec la plateforme suivante
+
+    //Vecteur AB
+    float ABx = x1 - x2;
+    float ABy = y1 - y2;
+    float ABz = z1 - z2;
+
+    //Vecteur AC
+    float ACx = x3 - x2;
+    float ACy = y3 - y2;
+    float ACz = z3 - z2;
+
+    //Produit vectoriel pour avoir vecteur normal au plan (ABC): 
+    float a = ABy*ACz - ABz*ACy;
+    float b = ABz*ACx - ABx*ACz;
+    float c = ABx*ACy - ABy*ACx;
+    float d = -(a*x1 + b*y1 + c*z1); //car (x1,y1,z1) appartient au plan
+
+    //Vecteur (A, centre de la boule)
+    float Abx = bx - x1; 
+    float Aby = by - y1; 
+    float Abz = bz - z1;
+
+    //On calcule la distance entre la boule et la plateforme
+    float distance = fabs((Abx*a + Aby*b + Abz*c)/sqrt(a*a + b*b + c*c));
+
+    if (distance > brayon) //La boule est au dessus ou en dessous de la platforme mais ne la touche pas
+        return 0;   //On vérifie avec une autre plate-forme
+    else //On est sur la plate-forme
+    {
+        if (type == 1) //plate-forme basique
+        {            
+            if (y1 != y2 || y1 != y3)   //Si la plate-forme n'est pas plate
+                ajouter_pente(a,b,c);   //On ajoute la pente aux vecteurs de la boule
+            by = ((-a*bx-c*bz-d)/b)+brayon; //On place la boule sur la plate-forme
+        }
+        else //plate-forme saut
+        {
+            ay = 0.4;
+        }
+        return 1;
+    }
+}
+
 /*Calcule si la boule est en collision avec un des plans*/
-int collision_boule_plateforme()
+int collision_boule_plateformes()
 {
     int i;
     for (i=0; i<nb_plateformes; i++) //On parcourt les plateforme dans le tableau
     {
-        //On récupère 3 points qui forment la plateforme
-        int x1 = tab_plateformes[i].p1.x;
-        int y1 = tab_plateformes[i].p1.y;
-        int z1 = tab_plateformes[i].p1.z;
-
-        int x2 = tab_plateformes[i].p2.x;
-        int y2 = tab_plateformes[i].p2.y;
-        int z2 = tab_plateformes[i].p2.z;
-
-        int x3 = tab_plateformes[i].p3.x;
-        int y3 = tab_plateformes[i].p3.y;
-        int z3 = tab_plateformes[i].p3.z;
-
-        //On regarde la position de la boule en x et z par rapport à la plate-forme
-        if ((bx < min(x1,x2,x3) )||( bx > max(x1,x2,x3) )||( bz < min(z1,z2,z3) )||( bz > max(z1,z2,z3)))
-           continue;    //si elle est pas au-dessus, on vérifie avec la plateforme suivante
-
-        //Vecteur AB
-        float ABx = x1 - x2;
-        float ABy = y1 - y2;
-        float ABz = z1 - z2;
-
-        //Vecteur AC
-        float ACx = x3 - x2;
-        float ACy = y3 - y2;
-        float ACz = z3 - z2;
-
-        //Produit vectoriel pour avoir vecteur normal au plan (ABC): 
-        float a = ABy*ACz - ABz*ACy;
-        float b = ABz*ACx - ABx*ACz;
-        float c = ABx*ACy - ABy*ACx;
-        float d = -(a*x1 + b*y1 + c*z1); //car (x1,y1,z1) appartient au plan
-
-        //Vecteur (A, centre de la boule)
-        float Abx = bx - x1; 
-        float Aby = by - y1; 
-        float Abz = bz - z1;
-
-        //On calcule la distance entre la boule et la plateforme
-        float distance = fabs((Abx*a + Aby*b + Abz*c)/sqrt(a*a + b*b + c*c));
-
-        if (distance > brayon) //La boule est au dessus ou en dessous de la platforme mais ne la touche pas
-            continue;   //On vérifie avec une autre plate-forme
-        else //On est sur la plate-forme
-        {
-            if (y1 != y2 || y1 != y3)   //Si la plate-forme n'est pas plate
-                ajouter_pente(a,b,c);   //On ajoute la pente aux vecteurs de la boule
-            by = ((-a*bx-c*bz-d)/b)+brayon; //On place la boule sur la plate-forme
-            return 1; //On renvoit que la boule est sur une plate-forme
-        }
+        if (collision_boule_une_plateforme(tab_plateformes[i], 1))
+            return 1; //La boule est en collision avec une plateforme basique
+    }
+    for (i=0; i<nb_sauts; i++)
+    {
+        if (collision_boule_une_plateforme(tab_sauts[i], 2))
+            return 2;
     }
     return 0; //On a trouvé aucun plate-forme telle que la boule soit en collision. On renvoie 0.
 }
@@ -95,6 +113,7 @@ int collision_boule_face(int x1, int z1, int x2, int z2)
             }
             if (bz >= zmin && bz <= zmax)
             {
+                vx = -vx;
                 return 1;
             }
             else 
@@ -120,9 +139,11 @@ int collision_boule_face(int x1, int z1, int x2, int z2)
             }
             if (bx >= xmin && bx <= xmax)
             {
+                vz = -vz;
                 return 1;
             }
-            else return 0;
+            else 
+                return 0;
         }
         else 
             return 0;
@@ -169,16 +190,21 @@ void maj_vecteur_vitesse()
 /*Met a jour la postion de la boule*/
 void maj_position_boule()
 {
-    if (!collision_boule_plateforme()) //La boule n'est pas en collision avec une plateforme
+    int type_plateforme = collision_boule_plateformes();
+    if (type_plateforme == 0) //La boule n'est pas en collision avec une plateforme
     {
         fx = fz = 0; //Plus de frottements
         by+= vy; //On modifie la position en fonction du vecteur vitesse en y (la gravité entre en jeu !)
     }
-    else
+    else if (type_plateforme == 1) //Plate forme basique
     { 
         fx = -vx*0.0005; //Frottements de la plateforme
         fz = -vz*0.0005;
         vy = 0; //On est sur une plate-forme, il ne faut pas descendre en dessous
+    }
+    else //Plateforme de saut
+    {
+        by += ay;
     }
     maj_vecteur_vitesse(); //on récupere le vecteur vitesse
     bx+=vx; //on ajoute la composante x de la vitesse a la position de la boule en x

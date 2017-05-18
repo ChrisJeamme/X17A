@@ -6,8 +6,8 @@
 #include <math.h>
 #include "GL/gl.h"
 #include "GL/glut.h"
-#include "decor.h"
 #include "boule.h"
+#include "decor.h"
 
 void GererClavier(unsigned char touche, int x, int y);
 void GestionSpecial(int key, int x, int y);

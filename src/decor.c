@@ -40,95 +40,98 @@ void chargerTextureCubemap(GLuint* texture, char *x_pos_file, char *x_neg_file, 
         fprintf(stderr,"Erreur de chargement de texture\n");
 }
 
+void afficher_la_plateforme(plateforme p)
+{
+//On récupère les coordonnées des 4 points qui définissent la plateforme
+    int x1 = p.p1.x;
+    int y1 = p.p1.y;
+    int z1 = p.p1.z;
+
+    int x2 = p.p2.x;
+    int y2 = p.p2.y;
+    int z2 = p.p2.z;
+
+    int x3 = p.p3.x;
+    int y3 = p.p3.y;
+    int z3 = p.p3.z;
+
+    int x4 = p.p4.x;
+    int y4 = p.p4.y;
+    int z4 = p.p4.z;
+
+
+    glBegin(GL_QUADS);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+
+    int distancex = ((x1>=x3)?x1-x3:x3-x1);
+    int distancez = ((z1>=z3)?z1-z3:z3-z1);
+
+    if(distancex==0)
+        distancex=1;
+    if(distancez==0)
+        distancez=1;
+
+    //Face dessus
+    glColor3f(0.7,0,0); 
+    glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
+    glTexCoord2i(0,distancez/10); glVertex3f(x2, y2, z2);    
+    glColor3f(0.4,0,0); 
+    glTexCoord2i(distancex/10,distancez/10); glVertex3f(x3, y3, z3);
+    glTexCoord2i(distancex/10,0); glVertex3f(x4, y4, z4);
+
+    glColor3f(0.1,0,0);  //Blanc
+
+    //Bord 1
+    glVertex3f(x1, y1, z1);    
+    glVertex3f(x2, y2, z2);
+    glVertex3f(x2, y2-2, z2);
+    glVertex3f(x1, y1-2, z1);
+
+    //Bord 2
+    glVertex3f(x2, y2, z2);    
+    glVertex3f(x3, y3, z3);
+    glVertex3f(x3, y3-2, z3);
+    glVertex3f(x2, y2-2, z2);
+
+    //Bord 3
+    glVertex3f(x3, y3, z3);    
+    glVertex3f(x4, y4, z4);
+    glVertex3f(x4, y4-2, z4);
+    glVertex3f(x3, y3-2, z3);
+
+    //Bord 4
+    glVertex3f(x4, y4, z4);    
+    glVertex3f(x1, y1, z1);
+    glVertex3f(x1, y1-2, z1);
+    glVertex3f(x4, y4-2, z4);
+
+    glColor3f(0,0,0); //Noir      
+
+    //Face du dessous 
+    glVertex3f(x1, y1-2, z1);    
+    glVertex3f(x2, y2-2, z2);
+    glVertex3f(x3, y3-2, z3);
+    glVertex3f(x4, y4-2, z4);
+
+    glColor3f(1,1,1); //Blanc   
+
+    glEnd();
+}
+
+
 /*Permet d'afficher toutes les plateformes*/
 void afficher_plateformes()
 {
     int i;
     for (i=0; i<nb_plateformes; i++) //Parcourt toutes les plateformes 
     {
-        //On récupère les coordonnées des 4 points qui définissent la plateforme
-        int x1 = tab_plateformes[i].p1.x;
-        int y1 = tab_plateformes[i].p1.y;
-        int z1 = tab_plateformes[i].p1.z;
-
-        int x2 = tab_plateformes[i].p2.x;
-        int y2 = tab_plateformes[i].p2.y;
-        int z2 = tab_plateformes[i].p2.z;
-
-        int x3 = tab_plateformes[i].p3.x;
-        int y3 = tab_plateformes[i].p3.y;
-        int z3 = tab_plateformes[i].p3.z;
-
-        int x4 = tab_plateformes[i].p4.x;
-        int y4 = tab_plateformes[i].p4.y;
-        int z4 = tab_plateformes[i].p4.z;
-
-
-        glBegin(GL_QUADS);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-
-        int distancex = ((x1>=x3)?x1-x3:x3-x1);
-        int distancez = ((z1>=z3)?z1-z3:z3-z1);
-
-        if(distancex==0)
-            distancex=1;
-        if(distancez==0)
-            distancez=1;
-
-        // printf("(x1>x3)?%d donc %d\n",x1>x3, (x1>x3)?x1-x3:x3-x1);
-        // printf("(z1>z3)?%d donc %d\n",z1>z3, (z1>z3)?z1-z3:z3-z1);
-        // printf("x1=%d x3=%d\n",x1,x3);
-        // printf("z1=%d z3=%d\n",z1,z3);
-        // printf("dis(X) = %d\n",distancex);
-        // printf("dis(Z) = %d\n",distancez);
-
-        //Face dessus
-        glColor3f(0.7,0,0); 
-        glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
-        glTexCoord2i(0,distancez/10); glVertex3f(x2, y2, z2);    
-        glColor3f(0.4,0,0); 
-        glTexCoord2i(distancex/10,distancez/10); glVertex3f(x3, y3, z3);
-        glTexCoord2i(distancex/10,0); glVertex3f(x4, y4, z4);
-
-        glColor3f(0.1,0,0);  //Blanc
-
-        //Bord 1
-        glVertex3f(x1, y1, z1);    
-        glVertex3f(x2, y2, z2);
-        glVertex3f(x2, y2-2, z2);
-        glVertex3f(x1, y1-2, z1);
-
-        //Bord 2
-        glVertex3f(x2, y2, z2);    
-        glVertex3f(x3, y3, z3);
-        glVertex3f(x3, y3-2, z3);
-        glVertex3f(x2, y2-2, z2);
-
-        //Bord 3
-        glVertex3f(x3, y3, z3);    
-        glVertex3f(x4, y4, z4);
-        glVertex3f(x4, y4-2, z4);
-        glVertex3f(x3, y3-2, z3);
-
-        //Bord 4
-        glVertex3f(x4, y4, z4);    
-        glVertex3f(x1, y1, z1);
-        glVertex3f(x1, y1-2, z1);
-        glVertex3f(x4, y4-2, z4);
-
-        glColor3f(0,0,0); //Noir      
-
-        //Face du dessous 
-        glVertex3f(x1, y1-2, z1);    
-        glVertex3f(x2, y2-2, z2);
-        glVertex3f(x3, y3-2, z3);
-        glVertex3f(x4, y4-2, z4);
-
-        glColor3f(1,1,1); //Blanc   
-
-        glEnd();
+        afficher_la_plateforme(tab_plateformes[i]);
+    }
+    for (i=0; i<nb_sauts; i++)
+    {
+        afficher_la_plateforme(tab_sauts[i]);
     }
 }
 
@@ -309,6 +312,18 @@ void ajouter_plateforme(point p1, point p2, point p3, point p4)
     p.p4 = p4;
     tab_plateformes[nb_plateformes++] = p;
 }
+
+/*Ajoute une plateforme de saut*/
+void ajouter_saut(point p1, point p2, point p3, point p4)
+{
+    plateforme p;
+    p.p1 = p1;
+    p.p2 = p2;
+    p.p3 = p3;
+    p.p4 = p4;
+    tab_sauts[nb_sauts++] = p;
+}
+
 
 /*Ajoute un objet dans le monde*/
 void ajouter_objet(point p1, point p2)
