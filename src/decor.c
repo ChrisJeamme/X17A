@@ -426,6 +426,8 @@ void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2)
 
 void parallelepipede(int x1, int y1, int z1, int x2, int y2, int z2)
 {
+    glColor3f(1,1,1); //Blanc   
+    
         glBegin(GL_QUADS);
 
         //Face 1
@@ -469,12 +471,49 @@ void parallelepipede(int x1, int y1, int z1, int x2, int y2, int z2)
 }
 
 
-void portail(int x1, int y1, int z1)
+//On fournit un point (l'arrivée) et un caractère (x ou z) pour l'orientation
+void portail(point p, char orientation)
 {
-    parallelepipede(x1,y1,z1, x1+2, y1+7, z1+2);
-    parallelepipede(x1+12,y1,z1, x1+14, y1+7, z1+2);
-    parallelepipede(x1,y1+7,z1, x1+14, y1+9, z1+2);
+    int x1 = p.x;
+    int y = p.y;
+    int z1 = p.z;
+
+    float base1x, base1z, base2x, base2z;
+    if (orientation == 'x')
+    {    
+        base1x = x1-5;
+        base1z = z1;
+        base2x = x1+5;
+        base2z = z1;
+    }
+    else
+    {
+        base1x = x1;
+        base1z = z1-5;
+        base2x = x1;
+        base2z = z1+5;
+    }
+
+    glColor3f(1,1,1); //Blanc   
+
+    //Premier pilier
+    parallelepipede(base1x-1, y, base1z-1, base1x+1,y+8,base1z+1);
+    //Deuxième pilier
+    parallelepipede(base2x-1, y, base2z-1, base2x+1,y+8,base2z+1);
+    //Partie supérieure
+    parallelepipede(base1x-1, y+8, base1z-1, base2x+1,y+10,base2z+1);
     
+    glColor3f(0,1,1); //Cyan       
+    //Enfin, la partie centrale où il faudra appliquer la texture
+    glBegin(GL_QUADS);
+        glVertex3f(base1x, y, base1z);    
+        glVertex3f(base1x, y+9, base1z);
+        glVertex3f(base2x, y+9, base2z);
+        glVertex3f(base2x, y, base2z);
+    glEnd();
+
+    glColor3f(1,1,1); //Blanc   
+
 }
 
 

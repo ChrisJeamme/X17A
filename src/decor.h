@@ -114,7 +114,7 @@ point nouveau_point(int x, int y, int z);
 
 void parallelepipede(int x1, int y1, int z1, int x2, int y2, int z2);
 
-void portail(int x1, int y1, int z1);
+void portail(point p, char orientation);
 
 
 float rand_0_1();
