@@ -44,35 +44,17 @@ void fixer_nombre_niveaux()
 
 void initialiser_tableaux_niveaux()
 {
-    int i;
-
     if(nombre_niveau==0)
     {
         fprintf(stderr,"Erreur: 0 niveaux trouvés\n");
         exit(-1);
     }
 
-    for(i=0; i<nombre_niveau; i++)
-    {
-        //Plateformes
-        plateforme_niveau[i] = NULL;
-        plateforme_niveau[i] = malloc(sizeof(plateforme)*NOMBRE_MAX_PLATEFORMES);
-        if(plateforme_niveau[i]==NULL)
-        {
-            fprintf(stderr,"Problème d'allocation de mémoire (Plateformes)\n");
-            exit(-1);
-        }
-
-        //Obstacles
-        // obstacle_niveau[i] = NULL;
-        // obstacle_niveau[i] = malloc(sizeof(obstacle)*NOMBRE_MAX_DECOR);
-        // if(obstacle_niveau[i]==NULL)
-        // {
-        //     fprintf(stderr,"Problème d'allocation de mémoire (Obstacle)\n");
-        //     exit(-1);
-        // }
-    }
-    
+    point_depart_niveau = (point*) malloc(sizeof(point*)*(nombre_niveau+1));
+    point_arrivee_niveau = (point*) malloc(sizeof(point*)*(nombre_niveau+1));
+    nombre_plateforme_niveau = (int*) malloc(sizeof(int*)*(nombre_niveau+1));
+    nombre_obstacle_niveau = (int*) malloc(sizeof(int*)*(nombre_niveau+1));    
+    plateforme_niveau = (plateforme**) malloc(sizeof(plateforme**)*(nombre_niveau+1));
 }
 
 void importer_niveau(char* nom_fichier, int numero_niveau)
@@ -82,7 +64,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
     char path[20] = "./levels/";
     char etat = 'w'; 
     strcat(path,nom_fichier);
-    int x,y,z;
+    int j,x,y,z;
     int num_plat = 0; //Itérateur sur les plateformes
 
     fichier = fopen(path, "r");
@@ -93,7 +75,6 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
     }
     else
     {
-        
         while(fgets(chaine, 500, fichier) != NULL) // On lit le fichier tant qu'on ne reçoit pas d'erreur (NULL)
         {
             // \n => Ligne ignoré
@@ -107,13 +88,31 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                     if(etat=='d'||etat=='a'||etat=='p'||etat=='o')
                         etat = chaine[1];
                     if(etat=='p')
-                        nombre_plateforme_niveau[numero_niveau] = chaine[13]-'0';
+                    {
+                        nombre_plateforme_niveau[numero_niveau] = (chaine[13]-'0')*10+chaine[14]-'0';
+
+                        //Allocation de la mémoire pour le tableau de plateforme de ce niveau
+
+                        plateforme_niveau[numero_niveau] = NULL;
+                        plateforme_niveau[numero_niveau] = (plateforme*) malloc(sizeof(plateforme)*nombre_plateforme_niveau[numero_niveau]);
+                        for(j=0; j<nombre_plateforme_niveau[numero_niveau]; j++)
+                        {
+                            plateforme p;
+                            p.p1 = nouveau_point(0,0,0);  p.p2 = nouveau_point(0,0,0);  p.p3 = nouveau_point(0,0,0);  p.p4 = nouveau_point(0,0,0);
+                            plateforme_niveau[numero_niveau][j] = p;
+                        }
+                        if(plateforme_niveau[numero_niveau]==NULL)
+                        {
+                            fprintf(stderr,"Problème d'allocation de mémoire (Plateformes)\n");
+                            exit(-1);
+                        }
+                    }
                     if(etat=='o')
-                        nombre_obstacle_niveau[numero_niveau] = chaine[11]-'0';
+                        nombre_obstacle_niveau[numero_niveau] = (chaine[11]-'0')*10+chaine[12]-'0';
                 }
                 else    //On lit des données
                 {
-                    // Données
+                   // Données
                     switch(etat)
                     {
                     case 'd': //Coordonnées de départ

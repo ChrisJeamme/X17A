@@ -16,6 +16,8 @@
 #define NOMBRE_MAX_OBJETS 100
 #define NOMBRE_MAX_DECOR 500
 
+#define TAILLE 50 
+
 typedef struct struct_point
 {
     int x;
@@ -80,11 +82,11 @@ int nSousmenu1, nSousmenu2, nMenuprincipal, nSousmenuChoixNiveau; // Numéros (i
 //Pour les niveaux
 
 int nombre_niveau;
-point point_depart_niveau[100];
-point point_arrivee_niveau[100];
-int nombre_plateforme_niveau[100];
-int nombre_obstacle_niveau[100];
-plateforme *plateforme_niveau[100];
+point *point_depart_niveau;
+point *point_arrivee_niveau;
+int *nombre_plateforme_niveau;
+int *nombre_obstacle_niveau;
+plateforme **plateforme_niveau;
 
 //Prototypes
 
