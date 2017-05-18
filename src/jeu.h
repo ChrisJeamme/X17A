@@ -11,6 +11,7 @@
 #include "entree.h"
 #include "gui.h"
 #include "menu.h"
+#include "niveaux.h"
 
 #define HAUTEUR_FENETRE 800 
 #define LARGEUR_FENETRE 800
@@ -19,6 +20,9 @@
 #define SENS_INVERSE -1
 #define LARGEUR_ELEMENT_DECOR 50
 #define LIMITE_MAP 450
+#define TAILLE_SAVE 100
+#define NOMBRE_MAX_PLATEFORMES 100
+#define NOMBRE_MAX_DECOR 500
 
 void gestion_arguments(int argc, char** argv);
 void initGL();
@@ -32,6 +36,7 @@ void definir_niveau();
 void verification_limites();
 
 int no_texture;
+
 int num_niveau;
 
 #endif

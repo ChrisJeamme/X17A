@@ -1,4 +1,5 @@
 #include "jeu.h"
+#include "niveaux.h"
 
 int main(int argc, char** argv)
 {
@@ -7,8 +8,12 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     initGL();
 
+    importer_niveaux();
+    afficher_niveaux();
+    
     lancement();
 
+     
     return 0;
 }
 
