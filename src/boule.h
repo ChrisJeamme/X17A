@@ -7,8 +7,8 @@
 #include <math.h>
 #include "GL/gl.h"
 #include "GL/glut.h"
-#include "karbre.h"
 #include "decor.h"
+#include "karbre.h"
 
 //Rayon de la boule
 int brayon;
@@ -39,8 +39,12 @@ float fz;
 float dx;
 float dz;
 
+
+/*Renvoie vrai si la boule est en collision avec la plateforme*/
+int collision_boule_une_plateforme(plateforme p, int type);
+
 /*Calcule si la boule est en collision avec un des plan*/
-int collison_boule_plateforme();
+int collison_boule_plateformes();
 
 int collision_boule_objet();
 

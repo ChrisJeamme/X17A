@@ -96,19 +96,23 @@ void lancementJeu()
     gestionMenu();
     nb_plateformes = 0;
     nb_objets = 0;
+    nb_sauts = 0;
     definir_decor(LARGEUR_ELEMENT_DECOR);
 
     init_texture();
     definir_niveau();
 
-    point p1 = nouveau_point(0,0,0);
-    point p2 = nouveau_point(15,4,15);
 
     point p3 = nouveau_point(15,0,15);
     point p4 = nouveau_point(21,8, 23);
 
+    point p21 = nouveau_point(30, -20, -20);
+    point p22 = nouveau_point(30, -20, 20);
+    point p23 = nouveau_point(60, -20, 20);
+    point p24 = nouveau_point(60, -20, -20);
     //ajouter_objet(p1, p2);
     ajouter_objet(p3, p4);
+    ajouter_saut(p21,p22,p23,p24);
 
     glutDisplayFunc(Affichage);
     glutIdleFunc(Animer);

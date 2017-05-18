@@ -2,8 +2,8 @@
 #define _NIVEAUX_H_
 
 
-#include "jeu.h"
 #include "boule.h"
+#include "jeu.h"
 #include "decor.h"
 #include <dirent.h>
 #include <stdlib.h>

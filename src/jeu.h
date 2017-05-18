@@ -5,9 +5,9 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
+#include "boule.h"
 #include "decor.h"
 #include "karbre.h"
-#include "boule.h"
 #include "entree.h"
 #include "gui.h"
 #include "menu.h"

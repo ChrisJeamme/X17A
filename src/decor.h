@@ -9,9 +9,10 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
-#include "jeu.h"
+
 
 #define NOMBRE_MAX_PLATEFORMES 100
+#define NOMBRE_MAX_SAUTS 100
 #define NOMBRE_MAX_OBJETS 100
 #define NOMBRE_MAX_DECOR 500
 
@@ -60,6 +61,9 @@ int nb_plateformes;
 objet tab_objets[NOMBRE_MAX_OBJETS];
 int nb_objets;
 
+plateforme tab_sauts[NOMBRE_MAX_SAUTS];
+int nb_sauts;
+
 element_decor tab_decor[NOMBRE_MAX_DECOR];
 int nb_element_decor;
 
@@ -93,6 +97,9 @@ void ajouter_plateforme(point p1, point p2, point p3, point p4);
 /*Ajoute une plate-forme qui existe déjà au niveau*/
 void ajouter_plateforme_charge(plateforme p);
 
+/*Ajoute une plateforme de saut*/
+void ajouter_saut(point p1, point p2, point p3, point p4);
+
 /*Ajoute un objet dans le monde*/
 void ajouter_objet(point p1, point p2);
 
@@ -102,6 +109,8 @@ void afficher_objets();
 /*Ajoute un élément (pavé) au décor du dessous*/
 void ajouter_element_decor(point p1, point p2, point p3, point p4);
 
+/*Permet d'afficher une plateforme*/
+void afficher_la_plateforme(plateforme p);
 
 /*Permet d'afficher toutes les plateformes*/
 void afficher_plateformes();
