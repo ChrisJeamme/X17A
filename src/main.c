@@ -7,9 +7,6 @@ int main(int argc, char** argv)
     srand(time(NULL));
     glutInit(&argc, argv);
     initGL();
-
-    importer_niveaux();
-    afficher_niveaux();
     
     lancement();
 
