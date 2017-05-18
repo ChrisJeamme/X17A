@@ -37,12 +37,8 @@ void gestion_arguments(int argc, char** argv)
             //Gestion du niveau spécifié en argument
             if(strcmp(argv[i],"-lvl")==0 && i+1<argc)
             {
-                num_niveau=atoi(argv[++i]);
+                num_niveau=atoi(argv[++i])-1;
             }
-        }
-        if(num_niveau==0) //Pas d'argument ou atoi fail
-        {
-            num_niveau=1;
         }
     }
     else // Cas normal: Texture et niveau 1
@@ -129,68 +125,66 @@ void init_texture()
 
 void definir_niveau()
 {
-    if(num_niveau==1)
+    int i;
+    //On ajoute chaque plateforme
+    for(i=0; i<nombre_plateforme_niveau[num_niveau]; i++)
     {
-        point p11 = nouveau_point(-30, 0, -30);
-        point p12 = nouveau_point(-30, 0, 30);
-        point p13 = nouveau_point(30, 0, 30);
-        point p14 = nouveau_point(30, 0, -30);
-
-        point p21 = nouveau_point(30, -10, 30);
-        point p22 = nouveau_point(30, -20, 90);
-        point p23 = nouveau_point(90, -20, 90);
-        point p24 = nouveau_point(90, -10, 30);
-
-        point p31 = nouveau_point(30, 30, 150);
-        point p32 = nouveau_point(90, 30, 150);
-
-        ajouter_plateforme(p11, p12, p13, p14);
-        ajouter_plateforme(p21, p22, p23, p24);
-        ajouter_plateforme(p31, p22, p23, p32);
-
-        //Coordonnées du centre de la boule
-        bx = 0;
-        by = 50;
-        bz = 0;
+        ajouter_plateforme_charge(plateforme_niveau[num_niveau][i]);
     }
-    if(num_niveau==2)
-    {
-        point p11 = nouveau_point(-15, 0, -15);
-        point p12 = nouveau_point(-15, 0, 15);
-        point p13 = nouveau_point(15, 0, 15);
-        point p14 = nouveau_point(15, 0, -15);
-        ajouter_plateforme(p11, p12, p13, p14);
 
-        point p21 = nouveau_point(80, 0, -15);
-        point p22 = nouveau_point(80, 0, 15);
-        point p23 = nouveau_point(50, 0, 15);
-        point p24 = nouveau_point(50, 0, -15);
-        ajouter_plateforme(p21, p22, p23, p24);
+    //On fixe le point de départ
+    bx = point_depart_niveau[num_niveau].x;
+    by = point_depart_niveau[num_niveau].y;
+    bz = point_depart_niveau[num_niveau].z;
 
-        point p31 = nouveau_point(50, 0, 0);
-        point p32 = nouveau_point(50, 0, 1);
-        point p33 = nouveau_point(15, 0, 1);
-        point p34 = nouveau_point(15, 0, 0);
-        ajouter_plateforme(p31, p32, p33, p34);
+    
+    printf("B = (%d,%d,%d)\n",point_depart_niveau[num_niveau].x,point_depart_niveau[num_niveau].y,point_depart_niveau[num_niveau].z);
+    printf("num_niveau=%d\n",num_niveau);
 
-        //Coordonnées du centre de la boule
-        bx = 0;
-        by = 15;
-        bz = 0;
-    }
-    if(num_niveau==3)
-    {
-        point p11 = nouveau_point(-30, 0, -30);
-        point p12 = nouveau_point(-30, 0, 30);
-        point p13 = nouveau_point(30, 0, 30);
-        point p14 = nouveau_point(30, 0, -30);
-        ajouter_plateforme(p11, p12, p13, p14);
+    //On fixe le point d'arrivée
+    goal = nouveau_point(   point_arrivee_niveau[num_niveau].x,
+                            point_arrivee_niveau[num_niveau].y,
+                            point_arrivee_niveau[num_niveau].z);
 
-        //Coordonnées du centre de la boule
-        bx = 0;
-        by = 50;
-        bz = 0;
-    }
+    
+    // if(num_niveau==2)
+    // {
+    //     point p11 = nouveau_point(-15, 0, -15);
+    //     point p12 = nouveau_point(-15, 0, 15);
+    //     point p13 = nouveau_point(15, 0, 15);
+    //     point p14 = nouveau_point(15, 0, -15);
+    //     ajouter_plateforme(p11, p12, p13, p14);
+
+    //     point p21 = nouveau_point(80, 0, -15);
+    //     point p22 = nouveau_point(80, 0, 15);
+    //     point p23 = nouveau_point(50, 0, 15);
+    //     point p24 = nouveau_point(50, 0, -15);
+    //     ajouter_plateforme(p21, p22, p23, p24);
+
+    //     point p31 = nouveau_point(50, 0, 0);
+    //     point p32 = nouveau_point(50, 0, 1);
+    //     point p33 = nouveau_point(15, 0, 1);
+    //     point p34 = nouveau_point(15, 0, 0);
+    //     ajouter_plateforme(p31, p32, p33, p34);
+
+    //     //Coordonnées du centre de la boule
+    //     bx = 0;
+    //     by = 15;
+    //     bz = 0;
+    // }
+    // if(num_niveau==3)
+    // {
+    //     point p11 = nouveau_point(-30, 0, -30);
+    //     point p12 = nouveau_point(-30, 0, 30);
+    //     point p13 = nouveau_point(30, 0, 30);
+    //     point p14 = nouveau_point(30, 0, -30);
+    //     ajouter_plateforme(p11, p12, p13, p14);
+
+    //     //Coordonnées du centre de la boule
+    //     bx = 0;
+    //     by = 50;
+    //     bz = 0;
+    // }
 }
 
 //Fonction Affichage pour flutDisplayFunc
