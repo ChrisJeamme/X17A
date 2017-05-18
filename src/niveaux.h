@@ -20,5 +20,6 @@ void fixer_nombre_niveaux();
 void initialiser_tableaux_niveaux();
 void importer_niveau(char* nom_fichier, int numero_niveau);
 void afficher_niveaux();
+void gestion_erreur_lecture_int(int niveau);
 
 #endif
