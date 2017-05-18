@@ -295,6 +295,12 @@ void ajouter_plateforme(point p1, point p2, point p3, point p4)
     tab_plateformes[nb_plateformes++] = p;
 }
 
+/*Ajoute une plate-forme qui existe déjà au niveau*/
+void ajouter_plateforme_charge(plateforme p)
+{
+    tab_plateformes[nb_plateformes++] = p;
+}
+
 void ajouter_element_decor(point p1, point p2, point p3, point p4)
 {
     element_decor p;
