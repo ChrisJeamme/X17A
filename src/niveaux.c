@@ -54,9 +54,11 @@ void initialiser_tableaux_niveaux()
     point_arrivee_niveau = (point*) malloc(sizeof(point)*(nombre_niveau+1));
     nombre_plateforme_niveau = (int*) malloc(sizeof(int)*(nombre_niveau+1));
     nombre_saut_niveau = (int*) malloc(sizeof(int)*(nombre_niveau+1));
+    obstacle_niveau = (couple_points**) malloc(sizeof(couple_points*)*(nombre_niveau+1));
     orientation_arrive_niveau = (char*) malloc(sizeof(char)*(nombre_niveau+1));
     nombre_obstacle_niveau = (int*) malloc(sizeof(int)*(nombre_niveau+1));    
-    plateforme_niveau = (plateforme**) malloc(sizeof(plateforme*)*(nombre_niveau+1));
+    saut_niveau = (plateforme**) malloc(sizeof(plateforme*)*50);
+    plateforme_niveau = (plateforme**) malloc(sizeof(plateforme*)*50);
 }
 
 void gestion_erreur_lecture_int(int niveau)
@@ -103,20 +105,18 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                         etat = chaine[1];
                     if(etat=='p')
                     {
-                        if(strlen(chaine)<15)
+                        if(strlen(chaine)<13)
                         {
                             fprintf(stderr,"Problème dans le fichier du niveau %d\n",numero_niveau);
                             exit(-1);
                         }
 
                         nombre_plateforme_niveau[numero_niveau] = (chaine[13]-'0')*10+chaine[14]-'0';
-
-                        printf("Nombre de plateforme '%d' niveau %d\n",nombre_plateforme_niveau[numero_niveau],numero_niveau);
+                        
                         //gestion_erreur_lecture_int(numero_niveau);
 
                         //Allocation de la mémoire pour le tableau de plateforme de ce niveau
 
-                        plateforme_niveau[numero_niveau] = NULL;
                         printf("Plateformes sur ce niveau(%d) : %d\n",numero_niveau,nombre_plateforme_niveau[numero_niveau]);
                         
                         plateforme_niveau[numero_niveau] = (plateforme*) malloc(sizeof(plateforme)*nombre_plateforme_niveau[numero_niveau]);
@@ -135,7 +135,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                     }
                     if(etat=='s')
                     {
-                        if(strlen(chaine)<9)
+                        if(strlen(chaine)<7)
                         {
                             fprintf(stderr,"Problème dans le fichier du niveau %d\n",numero_niveau);
                             exit(-1);
@@ -145,16 +145,10 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
 
                         //gestion_erreur_lecture_int(numero_niveau);
 
-                        printf("chaine = %s; nombre_saut_niveau[numero_niveau]=%d",chaine,nombre_saut_niveau[numero_niveau]);
-
                         printf("Plateformes sauts sur ce niveau %d : %d\n",numero_niveau,nombre_saut_niveau[numero_niveau]);
                         //Allocation de la mémoire pour le tableau de sauts de ce niveau
 
-                        printf("LE PREMIER");
-                        saut_niveau[numero_niveau] = NULL;
                         saut_niveau[numero_niveau] = (plateforme*) malloc(sizeof(plateforme)*nombre_saut_niveau[numero_niveau]);
-
-                        printf("BON");
 
                         for(j=0; j<nombre_saut_niveau[numero_niveau]; j++)
                         {
@@ -170,7 +164,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                     }
                     if(etat=='o')
                     {
-                        if(strlen(chaine)<13)
+                        if(strlen(chaine)<11)
                         {
                             fprintf(stderr,"Problème dans le fichier du niveau %d\n",numero_niveau);
                             exit(-1);
@@ -178,7 +172,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                         
                         nombre_obstacle_niveau[numero_niveau] = (chaine[11]-'0')*10+chaine[12]-'0';
                         
-                        gestion_erreur_lecture_int(numero_niveau);
+                        //gestion_erreur_lecture_int(numero_niveau);
 
                         printf("Objets sur ce niveau : %d\n",nombre_obstacle_niveau[numero_niveau]);
                         
