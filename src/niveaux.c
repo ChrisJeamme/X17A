@@ -53,6 +53,7 @@ void initialiser_tableaux_niveaux()
     point_depart_niveau = (point*) malloc(sizeof(point*)*(nombre_niveau+1));
     point_arrivee_niveau = (point*) malloc(sizeof(point*)*(nombre_niveau+1));
     nombre_plateforme_niveau = (int*) malloc(sizeof(int*)*(nombre_niveau+1));
+    orientation_arrive_niveau = (int*) malloc(sizeof(int*)*(nombre_niveau+1));
     nombre_obstacle_niveau = (int*) malloc(sizeof(int*)*(nombre_niveau+1));    
     plateforme_niveau = (plateforme**) malloc(sizeof(plateforme**)*(nombre_niveau+1));
 }
@@ -66,6 +67,8 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
     strcat(path,nom_fichier);
     int j,x,y,z;
     int num_plat = 0; //Itérateur sur les plateformes
+    int num_plat_saut = 0; //Itérateur sur les plateformes de saut
+    int num_obstacle = 0; //Itérateur sur les objets obstacles
 
     fichier = fopen(path, "r");
 
@@ -85,11 +88,11 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                 {
                     etat = chaine[1];
 
-                    if(etat=='d'||etat=='a'||etat=='p'||etat=='o')
+                    if(etat=='d'||etat=='a'||etat=='p'||etat=='o'||etat=='s')
                         etat = chaine[1];
                     if(etat=='p')
                     {
-                        nombre_plateforme_niveau[numero_niveau] = (chaine[13]-'0')*10+chaine[14]-'0';
+                        nombre_plateforme_niveau[numero_niveau] = (chaine[18]-'0')*10+chaine[19]-'0';
 
                         //Allocation de la mémoire pour le tableau de plateforme de ce niveau
 
@@ -107,8 +110,47 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                             exit(-1);
                         }
                     }
+                    if(etat=='s')
+                    {
+                        nombre_saut_niveau[numero_niveau] = (chaine[13]-'0')*10+chaine[14]-'0';
+
+                        //Allocation de la mémoire pour le tableau de sauts de ce niveau
+
+                        saut_niveau[numero_niveau] = NULL;
+                        saut_niveau[numero_niveau] = (plateforme*) malloc(sizeof(plateforme)*nombre_saut_niveau[numero_niveau]);
+                        for(j=0; j<nombre_saut_niveau[numero_niveau]; j++)
+                        {
+                            plateforme p;
+                            p.p1 = nouveau_point(0,0,0);  p.p2 = nouveau_point(0,0,0);  p.p3 = nouveau_point(0,0,0);  p.p4 = nouveau_point(0,0,0);
+                            saut_niveau[numero_niveau][j] = p;
+                        }
+                        if(saut_niveau[numero_niveau]==NULL)
+                        {
+                            fprintf(stderr,"Problème d'allocation de mémoire (Sauts)\n");
+                            exit(-1);
+                        }
+                    }
                     if(etat=='o')
+                    {
                         nombre_obstacle_niveau[numero_niveau] = (chaine[11]-'0')*10+chaine[12]-'0';
+
+                        //Allocation de la mémoire pour le tableau d'obstacle de ce niveau
+
+                        obstacle_niveau[numero_niveau] = NULL;
+                        obstacle_niveau[numero_niveau] = (plateforme*) malloc(sizeof(plateforme)*nombre_obstacle_niveau[numero_niveau]);
+                        for(j=0; j<nombre_obstacle_niveau[numero_niveau]; j++)
+                        {
+                            couple_points couple;
+                            couple.p1 = nouveau_point(0,0,0);
+                            couple.p2 = nouveau_point(0,0,0);
+                            obstacle_niveau[numero_niveau][j] = couple;
+                        }
+                        if(obstacle_niveau[numero_niveau]==NULL)
+                        {
+                            fprintf(stderr,"Problème d'allocation de mémoire (Obstacles)\n");
+                            exit(-1);
+                        }
+                    }
                 }
                 else    //On lit des données
                 {
@@ -121,7 +163,8 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
 
                         break;
                     case 'a': //Coordonnées de l'arrivée
-                        sscanf(chaine, "(%d,%d,%d)",    &point_arrivee_niveau[numero_niveau].x,
+                        sscanf(chaine, "%c (%d,%d,%d)", &goal_orientation[numero_niveau],
+                                                        &point_arrivee_niveau[numero_niveau].x,
                                                         &point_arrivee_niveau[numero_niveau].y,
                                                         &point_arrivee_niveau[numero_niveau].z);
                         break;
@@ -141,8 +184,31 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                                                         &plateforme_niveau[numero_niveau][num_plat].p4.z);
                         num_plat++;
                         break;
+                    case 's': //Plateformes de saut
+                        sscanf(chaine, "(%d,%d,%d)(%d,%d,%d)(%d,%d,%d)(%d,%d,%d)",
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p1.x,
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p1.y,
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p1.z,
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p2.x,
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p2.y,
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p2.z,
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p3.x,
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p3.y,
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p3.z,
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p4.x,
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p4.y,
+                                                        &saut_niveau[numero_niveau][num_plat_saut].p4.z);
+                        num_plat_saut++;
+                        break;
                     case 'o': //Obstacles
-                        printf("(Pas encore d'obstacle)");
+                        sscanf(chaine, "(%d,%d,%d)(%d,%d,%d)",
+                                                        &obstacle_niveau[numero_niveau][num_obstacle].p1.x,
+                                                        &obstacle_niveau[numero_niveau][num_obstacle].p1.y,
+                                                        &obstacle_niveau[numero_niveau][num_obstacle].p1.z,
+                                                        &obstacle_niveau[numero_niveau][num_obstacle].p2.x,
+                                                        &obstacle_niveau[numero_niveau][num_obstacle].p2.y,
+                                                        &obstacle_niveau[numero_niveau][num_obstacle].p2.z);
+                        num_obstacle++;
                         break;
                     default:
                         fprintf(stderr,"Erreur d'état (chargement sauvegarde");

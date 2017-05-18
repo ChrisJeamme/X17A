@@ -40,6 +40,12 @@ typedef struct struct_plateforme
     point p4;
 } plateforme;
 
+typedef struct struct_couple_points
+{
+    point p1;
+    point p2;
+} couple_points;
+
 typedef struct struct_objet
 {
     point p1;
@@ -57,6 +63,8 @@ typedef struct struct_element_decor
     couleur couleur_cotes;
 } element_decor;
 
+//Les objets du niveau actuel
+
 plateforme tab_plateformes[NOMBRE_MAX_PLATEFORMES];
 int nb_plateformes;
 
@@ -69,7 +77,9 @@ int nb_sauts;
 element_decor tab_decor[NOMBRE_MAX_DECOR];
 int nb_element_decor;
 
+//Point d'arrivée
 point goal;
+char goal_orientation;
 
 //Texture plateformes
 GLuint tex_sol[3];
@@ -79,14 +89,18 @@ GLuint tex_skybox[6];
 
 int nSousmenu1, nSousmenu2, nMenuprincipal, nSousmenuChoixNiveau; // Numéros (identifiants) des menus
 
-//Pour les niveaux
+//Les niveaux chargé depuis les fichiers
 
 int nombre_niveau;
 point *point_depart_niveau;
 point *point_arrivee_niveau;
+int *orientation_arrive_niveau;
 int *nombre_plateforme_niveau;
+int *nombre_saut_niveau;
 int *nombre_obstacle_niveau;
 plateforme **plateforme_niveau;
+plateforme **saut_niveau;
+couple_points **obstacle_niveau;
 
 //Prototypes
 

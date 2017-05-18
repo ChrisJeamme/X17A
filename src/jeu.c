@@ -150,6 +150,12 @@ void definir_niveau()
         ajouter_plateforme_charge(plateforme_niveau[num_niveau][i]);
     }
 
+    // On ajoute chaque plateforme de saut
+    for(i=0; i<nombre_saut_niveau[num_niveau]; i++)
+    {
+        ajouter_saut_charge(plateforme_niveau[num_niveau][i]);
+    }
+
     //On fixe le point de départ
     bx = point_depart_niveau[num_niveau].x;
     by = point_depart_niveau[num_niveau].y;
@@ -159,47 +165,13 @@ void definir_niveau()
     goal = nouveau_point(   point_arrivee_niveau[num_niveau].x,
                             point_arrivee_niveau[num_niveau].y,
                             point_arrivee_niveau[num_niveau].z);
+    goal_orientation = orientation_arrive_niveau[num_niveau];
 
-
-    
-    // if(num_niveau==2)
-    // {
-    //     point p11 = nouveau_point(-15, 0, -15);
-    //     point p12 = nouveau_point(-15, 0, 15);
-    //     point p13 = nouveau_point(15, 0, 15);
-    //     point p14 = nouveau_point(15, 0, -15);
-    //     ajouter_plateforme(p11, p12, p13, p14);
-
-    //     point p21 = nouveau_point(80, 0, -15);
-    //     point p22 = nouveau_point(80, 0, 15);
-    //     point p23 = nouveau_point(50, 0, 15);
-    //     point p24 = nouveau_point(50, 0, -15);
-    //     ajouter_plateforme(p21, p22, p23, p24);
-
-    //     point p31 = nouveau_point(50, 0, 0);
-    //     point p32 = nouveau_point(50, 0, 1);
-    //     point p33 = nouveau_point(15, 0, 1);
-    //     point p34 = nouveau_point(15, 0, 0);
-    //     ajouter_plateforme(p31, p32, p33, p34);
-
-    //     //Coordonnées du centre de la boule
-    //     bx = 0;
-    //     by = 15;
-    //     bz = 0;
-    // }
-    // if(num_niveau==3)
-    // {
-    //     point p11 = nouveau_point(-30, 0, -30);
-    //     point p12 = nouveau_point(-30, 0, 30);
-    //     point p13 = nouveau_point(30, 0, 30);
-    //     point p14 = nouveau_point(30, 0, -30);
-    //     ajouter_plateforme(p11, p12, p13, p14);
-
-    //     //Coordonnées du centre de la boule
-    //     bx = 0;
-    //     by = 50;
-    //     bz = 0;
-    // }
+    //On fixe les obstacles/objets
+    for(i=0; i<nombre_obstacle_niveau[num_niveau]; i++)
+    {
+        ajouter_objet(obstacle_niveau[num_niveau][i].p1,obstacle_niveau[num_niveau][i].p2);
+    }
 }
 
 //Fonction Affichage pour flutDisplayFunc
