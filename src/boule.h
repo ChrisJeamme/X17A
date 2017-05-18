@@ -42,6 +42,9 @@ float dz;
 /*Calcule si la boule est en collision avec un des plan*/
 int collison_boule_plateforme();
 
+
+int collision_boule_face(int x1, int z1, int x2, int z2);
+
 /*On modifie les vecteurs de la boule en fonction de la pente de la plate-forme*/
 void ajouter_pente(int a, int b, int c);
 
@@ -62,6 +65,8 @@ int min(int x1, int x2, int x3);
 
 /*Fonction de débeugage*/
 void afficher_vecteurs();
+
+
 
 
 

@@ -60,6 +60,63 @@ int collision_boule_plateforme()
     return 0; //On a trouvé aucun plate-forme telle que la boule soit en collision. On renvoie 0.
 }
 
+int collision_boule_objet()
+{
+    return 0;
+}
+
+int collision_boule_face(int x1, int z1, int x2, int z2)
+{
+    int d;
+    if (x1 == x2)
+    {
+        d = x1;
+        if ( abs(bx - d) <= brayon )
+        {
+            float zmin, zmax;
+            if (z1 < z2)
+            {
+                zmin = z1 - sqrt(2)/2;
+                zmax = z2 + sqrt(2)/2;
+            }
+            else 
+            {
+                zmin = z2 - sqrt(2)/2;
+                zmax = z1 + sqrt(2)/2;
+            }
+            if (bz >= zmin && bz <= zmax)
+                return 1;
+            else return 0;
+        }
+        else 
+            return 0;
+    }
+    else
+    {
+        d = z1;
+        if ( abs(bz - d) <= brayon )
+        {
+            float xmin, xmax;
+            if (x1 < x2)
+            {
+                xmin = x1 - sqrt(2)/2;
+                xmax = x2 + sqrt(2)/2;
+            }
+            else 
+            {
+                xmin = x2 - sqrt(2)/2;
+                xmax = x1 + sqrt(2)/2;
+            }
+            if (bx >= xmin && bz <= xmax)
+                return 1;
+            else return 0;
+        }
+        else 
+            return 0;
+    }
+
+}
+
 /*On modifie les vecteurs de la boule en fonction de la pente de la plate-forme*/
 void ajouter_pente(int a, int b, int c) 
 {   
