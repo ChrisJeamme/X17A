@@ -84,6 +84,7 @@ char goal_orientation;
 //Texture plateformes
 GLuint tex_sol[3];
 GLuint tex_skybox[6];
+GLuint tex_portail[2];
 
 //Gestion menus
 

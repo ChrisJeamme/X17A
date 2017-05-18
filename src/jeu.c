@@ -13,6 +13,7 @@ void initGL()
 
     glGenTextures(3, tex_sol);
     glGenTextures(6, tex_skybox);
+    glGenTextures(2, tex_portail);
 
     glBindTexture(GL_TEXTURE_2D, tex_sol[0]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -120,8 +121,9 @@ void init_texture()
 {
     if(!no_texture)
     {
-        chargementTexture(&tex_sol[0], "test.png");
-        chargementTexture(&tex_sol[1], "test3.png");
+        chargementTexture(&tex_sol[0], "img/test.png");
+        chargementTexture(&tex_sol[1], "img/test3.png");
+        chargementTexture(&tex_sol[1], "img/portail.png");
         chargementTexture(&tex_skybox[0],"img/testLF.png");
         chargementTexture(&tex_skybox[1],"img/testRT.png");
         chargementTexture(&tex_skybox[2],"img/testDN.png");

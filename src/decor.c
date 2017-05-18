@@ -469,12 +469,15 @@ void portail(point p, char orientation)
 
     parallelepipede(base1x-1, y+8, base1z-1, base2x+1,y+10,base2z+1);
       
+    
+    glBindTexture(GL_TEXTURE_2D, tex_portail[0]);
+
     //Enfin, la partie centrale où il faudra appliquer la texture
     glBegin(GL_QUADS);
-        glVertex3f(base1x, y, base1z);    
-        glVertex3f(base1x, y+9, base1z);
-        glVertex3f(base2x, y+9, base2z);
-        glVertex3f(base2x, y, base2z);
+        glTexCoord2i(0,0);glVertex3f(base1x, y, base1z);    
+        glTexCoord2i(0,1);glVertex3f(base1x, y+9, base1z);
+        glTexCoord2i(1,1);glVertex3f(base2x, y+9, base2z);
+        glTexCoord2i(1,0);glVertex3f(base2x, y, base2z);
     glEnd();
  
 }
