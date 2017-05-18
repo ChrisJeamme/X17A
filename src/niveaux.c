@@ -105,7 +105,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                         etat = chaine[1];
                     if(etat=='p')
                     {
-                        if(strlen(chaine)<15)
+                        if(strlen(chaine)<13)
                         {
                             fprintf(stderr,"Problème dans le fichier du niveau %d\n",numero_niveau);
                             exit(-1);
@@ -113,7 +113,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
 
                         nombre_plateforme_niveau[numero_niveau] = (chaine[13]-'0')*10+chaine[14]-'0';
                         
-                        gestion_erreur_lecture_int(numero_niveau);
+                        //gestion_erreur_lecture_int(numero_niveau);
 
                         //Allocation de la mémoire pour le tableau de plateforme de ce niveau
 
@@ -135,7 +135,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                     }
                     if(etat=='s')
                     {
-                        if(strlen(chaine)<9)
+                        if(strlen(chaine)<7)
                         {
                             fprintf(stderr,"Problème dans le fichier du niveau %d\n",numero_niveau);
                             exit(-1);
@@ -143,7 +143,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
 
                         nombre_saut_niveau[numero_niveau] = (chaine[7]-'0')*10+chaine[8]-'0';
 
-                        gestion_erreur_lecture_int(numero_niveau);
+                        //gestion_erreur_lecture_int(numero_niveau);
 
                         printf("Plateformes sauts sur ce niveau %d : %d\n",numero_niveau,nombre_saut_niveau[numero_niveau]);
                         //Allocation de la mémoire pour le tableau de sauts de ce niveau
@@ -164,7 +164,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                     }
                     if(etat=='o')
                     {
-                        if(strlen(chaine)<13)
+                        if(strlen(chaine)<11)
                         {
                             fprintf(stderr,"Problème dans le fichier du niveau %d\n",numero_niveau);
                             exit(-1);
@@ -172,7 +172,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                         
                         nombre_obstacle_niveau[numero_niveau] = (chaine[11]-'0')*10+chaine[12]-'0';
                         
-                        gestion_erreur_lecture_int(numero_niveau);
+                        //gestion_erreur_lecture_int(numero_niveau);
 
                         printf("Objets sur ce niveau : %d\n",nombre_obstacle_niveau[numero_niveau]);
                         
