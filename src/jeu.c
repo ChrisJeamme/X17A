@@ -134,6 +134,22 @@ void init_texture()
     }
 }
 
+
+void niveau_superieur()
+{
+    if (num_niveau == nombre_niveau)
+    {
+        printf("Jeu termine ! \n");
+        exit(0);
+    }
+    else 
+    {
+        num_niveau ++;
+        definir_niveau();
+    }
+}
+
+
 /*Definit les niveaux du jeu*/
 void definir_niveau()
 {
@@ -161,6 +177,7 @@ void definir_niveau()
                             point_arrivee_niveau[num_niveau].y,
                             point_arrivee_niveau[num_niveau].z);
     goal_orientation = orientation_arrive_niveau[num_niveau];
+    ajouter_pilier_portail(goal,goal_orientation);    
 
     //On fixe les obstacles/objets
     for(i=0; i<nombre_obstacle_niveau[num_niveau]; i++)
@@ -203,7 +220,7 @@ void Affichage()
 
     //Affichage Boule
     dessiner_boule(brayon,bx,by,bz);
-
+    portail(goal,goal_orientation);
     afficher_plateformes();
     afficher_objets();
     afficher_decor();

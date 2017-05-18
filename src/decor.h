@@ -157,6 +157,8 @@ void parallelepipede(int x1, int y1, int z1, int x2, int y2, int z2);
 
 void portail(point p, char orientation);
 
+void ajouter_pilier_portail(point p, char orientation);
+
 /*maximum entre 3 entiers*/
 int max(int x1, int x2, int x3);
 
