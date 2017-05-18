@@ -137,10 +137,6 @@ void definir_niveau()
     by = point_depart_niveau[num_niveau].y;
     bz = point_depart_niveau[num_niveau].z;
 
-    
-    printf("B = (%d,%d,%d)\n",point_depart_niveau[num_niveau].x,point_depart_niveau[num_niveau].y,point_depart_niveau[num_niveau].z);
-    printf("num_niveau=%d\n",num_niveau);
-
     //On fixe le point d'arrivée
     goal = nouveau_point(   point_arrivee_niveau[num_niveau].x,
                             point_arrivee_niveau[num_niveau].y,
