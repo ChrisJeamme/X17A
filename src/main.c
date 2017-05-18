@@ -13,7 +13,6 @@ int main(int argc, char** argv)
     
     lancement();
 
-     
     return 0;
 }
 

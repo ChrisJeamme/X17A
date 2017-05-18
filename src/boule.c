@@ -57,7 +57,7 @@ int collision_boule_plateforme()
             return 1; //On renvoit que la boule est sur une plate-forme
         }
     }
-    return 0; //On a trouvé aucun plate-forme telle que la boule soit en collision. On renvoit 0.
+    return 0; //On a trouvé aucun plate-forme telle que la boule soit en collision. On renvoie 0.
 }
 
 /*On modifie les vecteurs de la boule en fonction de la pente de la plate-forme*/
