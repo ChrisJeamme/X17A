@@ -53,7 +53,7 @@ void initialiser_tableaux_niveaux()
     point_depart_niveau = (point*) malloc(sizeof(point*)*(nombre_niveau+1));
     point_arrivee_niveau = (point*) malloc(sizeof(point*)*(nombre_niveau+1));
     nombre_plateforme_niveau = (int*) malloc(sizeof(int*)*(nombre_niveau+1));
-    orientation_arrive_niveau = (int*) malloc(sizeof(int*)*(nombre_niveau+1));
+    orientation_arrive_niveau = (char*) malloc(sizeof(char*)*(nombre_niveau+1));
     nombre_obstacle_niveau = (int*) malloc(sizeof(int*)*(nombre_niveau+1));    
     plateforme_niveau = (plateforme**) malloc(sizeof(plateforme**)*(nombre_niveau+1));
 }
@@ -97,7 +97,10 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                         //Allocation de la mémoire pour le tableau de plateforme de ce niveau
 
                         plateforme_niveau[numero_niveau] = NULL;
+                        printf("Test");
                         printf("Plateformes sur ce niveau : %d",nombre_plateforme_niveau[numero_niveau]);
+                        printf("Test2\n");
+                        
                         plateforme_niveau[numero_niveau] = (plateforme*) malloc(sizeof(plateforme)*nombre_plateforme_niveau[numero_niveau]);
                         for(j=0; j<nombre_plateforme_niveau[numero_niveau]; j++)
                         {
