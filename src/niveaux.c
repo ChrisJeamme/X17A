@@ -91,8 +91,6 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                     {
                         nombre_plateforme_niveau[numero_niveau] = (chaine[13]-'0')*10+chaine[14]-'0';
 
-                        printf("Nombre de plateforme du niveau %d = %d\n",numero_niveau,nombre_plateforme_niveau[numero_niveau]);
-
                         //Allocation de la mémoire pour le tableau de plateforme de ce niveau
 
                         plateforme_niveau[numero_niveau] = NULL;

@@ -16,6 +16,8 @@
 #define NOMBRE_MAX_OBJETS 100
 #define NOMBRE_MAX_DECOR 500
 
+#define TAILLE 50 
+
 typedef struct struct_point
 {
     int x;
