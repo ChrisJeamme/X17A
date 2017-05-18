@@ -581,13 +581,11 @@ void generer_objet_sur_plateforme(plateforme p)
     int x1 = rand()%(xmax-xmin) +xmin;
     int z1 = rand()%(zmax-zmin) +zmin;
 
-    int dx = rand()%(5)+1;
-    int dz = rand()%(5)+1;
-    int dy = rand()%(3)+4;
+    int dx = rand()%5+1;
+    int dz = rand()%5+1;
+    int dy = rand()%3+4;
 
-    ajouter_objet(nouveau_point(x1,y,z),nouveau_point(x1+dx, y+dy, z1+dz));
-
-}
+    ajouter_objet(nouveau_point(x1,y,z1),nouveau_point(x1+dx, y+dy, z1+dz));
 
 }
 
