@@ -209,7 +209,6 @@ void Affichage()
     afficher_decor();
     afficher_cubemap();
 
-    trace_grille(5);
     glutSwapBuffers();
 }
 
