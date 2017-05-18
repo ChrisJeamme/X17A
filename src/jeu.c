@@ -99,8 +99,8 @@ void lancementJeu()
     nb_sauts = 0;
     definir_decor(LARGEUR_ELEMENT_DECOR);
 
-    importer_niveaux();
-    afficher_niveaux();
+    //importer_niveaux();
+    //afficher_niveaux();
 
     init_texture();
     definir_niveau();
