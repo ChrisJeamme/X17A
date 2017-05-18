@@ -324,7 +324,6 @@ void ajouter_saut(point p1, point p2, point p3, point p4)
     tab_sauts[nb_sauts++] = p;
 }
 
-
 /*Ajoute un objet dans le monde*/
 void ajouter_objet(point p1, point p2)
 {
@@ -346,6 +345,12 @@ void ajouter_objet(point p1, point p2)
 void ajouter_plateforme_charge(plateforme p)
 {
     tab_plateformes[nb_plateformes++] = p;
+}
+
+/*Ajoute une plate-forme de saut qui existe déjà au niveau*/
+void ajouter_saut_charge(plateforme p)
+{
+    tab_sauts[nb_sauts++] = p;
 }
 
 void ajouter_element_decor(point p1, point p2, point p3, point p4)
