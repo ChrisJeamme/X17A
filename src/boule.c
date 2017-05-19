@@ -230,7 +230,6 @@ void maj_position_boule()
 void maj_observateur()
 {
     float normeVitesse = sqrt(vx*vx + vz*vz);
-    printf("%f\n", normeVitesse);
     if (normeVitesse < 0.02)
     {
         ox = bx - 4*dx;
