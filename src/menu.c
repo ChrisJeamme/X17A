@@ -11,17 +11,22 @@ void AffichageMenu()
     glutSwapBuffers();
 }
 
-void gestionMenu()
+void gestionMenu() //choix_niveau(int choix_niveau)
 {
     nSousmenuChoixNiveau = glutCreateMenu(vRappelSousmenuChoixNiveau);
-	glutAddMenuEntry("Niveau 1", 1);
-    glutAddMenuEntry("Niveau 2", 2);
-    glutAddMenuEntry("Niveau 3", 3);
+
+    char chaine[12];
+    int i;
+    for(i=0; i<nombre_niveau; i++)
+    {
+        printf("Ajout niveau %d au menu\n",i);
+        sscanf(chaine,"Niveau %d",&i);
+        glutAddMenuEntry(chaine, i);
+    }
 	nMenuprincipal = glutCreateMenu(vRappelMenuPrincipal);
 	glutAddSubMenu("Choix du niveau", nSousmenuChoixNiveau);
     glutAddMenuEntry("Reset", MENU_RESET);
 	glutAddMenuEntry("Quitter", MENU_QUITTER);
-	// glutAddMenuEntry("Elément 2", 2);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
@@ -32,7 +37,7 @@ void vRappelSousMenu1(int i)
 
 void vRappelSousmenuChoixNiveau(int i)
 {
-    num_niveau = i;
+    choix_niveau(i);
 }
 
 void vRappelMenuPrincipal(int i)

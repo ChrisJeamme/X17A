@@ -133,7 +133,6 @@ void init_texture()
     }
 }
 
-
 void niveau_superieur()
 {
     if (num_niveau == nombre_niveau)
@@ -171,6 +170,34 @@ void niveau_superieur()
     }
 }
 
+void choix_niveau(int choix_niveau)
+{
+    num_niveau = choix_niveau;
+    
+    int i;
+    plateforme p;
+    p.p1 = nouveau_point(1000,1000,1000);  p.p2 = nouveau_point(1000,1000,1000);  p.p3 = nouveau_point(1000,1000,1000);  p.p4 = nouveau_point(1000,1000,1000);
+    objet o;
+    o.p1 = nouveau_point(1000,1000,1000);  o.p2 = nouveau_point(1000,1000,1000);
+    for (i=0; i<nb_plateformes;i++)
+    {
+        tab_plateformes[i] = p;
+    }
+    nb_plateformes=0;
+    for (i=0; i<nb_objets;i++)
+    {
+        tab_objets[i]=o;
+    }
+    nb_objets=0;
+    for (i=0; i<nb_sauts;i++)
+    {
+        tab_sauts[i]=p;
+    }
+    nb_sauts=0;
+
+    definir_niveau();
+    vx=0; vy=0; vz=0;
+}
 
 /*Definit les niveaux du jeu*/
 void definir_niveau()
