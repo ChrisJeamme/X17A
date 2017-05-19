@@ -160,9 +160,6 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                         
                         nombre_obstacle_niveau[numero_niveau] = (chaine[11]-'0')*10+chaine[12]-'0';
 
-                        printf("Objets sur ce niveau : %d\n",nombre_obstacle_niveau[numero_niveau]);
-                        
-
                         //Allocation de la mémoire pour le tableau d'obstacle de ce niveau
 
                         obstacle_niveau[numero_niveau] = NULL;
