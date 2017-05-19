@@ -78,7 +78,7 @@ element_decor tab_decor[NOMBRE_MAX_DECOR];
 int nb_element_decor;
 
 //Point depart
-point start;
+point start = NULL;
 //Point d'arrivée
 point goal;
 char goal_orientation;
