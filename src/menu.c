@@ -15,9 +15,9 @@ void gestionMenu() //choix_niveau(int choix_niveau)
 {
     nSousmenuChoixNiveau = glutCreateMenu(vRappelSousmenuChoixNiveau);
 
-    char *chaine;
+    char chaine[12];
     int i;
-    for(i=1; i<=nombre_niveau; i++)
+    for(i=0; i<nombre_niveau; i++)
     {
         printf("Ajout niveau %d au menu\n",i);
         sscanf(chaine,"Niveau %d",i);
