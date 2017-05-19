@@ -139,6 +139,7 @@ void niveau_superieur()
     if (num_niveau == nombre_niveau-1)
     {
         printf("Jeu termine ! \n");
+        liberer_delivrer();
         exit(0);
     }
     else 
