@@ -86,6 +86,7 @@ char goal_orientation;
 //Texture plateformes
 GLuint tex_sol[3];
 GLuint tex_skybox[6];
+GLuint tex_portail[2];
 
 //Gestion menus
 
@@ -130,8 +131,8 @@ void afficher_objets();
 /*Ajoute un élément (pavé) au décor du dessous*/
 void ajouter_element_decor(point p1, point p2, point p3, point p4);
 
-/*Permet d'afficher une plateforme*/
-void afficher_la_plateforme(plateforme p);
+/*Permet d'afficher une plateforme selon plusieurs couleurs*/
+void afficher_la_plateforme(plateforme p, char couleur);
 
 /*Permet d'afficher toutes les plateformes*/
 void afficher_plateformes();

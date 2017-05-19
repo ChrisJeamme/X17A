@@ -40,7 +40,7 @@ void chargerTextureCubemap(GLuint* texture, char *x_pos_file, char *x_neg_file, 
         fprintf(stderr,"Erreur de chargement de texture\n");
 }
 
-void afficher_la_plateforme(plateforme p)
+void afficher_la_plateforme(plateforme p, char couleur)
 {
 //On récupère les coordonnées des 4 points qui définissent la plateforme
     int x1 = p.p1.x;
@@ -74,10 +74,12 @@ void afficher_la_plateforme(plateforme p)
         distancez=1;
 
     //Face dessus
-    glColor3f(0.7,0,0); 
+    if(couleur=='R')glColor3f(0.7,0,0); 
+    if(couleur=='B')glColor3f(0,0,0.7); 
     glTexCoord2i(0,0); glVertex3f(x1, y1, z1);    
-    glTexCoord2i(0,distancez/10); glVertex3f(x2, y2, z2);    
-    glColor3f(0.4,0,0); 
+    glTexCoord2i(0,distancez/10); glVertex3f(x2, y2, z2);     
+    if(couleur=='R')glColor3f(0.4,0,0); 
+    if(couleur=='B')glColor3f(0,0,0.4); 
     glTexCoord2i(distancex/10,distancez/10); glVertex3f(x3, y3, z3);
     glTexCoord2i(distancex/10,0); glVertex3f(x4, y4, z4);
 
@@ -127,11 +129,11 @@ void afficher_plateformes()
     int i;
     for (i=0; i<nb_plateformes; i++) //Parcourt toutes les plateformes 
     {
-        afficher_la_plateforme(tab_plateformes[i]);
+        afficher_la_plateforme(tab_plateformes[i],'R');
     }
     for (i=0; i<nb_sauts; i++)
     {
-        afficher_la_plateforme(tab_sauts[i]);
+        afficher_la_plateforme(tab_sauts[i],'B');
     }
 }
 
@@ -469,13 +471,18 @@ void portail(point p, char orientation)
 
     parallelepipede(base1x-1, y+8, base1z-1, base2x+1,y+10,base2z+1);
       
+    
+    glBindTexture(GL_TEXTURE_2D, tex_portail[0]);
+
     //Enfin, la partie centrale où il faudra appliquer la texture
     glBegin(GL_QUADS);
-        glVertex3f(base1x, y, base1z);    
-        glVertex3f(base1x, y+9, base1z);
-        glVertex3f(base2x, y+9, base2z);
-        glVertex3f(base2x, y, base2z);
+        glTexCoord2i(0,0);glVertex3f(base1x, y, base1z);    
+        glTexCoord2i(0,1);glVertex3f(base1x, y+9, base1z);
+        glTexCoord2i(1,1);glVertex3f(base2x, y+9, base2z);
+        glTexCoord2i(1,0);glVertex3f(base2x, y, base2z);
     glEnd();
+
+    glBindTexture(GL_TEXTURE_2D, tex_sol[0]);
  
 }
 
