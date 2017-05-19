@@ -13,11 +13,16 @@
 #define MENU_RESET 1
 #define MENU_QUITTER 2
 
+/*Affiche le menu (niveauxcipal)*/
 void AffichageMenu();
+
+/*Gère le menu clic droit*/
 void gestionMenu();
 
-void vRappelSousMenu1(int i);
+/*Menu clic droit*/
 void vRappelMenuPrincipal(int i);
+
+/*Sous menu pour le choix de niveau*/
 void vRappelSousmenuChoixNiveau(int i);
 
 
