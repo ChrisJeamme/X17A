@@ -21,7 +21,7 @@ void gestionMenu() //choix_niveau(int choix_niveau)
     int i;
     for(i=0; i<nombre_niveau; i++)
     {
-        sprintf(chaine, "Niveau %d", i);
+        sprintf(chaine, "Niveau %d", i+1);
         glutAddMenuEntry(chaine, i);
     }
 	nMenuprincipal = glutCreateMenu(vRappelMenuPrincipal);
