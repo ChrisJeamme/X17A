@@ -4,12 +4,12 @@
 /*Pour tourner à droite*/
 void droite()
 {
-    if (vx == 0 && vz == 0) //La boule est à l'arret
-    {
-        float dxp = cos(0.1)*dx - sin(0.1)*dz;
-        dz = sin(0.1)*dx + cos(0.1)*dz;
-        dx = dxp;
-    }
+    //Modification de la direction
+    float dxp = cos(0.1)*dx - sin(0.1)*dz;
+    dz = sin(0.1)*dx + cos(0.1)*dz;
+    dx = dxp;
+
+    //Modification du vecteur vitesse
     float vxp = cos(0.1)*vx - sin(0.1)*vz;
     vz = sin(0.1)*vx + cos(0.1)*vz;
     vx = vxp;
@@ -18,12 +18,12 @@ void droite()
 /*Pour tourner à gauche*/
 void gauche()
 {
-    if (vx == 0 && vz == 0) //La boule est à l'arret
-    {
-        float dxp = cos(-0.1)*dx - sin(-0.1)*dz;
-        dz = sin(-0.1)*dx + cos(-0.1)*dz;
-        dx = dxp;
-    }
+    //Modification de la direction
+    float dxp = cos(-0.1)*dx - sin(-0.1)*dz;
+    dz = sin(-0.1)*dx + cos(-0.1)*dz;
+    dx = dxp;
+
+    //Modification du vecteur vitesse
     float vxp = cos(-0.1)*vx - sin(-0.1)*vz;
     vz = sin(-0.1)*vx + cos(-0.1)*vz;
     vx = vxp;
@@ -54,12 +54,10 @@ void accelere()
 void decelere()
 {
     float normeVitesse = sqrt(vx*vx+vz*vz);
-    if (normeVitesse > 0.005)
+    if (normeVitesse > 0.01)
     {
         ax -= vx*0.1;
         az -= vz*0.1;
-        dx = vx;
-        dz = vz;
     }
     else 
     {

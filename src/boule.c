@@ -231,15 +231,15 @@ void maj_observateur()
 {
     if (vx == 0 && vz == 0)
     {
-        ox = bx - 3*dx;
-        oz = bz - 3*dz;
+        ox = bx - 5*dx;
+        oz = bz - 5*dz;
     }
     else 
     {
         ox = bx - vx*200;
         oz = bz - vz*200;
     }
-    oy = by + brayon*5;
+    oy = by + brayon*3;
 }
 
 /*Fonction de débeugage*/
