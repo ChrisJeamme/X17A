@@ -3,16 +3,20 @@
 
 int main(int argc, char** argv)
 {
+    //Analyse & interprétation des arguments
     gestion_arguments(argc,argv);
+    //Initialisation de rand
     srand(time(NULL));
+    //Initialisation de la librairie GLUT
     glutInit(&argc, argv);
+    //Paramètres d'initalisation et des objets
     initGL();
-
+    //Importation des niveaux du dossier ./level/
     importer_niveaux();
+    //Fonction d'affichage des niveaux chargés
     afficher_niveaux();
-    
+    //Lancement du menu
     lancement();
-
     return 0;
 }
 
