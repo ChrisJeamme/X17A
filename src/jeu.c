@@ -135,7 +135,7 @@ void init_texture()
 
 void niveau_superieur()
 {
-    if (num_niveau == nombre_niveau)
+    if (num_niveau == nombre_niveau-1)
     {
         printf("Jeu termine ! \n");
         exit(0);
