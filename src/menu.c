@@ -42,12 +42,8 @@ void vRappelMenuniveauxcipal(int i)
         exit(0);
     if(i==MENU_RESET)
     {
-        if(start!=NULL)
-        {
-            vx=0;        vy=0;        vz=0;
-            bx=start.x;  by=start.y;  bz=start.z;
-        }
-       
+        vx=0;        vy=0;        vz=0;
+        bx=start.x;  by=start.y;  bz=start.z;
     }
 
 }
