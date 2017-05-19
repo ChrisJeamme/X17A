@@ -44,6 +44,8 @@ void choix_niveau(int choix_niveau);
 void verification_limites();
 /*Passe au niveau supérieur*/
 void niveau_superieur();
+/*Libère la mémoire des objets*/
+void liberer_delivrer();
 
 /*Booléen pour savoir si on affiche les textures*/
 int no_texture;
