@@ -23,15 +23,21 @@
 #define NOMBRE_MAX_PLATEFORMES 100
 #define NOMBRE_MAX_DECOR 500
 
+//Analyse & interprétation des arguments
 void gestion_arguments(int argc, char** argv);
+//Paramètres d'initalisation et des objets
 void initGL();
+//Initialise les vecteurs au début du jeu
 void majVecteurs();
 void Animer();
 void Affichage();
 void lancement();
 void lancementJeu();
 void init_texture();
+// Défini le niveau selon num_niveau
 void definir_niveau();
+// Permet de changer de niveau
+void choix_niveau(int choix_niveau);
 void verification_limites();
 void niveau_superieur();
 

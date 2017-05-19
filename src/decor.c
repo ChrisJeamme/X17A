@@ -390,7 +390,7 @@ void ajouter_element_decor(point p1, point p2, point p3, point p4)
     tab_decor[nb_element_decor++] = p;
 }
 
-
+/*Afficher un  texte d'une certaine couleur*/
 void afficherText(float x, float y, int r, int g, int b, const char *texte) 
 {
 	int i, j = strlen(texte);
@@ -449,7 +449,7 @@ void parallelepipede(int x1, int y1, int z1, int x2, int y2, int z2)
 }
 
 
-//On fournit un point (l'arrivée) et un caractère (x ou z) pour l'orientation
+/*On fournit un point (l'arrivée) et un caractère (x ou z) pour l'orientation*/
 void portail(point p, char orientation)
 {
     int x1 = p.x;
