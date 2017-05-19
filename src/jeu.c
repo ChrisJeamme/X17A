@@ -287,23 +287,23 @@ void Animer()
 /*Libère la mémoire des objets*/
 void liberer_delivrer()
 {
-    int i,j,k;
-    for(i=0; i<nombre_niveau; i++)
-    {
-       for(j=0; j<nombre_obstacle_niveau[i]; i++)
-            free(obstacle_niveau[i]);
-       for(j=0; j<nombre_plateforme_niveau[i]; i++)
-            free(plateforme_niveau[i]);
-       for(j=0; j<nombre_saut_niveau[i]; i++)
-            free(saut_niveau[i]);
+    // int i,j,k;
+    // for(i=0; i<nombre_niveau; i++)
+    // {
+    //    for(j=0; j<nombre_obstacle_niveau[i]; i++)
+    //         free(obstacle_niveau[i]);
+    //    for(j=0; j<nombre_plateforme_niveau[i]; i++)
+    //         free(plateforme_niveau[i]);
+    //    for(j=0; j<nombre_saut_niveau[i]; i++)
+    //         free(saut_niveau[i]);
 
-       free(point_depart_niveau[i]);
-       free(point_arrivee_niveau[i]);
-       free(orientation_arrive_niveau[i]);
-       free(nombre_plateforme_niveau[i]);
-       free(nombre_saut_niveau[i]);
-       free(nombre_obstacle_niveau[i]);
-    }
+    //    free(point_depart_niveau[i]);
+    //    free(point_arrivee_niveau[i]);
+    //    free(orientation_arrive_niveau[i]);
+    //    free(nombre_plateforme_niveau[i]);
+    //    free(nombre_saut_niveau[i]);
+    //    free(nombre_obstacle_niveau[i]);
+    // }
     free(obstacle_niveau);
     free(plateforme_niveau);
     free(saut_niveau);
