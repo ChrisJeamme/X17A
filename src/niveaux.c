@@ -1,5 +1,6 @@
 #include "niveaux.h"
 
+/*Importe les niveaux contenu dans le dossier ./level/*/
 void importer_niveaux()
 {
     fixer_nombre_niveaux(); //Cherche dans le répertoire
@@ -21,6 +22,7 @@ void importer_niveaux()
     }
 }
 
+/*Compte le nombre de niveaux dans le dossier*/
 void fixer_nombre_niveaux()
 {
     DIR* rep = NULL;
@@ -43,6 +45,7 @@ void fixer_nombre_niveaux()
         exit(-1);
 }
 
+/*Alloue la mémoire aux tableaux qui contiendront tous les niveaux*/
 void initialiser_tableaux_niveaux()
 {
     if(nombre_niveau==0)
@@ -62,6 +65,7 @@ void initialiser_tableaux_niveaux()
     plateforme_niveau = (plateforme**) malloc(sizeof(plateforme*)*50);
 }
 
+/*Importe les donnés d'un fichier niveau, avec son nom de fichier*/
 void importer_niveau(char* nom_fichier, int numero_niveau)
 {
     FILE* fichier = NULL;
@@ -155,8 +159,6 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                         }
                         
                         nombre_obstacle_niveau[numero_niveau] = (chaine[11]-'0')*10+chaine[12]-'0';
-                        
-                        //gestion_erreur_lecture_int(numero_niveau);
 
                         printf("Objets sur ce niveau : %d\n",nombre_obstacle_niveau[numero_niveau]);
                         
@@ -251,6 +253,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
 
 }
 
+/*Affiche quelques données des niveaux stockés (manque obstacle + sauts)*/
 void afficher_niveaux()
 {
     int i,j;
