@@ -229,17 +229,19 @@ void maj_position_boule()
 /*Met a jour la position de l'observateur*/
 void maj_observateur()
 {
-    if (vx == 0 && vz == 0)
+    float normeVitesse = sqrt(vx*vx + vz*vz);
+    printf("%f\n", normeVitesse);
+    if (normeVitesse < 0.02)
     {
-        ox = bx - 5*dx;
-        oz = bz - 5*dz;
+        ox = bx - 4*dx;
+        oz = bz - 4*dz;
     }
     else 
     {
         ox = bx - vx*200;
         oz = bz - vz*200;
     }
-    oy = by + brayon*3;
+    oy = by + brayon*4;
 }
 
 /*Fonction de débeugage*/
