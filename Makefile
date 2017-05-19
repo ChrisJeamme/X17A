@@ -1,7 +1,7 @@
 CC=gcc
-CFLAGS=-Wall -lglut -lGLU -lGL -lm
+CFLAGS=-Wall -lglut -lGLU -lGL -lm -lSOIL
 
-boulemagique: src/main.o src/boule.o src/decor.o src/karbre.o src/karbre.h src/boule.h
+boulemagique: src/main.o src/jeu.o src/boule.o src/decor.o src/menu.o src/entree.o src/karbre.o src/niveaux.o src/niveaux.h src/decor.h src/karbre.h src/jeu.h src/boule.h src/menu.h src/entree.h
 	$(CC) -o $@ $^ $(CFLAGS)
 
 src/decor.o: src/decor.c
@@ -13,7 +13,19 @@ src/karbre.o: src/karbre.c
 src/boule.o: src/boule.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
-src/main.o: src/main.c
+src/menu.o: src/menu.c
+	$(CC) -o $@ -c $^ $(CFLAGS)
+
+src/entree.o: src/entree.c
+	$(CC) -o $@ -c $^ $(CFLAGS)
+
+src/niveaux.o: src/niveaux.c 
+	$(CC) -o $@ -c $^ $(CFLAGS)
+
+src/jeu.o: src/jeu.c
+	$(CC) -o $@ -c $^ $(CFLAGS)
+
+src/main.o: src/main.c 
 	$(CC) -o $@ -c $^ $(CFLAGS)
 
 clean:
