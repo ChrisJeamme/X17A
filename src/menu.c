@@ -1,5 +1,6 @@
 #include "menu.h"
 
+/*Affiche le menu (niveauxcipal)*/
 void AffichageMenu()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -11,17 +12,15 @@ void AffichageMenu()
     glutSwapBuffers();
 }
 
+/*Gère le menu clic droit*/
 void gestionMenu() //choix_niveau(int choix_niveau)
 {
     nSousmenuChoixNiveau = glutCreateMenu(vRappelSousmenuChoixNiveau);
 
-    char chaine[12];
     int i;
     for(i=0; i<nombre_niveau; i++)
     {
-        printf("Ajout niveau %d au menu\n",i);
-        sscanf(chaine,"Niveau %d",&i);
-        glutAddMenuEntry(chaine, i);
+        glutAddMenuEntry("Niveau ?", i);
     }
 	nMenuprincipal = glutCreateMenu(vRappelMenuPrincipal);
 	glutAddSubMenu("Choix du niveau", nSousmenuChoixNiveau);
@@ -30,16 +29,13 @@ void gestionMenu() //choix_niveau(int choix_niveau)
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-void vRappelSousMenu1(int i)
-{
-	printf("rappel de l'element %d\n", i);
-}
-
+/*Sous menu pour le choix de niveau*/
 void vRappelSousmenuChoixNiveau(int i)
 {
     choix_niveau(i);
 }
 
+/*Menu clic droit*/
 void vRappelMenuPrincipal(int i)
 {
     if(i==MENU_QUITTER)
@@ -47,7 +43,7 @@ void vRappelMenuPrincipal(int i)
     if(i==MENU_RESET)
     {
         vx=0;        vy=0;        vz=0;
-        bx=1;        by=50;        bz=1;
+        bx=start.x;  by=start.y;  bz=start.z;
     }
 
 }
