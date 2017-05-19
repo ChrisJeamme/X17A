@@ -135,7 +135,7 @@ void init_texture()
 
 void niveau_superieur()
 {
-    if (num_niveau == nombre_niveau)
+    if (num_niveau == nombre_niveau-1)
     {
         printf("Jeu termine ! \n");
         exit(0);
@@ -236,7 +236,7 @@ void definir_niveau()
         ajouter_objet(obstacle_niveau[num_niveau][i].p1,obstacle_niveau[num_niveau][i].p2, 'o');
     }
 
-    if (num_niveau == 1)
+    if (num_niveau == 4)
     {
         plateforme p = tab_plateformes[0];
         for (i=2; i<NOMBRE_MAX_OBJETS; i++)
