@@ -148,7 +148,7 @@ void afficher_cubemap();
 void chargementTexture(GLuint* texture, char* chemin);
 
 void chargerTextureCubemap(GLuint* texture, char *x_pos_file, char *x_neg_file, char *y_pos_file, char *y_neg_file, char *z_pos_file, char *z_neg_file);
-
+/*Afficher un  texte d'une certaine couleur*/
 void afficherText(float x, float y, int r, int g, int b, const char *texte);
 
 void chargementTexture(GLuint* texture, char* chemin);
