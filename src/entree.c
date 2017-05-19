@@ -106,8 +106,8 @@ void GererClavier(unsigned char touche, int x, int y)
     //Reset de la boule
     if(touche=='r')
     {
-        vx=0;        vy=0;        vz=0;
-        bx=0;        by=50;        bz=0.000001;
+        vx=0;       vy=0;       vz=0;
+        bx=start.x; by=start.y; bz=start.z;
     }
 
 

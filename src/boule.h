@@ -7,6 +7,7 @@
 #include <math.h>
 #include "GL/gl.h"
 #include "GL/glut.h"
+#include "jeu.h"
 #include "decor.h"
 #include "karbre.h"
 

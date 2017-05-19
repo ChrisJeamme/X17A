@@ -13,7 +13,7 @@
 
 #define NOMBRE_MAX_PLATEFORMES 100
 #define NOMBRE_MAX_SAUTS 100
-#define NOMBRE_MAX_OBJETS 100
+#define NOMBRE_MAX_OBJETS 1000
 #define NOMBRE_MAX_DECOR 500
 
 #define TAILLE 50 
@@ -77,6 +77,8 @@ int nb_sauts;
 element_decor tab_decor[NOMBRE_MAX_DECOR];
 int nb_element_decor;
 
+//Point depart
+point start;
 //Point d'arrivée
 point goal;
 char goal_orientation;
@@ -159,6 +161,8 @@ void parallelepipede(int x1, int y1, int z1, int x2, int y2, int z2);
 void portail(point p, char orientation);
 
 void ajouter_pilier_portail(point p, char orientation);
+
+void generer_objet_sur_plateforme(plateforme p);
 
 /*maximum entre 3 entiers*/
 int max(int x1, int x2, int x3);

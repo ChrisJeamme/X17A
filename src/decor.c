@@ -148,6 +148,10 @@ void afficher_objets()
         int y2 = tab_objets[i].p2.y;
         int z1 = tab_objets[i].p1.z;
         int z2 = tab_objets[i].p2.z;
+        float r = tab_objets[i].coul.r;
+        float v = tab_objets[i].coul.v;
+        float b = tab_objets[i].coul.b;
+        glColor3f(r,v,b); //Blanc       
         parallelepipede(x1,y1,z1, x2,y2,z2);
     }
 }
@@ -334,9 +338,9 @@ void ajouter_objet(point p1, point p2)
     o.p2 = p2;
     
     //Random sur le vert
-    float r = 0;
+    float r = rand_0_1();
     float v = rand_0_1();
-    float b = 0;
+    float b = rand_0_1();
 
     o.coul = nouvelle_couleur(r,v,b);
 
@@ -397,8 +401,6 @@ void afficherText(float x, float y, int r, int g, int b, const char *texte)
 
 void parallelepipede(int x1, int y1, int z1, int x2, int y2, int z2)
 {
-    glColor3f(1,1,1); //Blanc   
-    
         glBegin(GL_QUADS);
 
         //Face 1
@@ -505,8 +507,6 @@ void ajouter_pilier_portail(point p, char orientation)
         base2x = x1;
         base2z = z1+5;
     }
-
-    glColor3f(1,1,1); //Blanc   
 
     ajouter_objet(nouveau_point(base1x-1, y, base1z-1), nouveau_point(base1x+1,y+8,base1z+1));
     //Deuxième pilier
