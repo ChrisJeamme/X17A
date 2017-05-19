@@ -479,6 +479,8 @@ void portail(point p, char orientation)
         glTexCoord2i(1,1);glVertex3f(base2x, y+9, base2z);
         glTexCoord2i(1,0);glVertex3f(base2x, y, base2z);
     glEnd();
+
+    glBindTexture(GL_TEXTURE_2D, tex_sol[0]);
  
 }
 
