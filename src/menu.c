@@ -15,7 +15,7 @@ void gestionMenu() //choix_niveau(int choix_niveau)
 {
     nSousmenuChoixNiveau = glutCreateMenu(vRappelSousmenuChoixNiveau);
 
-    char[] chaine;
+    char chaine*;
     int i;
     for(i=1; i<=nombre_niveau; i++)
     {
