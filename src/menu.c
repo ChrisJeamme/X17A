@@ -22,7 +22,7 @@ void gestionMenu() //choix_niveau(int choix_niveau)
     {
         glutAddMenuEntry("Niveau ?", i);
     }
-	nMenuniveauxcipal = glutCreateMenu(vRappelMenuPrincipal);
+	nMenuprincipal = glutCreateMenu(vRappelMenuPrincipal);
 	glutAddSubMenu("Choix du niveau", nSousmenuChoixNiveau);
     glutAddMenuEntry("Reset", MENU_RESET);
 	glutAddMenuEntry("Quitter", MENU_QUITTER);
