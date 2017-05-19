@@ -42,7 +42,6 @@ void vRappelMenuPrincipal(int i)
 {
     if(i==MENU_QUITTER)
     {
-        liberer_delivrer();
         exit(0);
     }
     if(i==MENU_RESET)
