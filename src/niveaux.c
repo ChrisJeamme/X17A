@@ -62,15 +62,6 @@ void initialiser_tableaux_niveaux()
     plateforme_niveau = (plateforme**) malloc(sizeof(plateforme*)*50);
 }
 
-void gestion_erreur_lecture_int(int niveau)
-{
-    if(nombre_saut_niveau[niveau] < 0)
-    {
-        fprintf(stderr,"Problème dans le fichier du niveau %d\n",niveau);
-        exit(-1);
-    }
-}
-
 void importer_niveau(char* nom_fichier, int numero_niveau)
 {
     FILE* fichier = NULL;
@@ -93,7 +84,6 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
     {
         while(fgets(chaine, 500, fichier) != NULL) // On lit le fichier tant qu'on ne reçoit pas d'erreur (NULL)
         {
-            printf("\t%s",chaine);
             // \n => Ligne ignoré
             if(strcmp(chaine,"\n")!=0)
             {
@@ -104,7 +94,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
 
                     if(etat=='d'||etat=='a'||etat=='p'||etat=='o'||etat=='s')
                         etat = chaine[1];
-                    if(etat=='p')
+                    if(etat=='p') //Plateforme normale
                     {
                         if(strlen(chaine)<13)
                         {
@@ -114,12 +104,8 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
 
                         nombre_plateforme_niveau[numero_niveau] = (chaine[13]-'0')*10+chaine[14]-'0';
                         
-                        //gestion_erreur_lecture_int(numero_niveau);
-
                         //Allocation de la mémoire pour le tableau de plateforme de ce niveau
 
-                        printf("Plateformes sur ce niveau(%d) : %d\n",numero_niveau,nombre_plateforme_niveau[numero_niveau]);
-                        
                         plateforme_niveau[numero_niveau] = (plateforme*) malloc(sizeof(plateforme)*nombre_plateforme_niveau[numero_niveau]);
                         
                         for(j=0; j<nombre_plateforme_niveau[numero_niveau]; j++)
@@ -134,7 +120,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                             exit(-1);
                         }
                     }
-                    if(etat=='s')
+                    if(etat=='s') //Plateforme de saut
                     {
                         if(strlen(chaine)<7)
                         {
@@ -144,9 +130,6 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
 
                         nombre_saut_niveau[numero_niveau] = (chaine[7]-'0')*10+chaine[8]-'0';
 
-                        //gestion_erreur_lecture_int(numero_niveau);
-
-                        printf("Plateformes sauts sur ce niveau %d : %d\n",numero_niveau,nombre_saut_niveau[numero_niveau]);
                         //Allocation de la mémoire pour le tableau de sauts de ce niveau
 
                         saut_niveau[numero_niveau] = (plateforme*) malloc(sizeof(plateforme)*nombre_saut_niveau[numero_niveau]);
@@ -163,7 +146,7 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                             exit(-1);
                         }
                     }
-                    if(etat=='o')
+                    if(etat=='o') //Objet obstacle
                     {
                         if(strlen(chaine)<11)
                         {
@@ -243,9 +226,6 @@ void importer_niveau(char* nom_fichier, int numero_niveau)
                                                         &saut_niveau[numero_niveau][num_plat_saut].p4.x,
                                                         &saut_niveau[numero_niveau][num_plat_saut].p4.y,
                                                         &saut_niveau[numero_niveau][num_plat_saut].p4.z);
-
-                        printf("Ajout avec succès de saut : %d\n",saut_niveau[numero_niveau][num_plat_saut].p1.x);
-
                         num_plat_saut++;
                         break;
                     case 'o': //Obstacles
