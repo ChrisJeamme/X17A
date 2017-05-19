@@ -133,6 +133,7 @@ void init_texture()
     }
 }
 
+/*Passe au niveau supérieur*/
 void niveau_superieur()
 {
     if (num_niveau == nombre_niveau-1)
@@ -142,34 +143,11 @@ void niveau_superieur()
     }
     else 
     {
-        num_niveau ++;
-        
-        int i;
-        plateforme p;
-        p.p1 = nouveau_point(1000,1000,1000);  p.p2 = nouveau_point(1000,1000,1000);  p.p3 = nouveau_point(1000,1000,1000);  p.p4 = nouveau_point(1000,1000,1000);
-        objet o;
-        o.p1 = nouveau_point(1000,1000,1000);  o.p2 = nouveau_point(1000,1000,1000);
-        for (i=0; i<nb_plateformes;i++)
-        {
-            tab_plateformes[i] = p;
-        }
-        nb_plateformes=0;
-        for (i=0; i<nb_objets;i++)
-        {
-            tab_objets[i]=o;
-        }
-        nb_objets=0;
-        for (i=0; i<nb_sauts;i++)
-        {
-            tab_sauts[i]=p;
-        }
-        nb_sauts=0;
-
-        definir_niveau();
-        vx=0; vy=0; vz=0;
+       choix_niveau(num_niveau+1);
     }
 }
 
+/*Change le niveau pour celui choisi*/
 void choix_niveau(int choix_niveau)
 {
     num_niveau = choix_niveau;
@@ -304,4 +282,35 @@ void verification_limites()
 void Animer()
 {
     glutPostRedisplay();
+}
+
+/*Libère la mémoire des objets*/
+void liberer_delivrer()
+{
+    int i,j,k;
+    for(i=0; i<nombre_niveau; i++)
+    {
+       for(j=0; j<nombre_obstacle_niveau[i]; i++)
+            free(obstacle_niveau[i]);
+       for(j=0; j<nombre_plateforme_niveau[i]; i++)
+            free(plateforme_niveau[i]);
+       for(j=0; j<nombre_saut_niveau[i]; i++)
+            free(saut_niveau[i]);
+
+       free(point_depart_niveau[i]);
+       free(point_arrivee_niveau[i]);
+       free(orientation_arrive_niveau[i]);
+       free(nombre_plateforme_niveau[i]);
+       free(nombre_saut_niveau[i]);
+       free(nombre_obstacle_niveau[i]);
+    }
+    free(obstacle_niveau);
+    free(plateforme_niveau);
+    free(saut_niveau);
+    free(point_depart_niveau);
+    free(point_arrivee_niveau);
+    free(orientation_arrive_niveau);
+    free(nombre_plateforme_niveau);
+    free(nombre_saut_niveau);
+    free(nombre_obstacle_niveau);
 }
