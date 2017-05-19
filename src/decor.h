@@ -123,7 +123,7 @@ void ajouter_saut_charge(plateforme p);
 void ajouter_saut(point p1, point p2, point p3, point p4);
 
 /*Ajoute un objet dans le monde*/
-void ajouter_objet(point p1, point p2);
+void ajouter_objet(point p1, point p2, char c);
 
 /*Affiche les objets*/
 void afficher_objets();
