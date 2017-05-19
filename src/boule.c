@@ -208,6 +208,8 @@ void maj_position_boule()
     {
         by += ay; //On ajoute l'accélération en y
     }
+
+
     maj_vecteur_vitesse(); //on récupere le vecteur vitesse
     bx+=vx; //on ajoute la composante x de la vitesse a la position de la boule en x
     bz+=vz; //pareil que pour x
@@ -217,7 +219,6 @@ void maj_position_boule()
     float a_by = by - goal.y - brayon;
     float a_bz = bz - goal.z;
     float distance_arrivee = sqrt(a_bx*a_bx + a_by*a_by + a_bz*a_bz);
-    printf("%f\n",distance_arrivee);
     if (distance_arrivee <= brayon)
     {
         niveau_superieur();

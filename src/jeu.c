@@ -142,7 +142,30 @@ void niveau_superieur()
     else 
     {
         num_niveau ++;
+        
+        int i;
+        plateforme p;
+        p.p1 = nouveau_point(1000,1000,1000);  p.p2 = nouveau_point(1000,1000,1000);  p.p3 = nouveau_point(1000,1000,1000);  p.p4 = nouveau_point(1000,1000,1000);
+        objet o;
+        o.p1 = nouveau_point(1000,1000,1000);  o.p2 = nouveau_point(1000,1000,1000);
+        for (i=0; i<nb_plateformes;i++)
+        {
+            tab_plateformes[i] = p;
+        }
+        nb_plateformes=0;
+        for (i=0; i<nb_objets;i++)
+        {
+            tab_objets[i]=o;
+        }
+        nb_objets=0;
+        for (i=0; i<nb_sauts;i++)
+        {
+            tab_sauts[i]=p;
+        }
+        nb_sauts=0;
+
         definir_niveau();
+        vx=0; vy=0; vz=0;
     }
 }
 
@@ -169,6 +192,8 @@ void definir_niveau()
     by = point_depart_niveau[num_niveau].y;
     bz = point_depart_niveau[num_niveau].z;
 
+    //On fixe le point de départ
+    start = nouveau_point(bx, by, bz);
     //On fixe le point d'arrivée
     goal = nouveau_point(   point_arrivee_niveau[num_niveau].x,
                             point_arrivee_niveau[num_niveau].y,
@@ -181,6 +206,16 @@ void definir_niveau()
     {
         ajouter_objet(obstacle_niveau[num_niveau][i].p1,obstacle_niveau[num_niveau][i].p2);
     }
+
+    if (num_niveau == 1)
+    {
+        plateforme p = tab_plateformes[0];
+        for (i=2; i<NOMBRE_MAX_OBJETS; i++)
+        {
+            generer_objet_sur_plateforme(p);
+        }
+    }
+
 }
 
 //Fonction Affichage pour flutDisplayFunc
@@ -214,7 +249,7 @@ void Affichage()
 
     // point p=nouveau_point(0,0,0);
     // portail(p, 'z');
-
+    collision_boule_objet();
     //Affichage Boule
     dessiner_boule(brayon,bx,by,bz);
     portail(goal,goal_orientation);
@@ -231,9 +266,9 @@ void verification_limites()
 {
     if(bx>LIMITE_MAP || bx<-LIMITE_MAP || bz>LIMITE_MAP || bz<-LIMITE_MAP || by<-100)
     {
-        bx=0; by=50; bz=0;
         ax=0; ay=0; az=0;
         vx=0; vy=0; vz=0;
+        bx=start.x; by=start.y;  bz=start.z;
     }
 }
 
