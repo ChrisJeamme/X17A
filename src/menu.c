@@ -20,7 +20,7 @@ void gestionMenu() //choix_niveau(int choix_niveau)
     for(i=0; i<nombre_niveau; i++)
     {
         printf("Ajout niveau %d au menu\n",i);
-        sscanf(chaine,"Niveau %d",i);
+        sscanf(chaine,"Niveau %d",&i);
         glutAddMenuEntry(chaine, i);
     }
 	nMenuprincipal = glutCreateMenu(vRappelMenuPrincipal);
