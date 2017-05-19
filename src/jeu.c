@@ -85,7 +85,7 @@ void majVecteurs()
     dz = 0;
 }
 
-/*Lance le jeu*/
+/*Lance le menu*/
 void lancement()
 {
     //Menu
@@ -116,7 +116,7 @@ void lancementJeu()
     glutMainLoop();
 }
 
-/*Permet d'appliquer des textures aux objets*/
+/*Permet de charger les textures depuis les fichiers*/
 void init_texture()
 {
     if(!no_texture)
