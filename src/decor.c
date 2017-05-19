@@ -331,18 +331,23 @@ void ajouter_saut(point p1, point p2, point p3, point p4)
 }
 
 /*Ajoute un objet dans le monde*/
-void ajouter_objet(point p1, point p2)
+void ajouter_objet(point p1, point p2, char c)
 {
     objet o;
     o.p1 = p1;
     o.p2 = p2;
     
-    //Random sur le vert
-    float r = rand_0_1();
-    float v = rand_0_1();
-    float b = rand_0_1();
-
-    o.coul = nouvelle_couleur(r,v,b);
+    if (c == 'p')
+    {
+        o.coul = nouvelle_couleur(0.9492,0.6093,0.0703);
+    }
+    else
+    {
+        float r = rand_0_1();
+        float v = rand_0_1();
+        float b = rand_0_1();
+        o.coul = nouvelle_couleur(r,v,b);
+    }
 
     tab_objets[nb_objets++] = o;
 }
@@ -467,10 +472,11 @@ void portail(point p, char orientation)
         base2z = z1+5;
     }
 
-    glColor3f(1,1,1); //Blanc   
+    glColor3f(0.9492,0.6093,0.0703);
 
     parallelepipede(base1x-1, y+8, base1z-1, base2x+1,y+10,base2z+1);
       
+    glColor3f(1,1,1);
     
     glBindTexture(GL_TEXTURE_2D, tex_portail[0]);
 
@@ -508,9 +514,9 @@ void ajouter_pilier_portail(point p, char orientation)
         base2z = z1+5;
     }
 
-    ajouter_objet(nouveau_point(base1x-1, y, base1z-1), nouveau_point(base1x+1,y+8,base1z+1));
+    ajouter_objet(nouveau_point(base1x-1, y, base1z-1), nouveau_point(base1x+1,y+8,base1z+1), 'p');
     //Deuxième pilier
-    ajouter_objet(nouveau_point(base2x-1, y, base2z-1), nouveau_point(base2x+1,y+8,base2z+1));
+    ajouter_objet(nouveau_point(base2x-1, y, base2z-1), nouveau_point(base2x+1,y+8,base2z+1), 'p');
 
 }
 
@@ -530,7 +536,7 @@ void generer_objet_sur_plateforme(plateforme p)
     int dz = rand()%5+1;
     int dy = rand()%3+4;
 
-    ajouter_objet(nouveau_point(x1,y,z1),nouveau_point(x1+dx, y+dy, z1+dz));
+    ajouter_objet(nouveau_point(x1,y,z1),nouveau_point(x1+dx, y+dy, z1+dz), 'o');
 
 }
 
