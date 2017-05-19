@@ -19,8 +19,7 @@ void gestionMenu() //choix_niveau(int choix_niveau)
     int i;
     for(i=0; i<nombre_niveau; i++)
     {
-        sscanf(chaine,"Niveau ",&i);
-        glutAddMenuEntry(chaine, i);
+        glutAddMenuEntry("Niveau ?", i);
     }
 	nMenuprincipal = glutCreateMenu(vRappelMenuPrincipal);
 	glutAddSubMenu("Choix du niveau", nSousmenuChoixNiveau);
