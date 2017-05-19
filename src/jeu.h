@@ -31,15 +31,21 @@ void initGL();
 void majVecteurs();
 void Animer();
 void Affichage();
+/*Lance le menu*/
 void lancement();
+/*Appeler via le menu pour lancer le jeu*/
 void lancementJeu();
+/*Permet de charger les textures depuis les fichiers*/
 void init_texture();
 // Défini le niveau selon num_niveau
 void definir_niveau();
 // Permet de changer de niveau
 void choix_niveau(int choix_niveau);
 void verification_limites();
+/*Passe au niveau supérieur*/
 void niveau_superieur();
+/*Libère la mémoire des objets*/
+void liberer_delivrer()
 
 int no_texture;
 
