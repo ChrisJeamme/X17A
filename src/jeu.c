@@ -123,7 +123,7 @@ void init_texture()
     {
         chargementTexture(&tex_sol[0], "img/test.png");
         chargementTexture(&tex_sol[1], "img/test3.png");
-        chargementTexture(&tex_portail[0], "img/portail.png");
+        chargementTexture(&tex_portail[0], "img/portail_j.png");
         chargementTexture(&tex_skybox[0],"img/testLF.png");
         chargementTexture(&tex_skybox[1],"img/testRT.png");
         chargementTexture(&tex_skybox[2],"img/testDN.png");

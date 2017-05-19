@@ -472,7 +472,7 @@ void portail(point p, char orientation)
     
     glBindTexture(GL_TEXTURE_2D, tex_portail[0]);
 
-    //Enfin, la partie centrale où il faudra appliquer la texture
+    //Partie centrale (spirale) du portail
     glBegin(GL_QUADS);
         glTexCoord2i(0,0);glVertex3f(base1x, y, base1z);    
         glTexCoord2i(0,1);glVertex3f(base1x, y+9, base1z);
