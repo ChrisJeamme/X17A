@@ -133,8 +133,6 @@ void init_texture()
     }
 }
 
-
-
 void niveau_superieur()
 {
     if (num_niveau == nombre_niveau)
@@ -172,7 +170,7 @@ void niveau_superieur()
     }
 }
 
-void niveau_superieur(int choix_niveau)
+void choix_niveau(int choix_niveau)
 {
     num_niveau = choix_niveau;
     
