@@ -206,7 +206,7 @@ void definir_niveau()
     //On fixe les obstacles/objets
     for(i=0; i<nombre_obstacle_niveau[num_niveau]; i++)
     {
-        ajouter_objet(obstacle_niveau[num_niveau][i].p1,obstacle_niveau[num_niveau][i].p2);
+        ajouter_objet(obstacle_niveau[num_niveau][i].p1,obstacle_niveau[num_niveau][i].p2, 'o');
     }
 
     if (num_niveau == 1)
