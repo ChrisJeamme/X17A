@@ -240,7 +240,7 @@ void maj_observateur()
         ox = bx - vx*200;
         oz = bz - vz*200;
     }
-    oy = by + brayon*4;
+    oy = by + brayon*3;
 }
 
 /*Fonction de débeugage*/

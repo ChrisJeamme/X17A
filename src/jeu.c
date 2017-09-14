@@ -252,7 +252,7 @@ void Affichage()
 
     //Mise a jour de la caméra
     maj_observateur();
-    gluLookAt(ox, oy, oz, bx, by+brayon, bz+0.0000001, 0, 1, 0);
+    gluLookAt(ox, oy, oz, bx, by+brayon+3, bz+0.0000001, 0, 1, 0);
 
     // point p=nouveau_point(0,0,0);
     // portail(p, 'z');
